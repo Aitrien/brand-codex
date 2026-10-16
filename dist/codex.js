@@ -1,5 +1,10 @@
-// Enhancement only. Without this script: themes follow the system, code is selectable, the TOC is a plain list.
+// brand-codex behaviour: theme toggle, tooltip dismissal, code copy buttons, TOC docking and active section.
+// Shipped as dist/codex.js (@aitrien/brand-codex/codex.js) and inlined into the showcase, so there is one implementation.
+// Enhancement only. Without this script: themes follow the system, code is selectable, the TOC is a plain open list,
+// and every control that needs script stays hidden. Load it with `defer`; it also works inline at the end of <body>.
+// Pair it with dist/theme-init.js inline in <head>, which applies a stored theme before first paint.
 (function () {
+  'use strict';
   var root = document.documentElement;
   var KEY = 'cx-theme';
   var system = window.matchMedia ? window.matchMedia('(prefers-color-scheme: dark)') : null;
@@ -27,7 +32,9 @@
   apply(theme);
   if (system && system.addEventListener) system.addEventListener('change', function () { apply(theme); });
 
-  document.addEventListener('DOMContentLoaded', function () {
+  function ready(fn) { if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn); else fn(); }
+
+  ready(function () {
     apply(theme);
     document.querySelectorAll('[data-theme-toggle]').forEach(function (b) {
       b.hidden = false;

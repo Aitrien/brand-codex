@@ -1,4 +1,4 @@
-// npm run build — tokens -> dist/*.css, dist/tokens.json, dist/tokens.js, dist/contrast.md, docs table, dist/showcase.html
+// npm run build — tokens -> dist/*.css, dist/tokens.json, dist/tokens.js, dist/codex.js, dist/theme-init.js, dist/contrast.md, docs table, dist/showcase.html
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import vm from 'node:vm';
@@ -62,7 +62,7 @@ let lastGroup = '';
 for (const t of tokens.values()) {
   const g = t.segments.slice(0, t.tier === 'primitive' ? 3 : 2).join('.');
   if (g !== lastGroup) { groups.push(`\n  /* ${g} */`); lastGroup = g; }
-  groups.push(`  ${cssVar(t.path)}: ${tokenCss(t)};`);
+  groups.push(`  ${cssVar(t.path)}: ${tokenCss(t)};${t.deprecated ? ` /* Deprecated: ${t.deprecated} */` : ''}`);
 }
 const tokensCss = `/* brand-codex ${pkg.version} — generated from tokens/*.json. Do not edit.
    Themes: semantic colours use light-dark(); color-scheme follows the system unless
@@ -113,7 +113,7 @@ const spriteFile = `<svg xmlns="http://www.w3.org/2000/svg">\n${symbols.join('\n
 const spriteInline = `<div hidden><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${symbols.join('')}</svg></div>`;
 writeFileSync(join(DIST, 'icons.svg'), spriteFile);
 // Every icon reference in the showcase and docs must exist in the manifest.
-const iconSources = [join(ROOT, 'showcase', 'index.src.html'), join(ROOT, 'showcase', 'showcase.js'), join(ROOT, 'README.md'),
+const iconSources = [join(ROOT, 'showcase', 'index.src.html'), join(ROOT, 'js', 'codex.js'), join(ROOT, 'README.md'),
   ...readdirSync(join(ROOT, 'docs', 'components')).map((f) => join(ROOT, 'docs', 'components', f))];
 for (const f of iconSources) {
   for (const m of readFileSync(f, 'utf8').matchAll(/cx-icon-([a-z]+(?:-[a-z]+)*)/g)) {
@@ -182,6 +182,7 @@ const flat = [...tokens.values()].map((t) => {
   o.value = t.type === 'color' ? hexOf(resolveIn(tokens, t.path, 'light')) : tokenCss(t).startsWith('var(') || tokenCss(t).startsWith('light-dark(') ? rawCss(t, resolve(tokens, t.value)) : tokenCss(t);
   if (t.type === 'color' && t.tier === 'semantic') o.valueDark = hexOf(resolveIn(tokens, t.path, 'dark'));
   if (t.description) o.description = t.description;
+  if (t.deprecated) o.deprecated = t.deprecated;
   if (t.extensions['codex.pairsWith']) o.pairsWith = t.extensions['codex.pairsWith'];
   if (t.extensions['codex.glyphs']) o.glyphs = t.extensions['codex.glyphs'];
   return o;
@@ -254,6 +255,17 @@ const SCALE = sizeRoles.map((r) => {
 const spaceTokens = [...tokens.values()].filter((t) => t.tier === 'primitive' && t.segments[1] === 'space');
 const SPACE = spaceTokens.map((t) => `<li class="sc-space__row"><code>${t.segments[2]}</code><span class="sc-space__bar" style="width: var(${cssVar(t.path)})"></span><span>${toRem(t.value) * 16}px</span></li>`).join('');
 
+// ------------------------------------------------------------------ behaviour: js/codex.js and the theme-init snippet
+// One implementation, shipped as-is for sites and inlined into the showcase below.
+const codexJs = readFileSync(join(ROOT, 'js', 'codex.js'), 'utf8');
+const themeInit = readFileSync(join(ROOT, 'js', 'theme-init.js'), 'utf8').trim();
+// site-header.md documents the snippet sites inline in <head>; it must match the shipped file exactly.
+if (!readFileSync(join(ROOT, 'docs', 'components', 'site-header.md'), 'utf8').includes(`<script>${themeInit}</script>`)) {
+  throw new Error('docs/components/site-header.md: the theme-init snippet differs from js/theme-init.js. Copy the file into the doc.');
+}
+writeFileSync(join(DIST, 'codex.js'), codexJs);
+writeFileSync(join(DIST, 'theme-init.js'), themeInit + '\n');
+
 // ------------------------------------------------------------------ specimen plate
 // js/plate.js is a plain browser script. Run it in a sandbox to draw the static contours (t = 0), then ship it as-is.
 const plateJs = readFileSync(join(ROOT, 'js', 'plate.js'), 'utf8');
@@ -295,20 +307,20 @@ const stats = {
 
 let src = readFileSync(join(ROOT, 'showcase', 'index.src.html'), 'utf8');
 const showcaseCss = readFileSync(join(ROOT, 'showcase', 'showcase.css'), 'utf8');
-const showcaseJs = readFileSync(join(ROOT, 'showcase', 'showcase.js'), 'utf8');
 src = src
   .replace('<!-- CX:STYLE -->', `<style>\n${fontsInline}\n${tokensCss}\n${componentsCss}\n${chromaCss}\n${showcaseCss}\n</style>`)
-  .replace('<!-- CX:SCRIPT -->', `<script>\n${plateJs}\n${showcaseJs}\n</script>`)
+  .replace('<!-- CX:THEME_INIT -->', `<script>${themeInit}</script>`)
+  .replace('<!-- CX:SCRIPT -->', `<script>\n${plateJs}\n${codexJs}\n</script>`)
   .replace('<!-- CX:ICONS -->', spriteInline)
   .replace('{{PALETTE}}', PALETTE).replace('{{SEMANTIC}}', SEMANTIC).replace('{{PAIRS}}', PAIRS)
   .replace('{{SCALE}}', SCALE).replace('{{SPACE}}', SPACE).replace('{{CHROMA_TABLE}}', CHROMA_TABLE).replace('{{ICONS}}', ICONS).replace('{{GLYPHS}}', GLYPHS)
   .replace('{{PLATE}}', PLATE)
   .replace(/\{\{([A-Z_]+)\}\}/g, (m, k) => (k in stats ? String(stats[k]) : m));
-const leftover = src.match(/\{\{[A-Z_:0-9]+\}\}/g);
+const leftover = src.match(/\{\{[A-Z_:0-9]+\}\}|<!-- CX:[A-Z_]+ -->/g);
 if (leftover) throw new Error(`unfilled placeholders: ${leftover.join(', ')}`);
 writeFileSync(join(DIST, 'showcase.html'), src);
 // A complete document for opening locally (the publishing host supplies the doctype for showcase.html).
 writeFileSync(join(DIST, 'showcase.standalone.html'), `<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n</head>\n<body>\n${src}\n</body>\n</html>\n`);
 
-console.log(`Built dist/: tokens.css, chroma.css, fonts.css, codex.css, icons.svg, tokens.json, tokens.js, plate.html, plate.js, contrast.md, showcase.html (${(src.length / 1024).toFixed(0)} KB).`);
+console.log(`Built dist/: tokens.css, chroma.css, fonts.css, codex.css, codex.js, theme-init.js, icons.svg, tokens.json, tokens.js, plate.html, plate.js, contrast.md, showcase.html (${(src.length / 1024).toFixed(0)} KB).`);
 console.log(`${tokens.size} tokens, ${pairs.length} pairs, fonts ${stats.FONT_KB} KB.`);

@@ -39,6 +39,19 @@ if (glyphs) {
     seen.set(g.char, key);
   }
 }
+// Deprecated tokens stay published but nothing in the system may use them.
+const deprecated = [...tokens.values()].filter((t) => t.deprecated !== undefined);
+for (const f of ['css/components.css', 'syntax/chroma.json', 'js/codex.js', 'js/plate.js', 'showcase/showcase.css', 'showcase/index.src.html']) {
+  let text; try { text = readFileSync(join(ROOT, f), 'utf8'); } catch { continue; }
+  for (const t of deprecated) {
+    const css = `--cx-${t.path.replace(/\./g, '-')}`;
+    if (new RegExp(`${css}(?![\\w-])|"${t.path.replace(/\./g, '\\.')}"`).test(text)) errors.push(`${f}: uses deprecated ${t.path} (${t.deprecated})`);
+  }
+}
+for (const file of readdirSync(docsDir).filter((f) => f.endsWith('.md') && !f.startsWith('_'))) {
+  const fm = readFileSync(join(docsDir, file), 'utf8').match(/^---\n([\s\S]*?)\n---\n/)?.[1] ?? '';
+  for (const t of deprecated) if (fm.includes(`  - ${t.path}\n`)) errors.push(`docs/components/${file}: lists deprecated ${t.path}`);
+}
 const pairs = contrastReport(tokens);
 const failing = pairs.filter((p) => !p.pass);
 
@@ -47,7 +60,7 @@ for (const p of failing) {
   console.error(`✗ contrast ${p.fg} on ${p.bg}: light ${p.light.ratio.toFixed(2)}, dark ${p.dark.ratio.toFixed(2)} (min ${p.min})`);
 }
 const semantic = [...tokens.values()].filter((t) => t.tier === 'semantic').length;
-console.log(`${tokens.size} tokens (${semantic} semantic), ${pairs.length} contrast pairs × 2 themes.`);
+console.log(`${tokens.size} tokens (${semantic} semantic, ${deprecated.length} deprecated), ${pairs.length} contrast pairs × 2 themes.`);
 if (errors.length || failing.length) {
   console.error(`${errors.length} rule errors, ${failing.length} failing pairs.`);
   process.exit(1);

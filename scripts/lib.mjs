@@ -41,6 +41,7 @@ export function loadTokens(dir = join(ROOT, 'tokens')) {
         type,
         value: node.$value,
         description: node.$description,
+        deprecated: node.$deprecated,
         extensions: node.$extensions ?? {},
         tier: path[0] === 'primitive' ? 'primitive' : 'semantic',
       });
@@ -132,6 +133,11 @@ export function validate(tokens) {
       else if (tokens.get(aliasTarget(dark)).type !== t.type) errors.push(`${path}: dark alias type mismatch`);
     }
     if (t.tier === 'semantic' && t.type === 'color' && dark === undefined) errors.push(`${path}: semantic colour has no codex.modes.dark`);
+    // Deprecation (DTCG $deprecated): a semantic token kept for one more major, with a reason.
+    if (t.deprecated !== undefined) {
+      if (t.tier === 'primitive') errors.push(`${path}: deprecate the semantic token, not the primitive`);
+      if (typeof t.deprecated !== 'string' || t.deprecated.length < 12) errors.push(`${path}: $deprecated must be a sentence saying why and when it goes`);
+    }
     // Pairs.
     for (const pair of t.extensions['codex.pairsWith'] ?? []) {
       if (!tokens.has(pair.token)) errors.push(`${path}: pairsWith unknown token ${pair.token}`);

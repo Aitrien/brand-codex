@@ -50,6 +50,15 @@
         },
         "5": {
           "$value": {
+            "value": 3200,
+            "unit": "ms"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "6": {
+          "$value": {
             "value": 60000,
             "unit": "ms"
           },
@@ -103,6 +112,17 @@
           "$extensions": {
             "codex.tier": "primitive"
           }
+        },
+        "in-out": {
+          "$value": [
+            0.45,
+            0,
+            0.55,
+            1
+          ],
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
         }
       },
       "distance": {
@@ -143,8 +163,13 @@
         "$description": "The specimen plate's single draw-in on load. Decoration only; never for content."
       },
       "drift": {
-        "$value": "{primitive.motion.duration.5}",
+        "$value": "{primitive.motion.duration.6}",
         "$description": "Time the specimen plate's terrain takes to drift one noise unit, so its contours reshape slowly and continuously. The only looping motion in the system; it must have a visible pause control and stop under prefers-reduced-motion."
+      },
+      "pulse": {
+        "$value": "{primitive.motion.duration.5}",
+        "$description": "One full cycle of the specimen plate's outward pulse. The only looping motion in the system; it must have a visible pause control and stop under prefers-reduced-motion.",
+        "$deprecated": "Unused since the contour plate; removed in 2.0.0."
       }
     },
     "easing": {
@@ -164,6 +189,11 @@
       "linear": {
         "$value": "{primitive.motion.easing.linear}",
         "$description": "Staggered decoration (the plate's contour draw-in) and progress only. The plate's drift is linear too."
+      },
+      "pulse": {
+        "$value": "{primitive.motion.easing.in-out}",
+        "$description": "Symmetric ease for looping decoration (the plate pulse), so growth and shrink feel even. Never for state changes.",
+        "$deprecated": "Unused since the contour plate; removed in 2.0.0."
       }
     },
     "distance": {

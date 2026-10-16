@@ -1,4 +1,4 @@
-// npm run audit — prove dist/showcase.html has no raw colour, size or duration values outside the generated :root block.
+// npm run audit — prove dist/showcase.html, dist/codex.js and dist/theme-init.js have no raw colour, size or duration values outside the generated :root block.
 import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { ROOT } from './lib.mjs';
@@ -47,6 +47,12 @@ export function auditHtml(html) {
 if (import.meta.url === `file://${process.argv[1]}`) {
   const html = readFileSync(join(ROOT, 'dist', 'showcase.html'), 'utf8');
   const problems = auditHtml(html);
+  // Sites load these files directly, so check them on their own as well as inlined in the showcase.
+  for (const f of ['codex.js', 'theme-init.js']) {
+    const js = readFileSync(join(ROOT, 'dist', f), 'utf8');
+    const own = auditHtml(`<style>\n:root {\n}\n</style><script>${js}</script>`);
+    problems.push(...own.map((p) => `dist/${f}: ${p}`));
+  }
   if (problems.length) { console.error(problems.map((p) => `✗ ${p}`).join('\n')); process.exit(1); }
-  console.log('No raw colour, size or duration values outside the :root block (CSS, style attributes, SVG colours, scripts).');
+  console.log('No raw colour, size or duration values outside the :root block (CSS, style attributes, SVG colours, scripts, dist/codex.js, dist/theme-init.js).');
 }

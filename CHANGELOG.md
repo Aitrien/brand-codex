@@ -2,18 +2,27 @@
 
 Every release of brand-codex, newest first. Versions follow the rules in `CONVENTIONS.md`: renaming or removing a semantic token is major, adding tokens, components or icons is minor, and changing a value or fixing a description is a patch. `npm run build` fails if the version in `package.json` has no entry here.
 
-## [Unreleased]
+## [1.7.0] - 2026-10-16
 
 ### Changed
 - Specimen plate: a contour survey of simplex-noise terrain replaces the Vogel phyllotaxis seed head. The build draws the contours as a static SVG; `js/plate.js` (shipped as `dist/plate.js`) reshapes them as the terrain drifts. Index contours every fifth line, a quarter grid, and a once-only draw-in.
 - `color.ornament.*` descriptions now name contour lines, index contours and the survey grid instead of seeds.
+- The showcase no longer has its own script. It inlines `dist/theme-init.js` and `dist/codex.js`, the same files sites load, so there is one implementation.
+- `npm run audit` also checks `dist/codex.js` and `dist/theme-init.js` on their own.
 
 ### Added
 - `motion.duration.drift` (60000ms): time for the plate's terrain to drift one noise unit.
 - `dist/plate.html` and `dist/plate.js` for sites that use the plate, exported as `@aitrien/brand-codex/plate.html` and `/plate.js`.
+- `dist/codex.js` (`@aitrien/brand-codex/codex.js`), built from `js/codex.js`: the theme toggle (storage key `cx-theme`), tooltip dismissal on Escape, code copy buttons, and TOC docking with the active section. Timings come from `--cx-motion-*` tokens. Load it with `defer`.
+- `dist/theme-init.js` (`@aitrien/brand-codex/theme-init.js`): the one-line `<head>` snippet that applies a stored theme before first paint, documented in `site-header.md`. The build fails if the doc and the file differ.
+- `$deprecated` support: the validator requires a reason, rejects deprecated primitives, and fails if a component, the Chroma mapping, a script or a component doc uses a deprecated token. `tokens.css` marks them with a comment and `tokens.json` with a `deprecated` field. `CONVENTIONS.md` describes the deprecate-then-remove rule.
 
-### Removed
-- `motion.duration.pulse` and `motion.easing.pulse`, which only the seed-head pulse used. Removing semantic tokens is a major change under `CONVENTIONS.md`.
+### Deprecated
+- `motion.duration.pulse` and `motion.easing.pulse`, which only the seed-head pulse used. They stay published with `$deprecated` ("Unused since the contour plate; removed in 2.0.0.") so this release is minor and the module path stays `github.com/aitrien/brand-codex`. Nothing in the system uses them; move off them before 2.0.0.
+
+### Fixed
+- Without JavaScript, the theme toggle and code copy buttons appeared as dead controls: their `display` rules overrode `hidden`. A base `[hidden]` rule now keeps every script-revealed control hidden until the script reveals it (replacing the plate pause's own rule).
+- The `pause` icon's usage rule named the plate's pulse; it now names the drift.
 
 ## [1.6.0] - 2026-10-16
 
@@ -120,6 +129,7 @@ Every release of brand-codex, newest first. Versions follow the rules in `CONVEN
 - Component docs, Chroma syntax mapping, README principles and the showcase page.
 - `npm run validate`, `build` and `audit`.
 
+[1.7.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#170---2026-10-16
 [1.6.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#160---2026-10-16
 [1.5.1]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#151---2026-10-15
 [1.5.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#150---2026-10-15
