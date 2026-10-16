@@ -170,14 +170,13 @@
   --cx-primitive-motion-duration-2: 200ms;
   --cx-primitive-motion-duration-3: 320ms;
   --cx-primitive-motion-duration-4: 1600ms;
-  --cx-primitive-motion-duration-5: 3200ms;
+  --cx-primitive-motion-duration-5: 60000ms;
 
   /* primitive.motion.easing */
   --cx-primitive-motion-easing-out-strong: cubic-bezier(0.2, 0, 0, 1);
   --cx-primitive-motion-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
   --cx-primitive-motion-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
   --cx-primitive-motion-easing-linear: cubic-bezier(0, 0, 1, 1);
-  --cx-primitive-motion-easing-in-out: cubic-bezier(0.45, 0, 0.55, 1);
 
   /* primitive.motion.distance */
   --cx-primitive-motion-distance-1: 0.125rem;
@@ -188,14 +187,13 @@
   --cx-motion-duration-base: var(--cx-primitive-motion-duration-2);
   --cx-motion-duration-slow: var(--cx-primitive-motion-duration-3);
   --cx-motion-duration-plate: var(--cx-primitive-motion-duration-4);
-  --cx-motion-duration-pulse: var(--cx-primitive-motion-duration-5);
+  --cx-motion-duration-drift: var(--cx-primitive-motion-duration-5);
 
   /* motion.easing */
   --cx-motion-easing-standard: var(--cx-primitive-motion-easing-out-strong);
   --cx-motion-easing-enter: var(--cx-primitive-motion-easing-decelerate);
   --cx-motion-easing-exit: var(--cx-primitive-motion-easing-accelerate);
   --cx-motion-easing-linear: var(--cx-primitive-motion-easing-linear);
-  --cx-motion-easing-pulse: var(--cx-primitive-motion-easing-in-out);
 
   /* motion.distance */
   --cx-motion-distance-nudge: var(--cx-primitive-motion-distance-1);
@@ -912,38 +910,30 @@ a.cx-tag:hover { border-color: var(--cx-color-accent-border); color: var(--cx-co
 .cx-toc a[aria-current="true"] { color: var(--cx-color-text-primary); border-left-color: var(--cx-color-accent-border); }
 .cx-toc__no { color: var(--cx-color-text-muted); font-family: var(--cx-font-family-mono); font-size: var(--cx-font-size-label); font-variant-numeric: tabular-nums; }
 
-/* ------------------------------------------------------------ specimen plate (CSS-only phyllotaxis, Vogel's model) */
+/* ------------------------------------------------------------ specimen plate (contour survey of simplex-noise terrain) */
 .cx-plate-frame { position: relative; display: inline-flex; flex-direction: column; gap: var(--cx-space-stack-sm); margin: var(--cx-size-mark-tick); padding: var(--cx-space-inset-md); border: var(--cx-border-width-hairline) solid var(--cx-color-border-default); background: var(--cx-color-surface-raised); max-width: 100%; }
 .cx-plate {
   position: relative; width: var(--cx-size-column-card); max-width: 100%; aspect-ratio: 1; overflow: hidden;
+  /* Read by js/plate.js: how long the terrain takes to drift one noise unit, and how long to wait for the draw-in. */
+  --cx-plate-drift: var(--cx-motion-duration-drift); --cx-plate-draw: var(--cx-motion-duration-plate);
 }
-.cx-plate i {
-  --_f: sqrt(var(--n) / var(--count));
-  --_a: calc(var(--n) * 137.508deg);
-  position: absolute;
-  left: calc(50% + cos(var(--_a)) * var(--_f) * 41%);
-  top: calc(50% + sin(var(--_a)) * var(--_f) * 41%);
-  width: calc(var(--cx-size-ornament-sm) * (0.3 + 0.7 * var(--_f))); aspect-ratio: 1;
-  border-radius: var(--cx-radius-round); background: var(--cx-color-ornament-rest);
-  /* Centre with the `translate` property, not `transform`: browsers apply it after `scale`, so every
-     seed grows and shrinks around its own centre. */
-  translate: -50% -50%;
-  /* 1. Draw-in once, staggered from the centre. 2. Pulse forever: each seed's phase is offset by its
-     radius, so the wave travels outward. The pulse animates `scale`, the draw-in animates `transform`. */
-  animation:
-    cx-seed var(--cx-motion-duration-base) var(--cx-motion-easing-enter) both,
-    cx-pulse var(--cx-motion-duration-pulse) var(--cx-motion-easing-pulse) infinite;
-  animation-delay:
-    calc(var(--n) / var(--count) * var(--cx-motion-duration-plate)),
-    calc((1 - var(--_f)) * var(--cx-motion-duration-pulse) * -1);
+.cx-plate__map { display: block; width: 100%; height: 100%; }
+.cx-plate__map path { fill: none; vector-effect: non-scaling-stroke; stroke-linecap: round; stroke-linejoin: round; }
+.cx-plate__grid { stroke: var(--cx-color-ornament-muted); stroke-width: var(--cx-border-width-hairline); }
+/* Each contour carries pathLength="1", so the dash maths is the same for every line: it draws in once on load,
+   lowest contour first. */
+.cx-plate__line {
+  stroke: var(--cx-color-ornament-rest); stroke-width: var(--cx-border-width-hairline);
+  stroke-dasharray: 1; stroke-dashoffset: 1;
+  animation: cx-contour var(--cx-motion-duration-plate) var(--cx-motion-easing-enter) forwards;
+  animation-delay: calc(var(--i) * var(--cx-motion-duration-fast) / 3);
 }
-.cx-plate i:nth-child(13n) { background: var(--cx-color-ornament-strong); }
-.cx-plate i:nth-child(21n) { background: var(--cx-color-ornament-muted); }
-@keyframes cx-seed { from { opacity: 0; transform: scale(0); } }
-@keyframes cx-pulse { 0%, 100% { scale: 1; } 50% { scale: 1.5; } }
-.cx-plate-frame:has(.cx-plate__pause input:checked) .cx-plate i { animation-play-state: running, paused; }
+.cx-plate__line--index { stroke: var(--cx-color-ornament-strong); stroke-width: var(--cx-border-width-emphasis); }
+/* The dash only exists for the draw-in. The last keyframe drops it, so lines reshaped later never show gaps. */
+@keyframes cx-contour { 99% { stroke-dasharray: 1; stroke-dashoffset: 0; } 100% { stroke-dasharray: none; stroke-dashoffset: 0; } }
 
-/* Pause control: a native checkbox styled as an icon-only pill, so it works without JavaScript. */
+/* Pause control: a native checkbox styled as an icon-only pill. It ships hidden; the script reveals it when it
+   starts the drift, so it never appears on a plate that isn't moving. */
 .cx-plate__pause {
   position: absolute; z-index: 2; top: var(--cx-space-inset-sm); right: var(--cx-space-inset-sm);
   display: inline-grid; place-items: center; width: var(--cx-size-target-touch); height: var(--cx-size-target-touch);
@@ -957,6 +947,7 @@ a.cx-tag:hover { border-color: var(--cx-color-accent-border); color: var(--cx-co
 .cx-plate__pause :is(.cx-icon, .cx-tooltip [data-when]) { display: none; }
 .cx-plate__pause:not(:has(:checked)) [data-when="running"],
 .cx-plate__pause:has(:checked) [data-when="paused"] { display: inline-block; }
+.cx-plate__pause[hidden] { display: none; }
 @media (hover: none) { .cx-plate__pause { opacity: 1; } }
 .cx-plate-frame figcaption { font-family: var(--cx-font-family-mono); font-size: var(--cx-font-size-label); letter-spacing: var(--cx-font-tracking-ui); color: var(--cx-color-text-muted); max-width: var(--cx-size-column-card); }
 
@@ -972,8 +963,8 @@ a.cx-tag:hover { border-color: var(--cx-color-accent-border); color: var(--cx-co
     animation-duration: var(--cx-motion-duration-instant) !important;
     animation-delay: var(--cx-motion-duration-instant) !important;
   }
-  /* The plate stays still and its pause control disappears: there is nothing to pause. */
-  .cx-plate i { animation: none !important; }
+  /* The plate is drawn complete and stays still; its pause control disappears because there is nothing to pause. */
+  .cx-plate__line { animation: none !important; stroke-dasharray: none; }
   .cx-plate__pause { display: none; }
 }
 

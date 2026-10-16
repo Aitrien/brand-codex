@@ -1,6 +1,7 @@
 // npm run build — tokens -> dist/*.css, dist/tokens.json, dist/tokens.js, dist/contrast.md, docs table, dist/showcase.html
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
+import vm from 'node:vm';
 import {
   ROOT, loadTokens, validate, resolve, resolveIn, isAlias, aliasTarget, cssVar, contrastReport, hexOf,
 } from './lib.mjs';
@@ -253,8 +254,14 @@ const SCALE = sizeRoles.map((r) => {
 const spaceTokens = [...tokens.values()].filter((t) => t.tier === 'primitive' && t.segments[1] === 'space');
 const SPACE = spaceTokens.map((t) => `<li class="sc-space__row"><code>${t.segments[2]}</code><span class="sc-space__bar" style="width: var(${cssVar(t.path)})"></span><span>${toRem(t.value) * 16}px</span></li>`).join('');
 
-const COUNT = 233;
-const PLATE = (count = COUNT) => `<div class="cx-plate" aria-hidden="true" style="--count: ${count}">${Array.from({ length: count }, (_, i) => `<i style="--n: ${i + 1}"></i>`).join('')}</div>`;
+// ------------------------------------------------------------------ specimen plate
+// js/plate.js is a plain browser script. Run it in a sandbox to draw the static contours (t = 0), then ship it as-is.
+const plateJs = readFileSync(join(ROOT, 'js', 'plate.js'), 'utf8');
+const plateCtx = {}; plateCtx.globalThis = plateCtx;
+vm.runInNewContext(plateJs, plateCtx, { filename: 'js/plate.js' });
+const PLATE = plateCtx.cxPlate.markup();
+writeFileSync(join(DIST, 'plate.html'), PLATE + '\n');
+writeFileSync(join(DIST, 'plate.js'), plateJs);
 
 const CHROMA_TABLE = `<div class="cx-table" role="region" aria-label="Chroma mapping" tabindex="0"><table><thead><tr><th scope="col">Role</th><th scope="col">Chroma classes</th><th scope="col">Token</th><th scope="col">Sample</th></tr></thead><tbody>${
   chroma.rules.map((r) => `<tr><td>${esc(r.role)}</td><td><code>${r.classes.map((c) => '.' + c).join(' ')}</code></td><td><code>${r.color ?? r.background ?? r.weight}</code></td><td><span class="sc-chroma-sample chroma"><span class="${r.classes[0]}">${r.background ? 'highlighted line' : r.classes[0] === 'ln' ? '42' : 'sample'}</span></span></td></tr>`).join('')
@@ -291,11 +298,11 @@ const showcaseCss = readFileSync(join(ROOT, 'showcase', 'showcase.css'), 'utf8')
 const showcaseJs = readFileSync(join(ROOT, 'showcase', 'showcase.js'), 'utf8');
 src = src
   .replace('<!-- CX:STYLE -->', `<style>\n${fontsInline}\n${tokensCss}\n${componentsCss}\n${chromaCss}\n${showcaseCss}\n</style>`)
-  .replace('<!-- CX:SCRIPT -->', `<script>\n${showcaseJs}\n</script>`)
+  .replace('<!-- CX:SCRIPT -->', `<script>\n${plateJs}\n${showcaseJs}\n</script>`)
   .replace('<!-- CX:ICONS -->', spriteInline)
   .replace('{{PALETTE}}', PALETTE).replace('{{SEMANTIC}}', SEMANTIC).replace('{{PAIRS}}', PAIRS)
   .replace('{{SCALE}}', SCALE).replace('{{SPACE}}', SPACE).replace('{{CHROMA_TABLE}}', CHROMA_TABLE).replace('{{ICONS}}', ICONS).replace('{{GLYPHS}}', GLYPHS)
-  .replace(/\{\{PLATE(?::(\d+))?\}\}/g, (_, c) => PLATE(c ? Number(c) : COUNT))
+  .replace('{{PLATE}}', PLATE)
   .replace(/\{\{([A-Z_]+)\}\}/g, (m, k) => (k in stats ? String(stats[k]) : m));
 const leftover = src.match(/\{\{[A-Z_:0-9]+\}\}/g);
 if (leftover) throw new Error(`unfilled placeholders: ${leftover.join(', ')}`);
@@ -303,5 +310,5 @@ writeFileSync(join(DIST, 'showcase.html'), src);
 // A complete document for opening locally (the publishing host supplies the doctype for showcase.html).
 writeFileSync(join(DIST, 'showcase.standalone.html'), `<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n</head>\n<body>\n${src}\n</body>\n</html>\n`);
 
-console.log(`Built dist/: tokens.css, chroma.css, fonts.css, codex.css, icons.svg, tokens.json, tokens.js, contrast.md, showcase.html (${(src.length / 1024).toFixed(0)} KB).`);
+console.log(`Built dist/: tokens.css, chroma.css, fonts.css, codex.css, icons.svg, tokens.json, tokens.js, plate.html, plate.js, contrast.md, showcase.html (${(src.length / 1024).toFixed(0)} KB).`);
 console.log(`${tokens.size} tokens, ${pairs.length} pairs, fonts ${stats.FONT_KB} KB.`);

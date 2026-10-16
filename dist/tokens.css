@@ -166,14 +166,13 @@
   --cx-primitive-motion-duration-2: 200ms;
   --cx-primitive-motion-duration-3: 320ms;
   --cx-primitive-motion-duration-4: 1600ms;
-  --cx-primitive-motion-duration-5: 3200ms;
+  --cx-primitive-motion-duration-5: 60000ms;
 
   /* primitive.motion.easing */
   --cx-primitive-motion-easing-out-strong: cubic-bezier(0.2, 0, 0, 1);
   --cx-primitive-motion-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
   --cx-primitive-motion-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
   --cx-primitive-motion-easing-linear: cubic-bezier(0, 0, 1, 1);
-  --cx-primitive-motion-easing-in-out: cubic-bezier(0.45, 0, 0.55, 1);
 
   /* primitive.motion.distance */
   --cx-primitive-motion-distance-1: 0.125rem;
@@ -184,14 +183,13 @@
   --cx-motion-duration-base: var(--cx-primitive-motion-duration-2);
   --cx-motion-duration-slow: var(--cx-primitive-motion-duration-3);
   --cx-motion-duration-plate: var(--cx-primitive-motion-duration-4);
-  --cx-motion-duration-pulse: var(--cx-primitive-motion-duration-5);
+  --cx-motion-duration-drift: var(--cx-primitive-motion-duration-5);
 
   /* motion.easing */
   --cx-motion-easing-standard: var(--cx-primitive-motion-easing-out-strong);
   --cx-motion-easing-enter: var(--cx-primitive-motion-easing-decelerate);
   --cx-motion-easing-exit: var(--cx-primitive-motion-easing-accelerate);
   --cx-motion-easing-linear: var(--cx-primitive-motion-easing-linear);
-  --cx-motion-easing-pulse: var(--cx-primitive-motion-easing-in-out);
 
   /* motion.distance */
   --cx-motion-distance-nudge: var(--cx-primitive-motion-distance-1);

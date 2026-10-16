@@ -23,6 +23,8 @@
     "./codex.css": "./dist/codex.css",
     "./tokens.js": "./dist/tokens.js",
     "./tokens.json": "./dist/tokens.json",
+    "./plate.js": "./dist/plate.js",
+    "./plate.html": "./dist/plate.html",
     "./package.json": "./package.json"
   },
   "scripts": {

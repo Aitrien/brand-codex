@@ -93,8 +93,7 @@
 .sc-motion--fast i { transition-duration: var(--cx-motion-duration-fast); transition-timing-function: var(--cx-motion-easing-standard); }
 .sc-motion--base i { transition-duration: var(--cx-motion-duration-base); transition-timing-function: var(--cx-motion-easing-standard); }
 .sc-motion--slow i { transition-duration: var(--cx-motion-duration-slow); transition-timing-function: var(--cx-motion-easing-enter); }
-.sc-motion--pulse i { transition-duration: var(--cx-motion-duration-pulse); transition-timing-function: var(--cx-motion-easing-pulse); }
-.sc-motion--plate i { transition-duration: var(--cx-motion-duration-plate); transition-timing-function: var(--cx-motion-easing-linear); }
+.sc-motion--plate i { transition-duration: var(--cx-motion-duration-plate); transition-timing-function: var(--cx-motion-easing-enter); }
 
 /* templates */
 .sc-templates { display: grid; gap: var(--cx-space-gutter-grid); grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--cx-size-column-card)), 1fr)); margin: 0; padding: 0; list-style: none; }

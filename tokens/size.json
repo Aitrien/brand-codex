@@ -259,7 +259,7 @@
       },
       "card": {
         "$value": "{primitive.size.width.sm}",
-        "$description": "Minimum card width in auto-fill grids, and the specimen plate's diameter."
+        "$description": "Minimum card width in auto-fill grids, and the specimen plate's width."
       }
     },
     "target": {
