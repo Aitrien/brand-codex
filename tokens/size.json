@@ -1,0 +1,329 @@
+{
+  "primitive": {
+    "size": {
+      "width": {
+        "$type": "dimension",
+        "xs": {
+          "$value": {
+            "value": 15,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "sm": {
+          "$value": {
+            "value": 20,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "md": {
+          "$value": {
+            "value": 40,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "lg": {
+          "$value": {
+            "value": 60,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "xl": {
+          "$value": {
+            "value": 69,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        }
+      },
+      "measure": {
+        "$type": "number",
+        "narrow": {
+          "$value": 52,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "ch"
+          }
+        },
+        "base": {
+          "$value": 66,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "ch"
+          }
+        },
+        "wide": {
+          "$value": 80,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "ch"
+          }
+        }
+      },
+      "control": {
+        "$type": "dimension",
+        "1": {
+          "$value": {
+            "value": 1.5,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "2": {
+          "$value": {
+            "value": 2.5,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "3": {
+          "$value": {
+            "value": 2.75,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        }
+      },
+      "icon": {
+        "$type": "dimension",
+        "$description": "Icon boxes for Material Symbols, drawn on a 24-unit grid. Primitive.",
+        "1": {
+          "$value": {
+            "value": 1,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "2": {
+          "$value": {
+            "value": 1.25,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "3": {
+          "$value": {
+            "value": 1.5,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        }
+      },
+      "glyph": {
+        "$type": "dimension",
+        "$description": "Multiples of 12px, the Yarndings stitch grid. Primitive.",
+        "1": {
+          "$value": {
+            "value": 0.75,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "2": {
+          "$value": {
+            "value": 1.5,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "3": {
+          "$value": {
+            "value": 2.25,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "4": {
+          "$value": {
+            "value": 3,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        }
+      },
+      "breakpoint": {
+        "$type": "dimension",
+        "sm": {
+          "$value": {
+            "value": 30,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "md": {
+          "$value": {
+            "value": 48,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "lg": {
+          "$value": {
+            "value": 64,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "xl": {
+          "$value": {
+            "value": 80,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        }
+      }
+    }
+  },
+  "size": {
+    "container": {
+      "$type": "dimension",
+      "page": {
+        "$value": "{primitive.size.width.xl}",
+        "$description": "Max width of the page container (header, main, footer). Never full-bleed text."
+      },
+      "breakout": {
+        "$value": "{primitive.size.width.lg}",
+        "$description": "Max width for wide figures, tables and code blocks that break out of the prose column."
+      }
+    },
+    "measure": {
+      "$type": "number",
+      "prose": {
+        "$value": "{primitive.size.measure.base}",
+        "$description": "Max line length of running text (ch).",
+        "$extensions": {
+          "codex.unit": "ch"
+        }
+      },
+      "caption": {
+        "$value": "{primitive.size.measure.narrow}",
+        "$description": "Max line length of captions, ledes on cards and summaries (ch).",
+        "$extensions": {
+          "codex.unit": "ch"
+        }
+      },
+      "code": {
+        "$value": "{primitive.size.measure.wide}",
+        "$description": "Target line length that code blocks fit without scrolling (ch).",
+        "$extensions": {
+          "codex.unit": "ch"
+        }
+      }
+    },
+    "column": {
+      "$type": "dimension",
+      "sidebar": {
+        "$value": "{primitive.size.width.xs}",
+        "$description": "Width of a side column such as the table of contents; it wraps below the main column when space runs out."
+      },
+      "card": {
+        "$value": "{primitive.size.width.sm}",
+        "$description": "Minimum card width in auto-fill grids, and the specimen plate's diameter."
+      }
+    },
+    "target": {
+      "$type": "dimension",
+      "min": {
+        "$value": "{primitive.size.control.1}",
+        "$description": "Minimum hit area for inline controls such as tags and pagination numbers (WCAG 2.2 AA 24px)."
+      },
+      "control": {
+        "$value": "{primitive.size.control.2}",
+        "$description": "Height of buttons, inputs and the theme toggle."
+      },
+      "touch": {
+        "$value": "{primitive.size.control.3}",
+        "$description": "Hit area for primary nav links and icon-only buttons (44px)."
+      }
+    },
+    "icon": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{primitive.size.icon.1}",
+        "$description": "Icons beside label-size mono text: pagination directions, callout titles, back links, the copy button, footer links."
+      },
+      "md": {
+        "$value": "{primitive.size.icon.2}",
+        "$description": "Icons inside buttons and the theme toggle, beside small or body text."
+      },
+      "lg": {
+        "$value": "{primitive.size.icon.3}",
+        "$description": "An icon standing alone in a control with no visible text. The control still needs an accessible name."
+      }
+    },
+    "ornament": {
+      "$type": "dimension",
+      "sm": {
+        "$value": "{primitive.size.glyph.1}",
+        "$description": "Inline ornaments and footer bands (12px grid)."
+      },
+      "md": {
+        "$value": "{primitive.size.glyph.2}",
+        "$description": "Section dividers and end marks."
+      },
+      "lg": {
+        "$value": "{primitive.size.glyph.4}",
+        "$description": "A single empty-state ornament, e.g. on a 404."
+      }
+    },
+    "mark": {
+      "$type": "dimension",
+      "tick": {
+        "$value": "{primitive.space.2}",
+        "$description": "Length of the registration ticks at the corners of accession labels and plates."
+      }
+    },
+    "breakpoint": {
+      "$type": "dimension",
+      "md": {
+        "$value": "{primitive.size.breakpoint.md}",
+        "$description": "For build-time media queries (SCSS) only; CSS custom properties cannot be used in @media. Prefer intrinsic layouts."
+      },
+      "lg": {
+        "$value": "{primitive.size.breakpoint.lg}",
+        "$description": "For build-time media queries (SCSS) only. Wide layouts such as a sticky TOC beside prose."
+      }
+    }
+  }
+}

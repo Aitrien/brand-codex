@@ -1,0 +1,36 @@
+/* Hugo Chroma classes -> brand-codex tokens (generated from syntax/chroma.json). Both themes via tokens. */
+.chroma { color: var(--cx-color-syntax-variable); background: var(--cx-color-surface-sunken); }
+/* Keywords */
+.chroma .k, .chroma .kd, .chroma .kn, .chroma .kp, .chroma .kr, .chroma .ow, .chroma .bp { color: var(--cx-color-syntax-keyword); font-weight: var(--cx-font-weight-strong); }
+/* Type keywords, classes, built-ins, namespaces, exceptions */
+.chroma .kt, .chroma .nb, .chroma .nc, .chroma .nn, .chroma .ne { color: var(--cx-color-syntax-type); }
+/* Constants: numbers, booleans, null, dates, symbols, entities, escapes */
+.chroma .kc, .chroma .no, .chroma .m, .chroma .mb, .chroma .mf, .chroma .mh, .chroma .mi, .chroma .il, .chroma .mo, .chroma .ld, .chroma .ss, .chroma .ni, .chroma .se { color: var(--cx-color-syntax-number); }
+/* Strings and regex */
+.chroma .s, .chroma .sa, .chroma .sb, .chroma .sc, .chroma .dl, .chroma .s2, .chroma .sh, .chroma .sx, .chroma .sr, .chroma .s1, .chroma .cpf { color: var(--cx-color-syntax-string); }
+/* Functions */
+.chroma .nf, .chroma .fm { color: var(--cx-color-syntax-function); }
+/* Markup tags */
+.chroma .nt { color: var(--cx-color-syntax-tag); }
+/* Attributes, properties, object keys */
+.chroma .na, .chroma .py { color: var(--cx-color-syntax-attribute); }
+/* Names and variables */
+.chroma .n, .chroma .nx, .chroma .nv, .chroma .vc, .chroma .vg, .chroma .vi, .chroma .vm, .chroma .l { color: var(--cx-color-syntax-variable); }
+/* Operators and punctuation */
+.chroma .o, .chroma .p { color: var(--cx-color-syntax-operator); }
+/* Comments and doc strings */
+.chroma .c, .chroma .ch, .chroma .cm, .chroma .c1, .chroma .cs, .chroma .sd, .chroma .go { color: var(--cx-color-syntax-comment); }
+/* Meta: decorators, preprocessor, labels, interpolation, prompts */
+.chroma .nd, .chroma .cp, .chroma .nl, .chroma .si, .chroma .gp { color: var(--cx-color-syntax-meta); }
+/* Diff: inserted */
+.chroma .gi { color: var(--cx-color-syntax-inserted); }
+/* Diff: deleted, errors, tracebacks */
+.chroma .gd, .chroma .gr, .chroma .gt, .chroma .err { color: var(--cx-color-syntax-deleted); }
+/* Headings and diff hunks */
+.chroma .gh, .chroma .gu { color: var(--cx-color-syntax-heading); font-weight: var(--cx-font-weight-strong); }
+/* Generic strong and emphasis (no italic available) */
+.chroma .gs, .chroma .ge { font-weight: var(--cx-font-weight-strong); }
+/* Line numbers */
+.chroma .ln, .chroma .lnt { color: var(--cx-color-syntax-line-number); }
+/* Highlighted lines (hl_lines) */
+.chroma .hl { background: var(--cx-color-syntax-line-highlight); }

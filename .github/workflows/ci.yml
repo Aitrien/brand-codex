@@ -17,3 +17,7 @@ jobs:
         run: npm run validate
       - name: Build
         run: npm run build
+      - name: Check dist/ is up to date
+        run: git diff --exit-code -- dist docs || (echo "::error::dist/ or the generated doc tables are stale. Run npm run build and commit the result." && exit 1)
+      - name: Audit showcase
+        run: npm run audit

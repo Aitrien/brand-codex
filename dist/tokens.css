@@ -1,0 +1,436 @@
+/* brand-codex 1.6.0 — generated from tokens/*.json. Do not edit.
+   Themes: semantic colours use light-dark(); color-scheme follows the system unless
+   <html data-theme="light|dark"> pins it. --cx-primitive-* are for this file only. */
+:root {
+  color-scheme: light dark;
+  /* primitive.border.width */
+  --cx-primitive-border-width-1: 1px;
+  --cx-primitive-border-width-2: 2px;
+
+  /* border.width */
+  --cx-border-width-hairline: var(--cx-primitive-border-width-1);
+  --cx-border-width-emphasis: var(--cx-primitive-border-width-2);
+
+  /* border.focus */
+  --cx-border-focus-width: var(--cx-primitive-border-width-2);
+  --cx-border-focus-offset: var(--cx-primitive-border-width-2);
+
+  /* primitive.color.ash */
+  --cx-primitive-color-ash-0: #fbfefd;
+  --cx-primitive-color-ash-50: #f4f8f6;
+  --cx-primitive-color-ash-100: #eaf1ee;
+  --cx-primitive-color-ash-200: #dae4df;
+  --cx-primitive-color-ash-300: #c4cdc8;
+  --cx-primitive-color-ash-400: #a4ada9;
+  --cx-primitive-color-ash-500: #838c87;
+  --cx-primitive-color-ash-600: #69716d;
+  --cx-primitive-color-ash-700: #515955;
+  --cx-primitive-color-ash-800: #323a36;
+  --cx-primitive-color-ash-850: #2d3330;
+  --cx-primitive-color-ash-900: #252a28;
+  --cx-primitive-color-ash-950: #171a19;
+  --cx-primitive-color-ash-1000: #0e100f;
+
+  /* primitive.color.sap */
+  --cx-primitive-color-sap-50: #e9fdee;
+  --cx-primitive-color-sap-100: #d8f9df;
+  --cx-primitive-color-sap-200: #bbf1c8;
+  --cx-primitive-color-sap-300: #a7d9b3;
+  --cx-primitive-color-sap-400: #7dbc8e;
+  --cx-primitive-color-sap-500: #4d9d66;
+  --cx-primitive-color-sap-600: #208347;
+  --cx-primitive-color-sap-700: #126836;
+  --cx-primitive-color-sap-800: #01441f;
+  --cx-primitive-color-sap-900: #003315;
+  --cx-primitive-color-sap-950: #00200b;
+
+  /* primitive.color.woad */
+  --cx-primitive-color-woad-50: #f2f7fe;
+  --cx-primitive-color-woad-100: #e5f0fe;
+  --cx-primitive-color-woad-200: #cde4fe;
+  --cx-primitive-color-woad-300: #abcef6;
+  --cx-primitive-color-woad-400: #83afe0;
+  --cx-primitive-color-woad-500: #578dc7;
+  --cx-primitive-color-woad-600: #3571b1;
+  --cx-primitive-color-woad-700: #26598e;
+  --cx-primitive-color-woad-800: #123961;
+  --cx-primitive-color-woad-900: #092a4b;
+  --cx-primitive-color-woad-950: #021a34;
+
+  /* primitive.color.weld */
+  --cx-primitive-color-weld-50: #fff6e1;
+  --cx-primitive-color-weld-100: #feeec7;
+  --cx-primitive-color-weld-200: #f9dfa1;
+  --cx-primitive-color-weld-300: #e0c88f;
+  --cx-primitive-color-weld-400: #c5a75d;
+  --cx-primitive-color-weld-500: #a88416;
+  --cx-primitive-color-weld-600: #896a02;
+  --cx-primitive-color-weld-700: #6c5302;
+  --cx-primitive-color-weld-800: #473502;
+  --cx-primitive-color-weld-900: #352700;
+  --cx-primitive-color-weld-950: #221800;
+
+  /* primitive.color.madder */
+  --cx-primitive-color-madder-50: #fef4f3;
+  --cx-primitive-color-madder-100: #feeae7;
+  --cx-primitive-color-madder-200: #ffd6d1;
+  --cx-primitive-color-madder-300: #feb5ac;
+  --cx-primitive-color-madder-400: #ea8e83;
+  --cx-primitive-color-madder-500: #d16359;
+  --cx-primitive-color-madder-600: #b94039;
+  --cx-primitive-color-madder-700: #942f29;
+  --cx-primitive-color-madder-800: #651916;
+  --cx-primitive-color-madder-900: #4e0d0c;
+  --cx-primitive-color-madder-950: #360404;
+
+  /* color.surface */
+  --cx-color-surface-base: light-dark(var(--cx-primitive-color-ash-50), var(--cx-primitive-color-ash-900));
+  --cx-color-surface-raised: light-dark(var(--cx-primitive-color-ash-0), var(--cx-primitive-color-ash-850));
+  --cx-color-surface-sunken: light-dark(var(--cx-primitive-color-ash-100), var(--cx-primitive-color-ash-950));
+  --cx-color-surface-hover: light-dark(var(--cx-primitive-color-ash-100), var(--cx-primitive-color-ash-800));
+  --cx-color-surface-inverse: light-dark(var(--cx-primitive-color-ash-900), var(--cx-primitive-color-ash-100));
+  --cx-color-surface-highlight: light-dark(var(--cx-primitive-color-sap-100), var(--cx-primitive-color-sap-900));
+
+  /* color.text */
+  --cx-color-text-primary: light-dark(var(--cx-primitive-color-ash-950), var(--cx-primitive-color-ash-100));
+  --cx-color-text-secondary: light-dark(var(--cx-primitive-color-ash-800), var(--cx-primitive-color-ash-300));
+  --cx-color-text-muted: light-dark(var(--cx-primitive-color-ash-700), var(--cx-primitive-color-ash-400));
+  --cx-color-text-accent: light-dark(var(--cx-primitive-color-sap-700), var(--cx-primitive-color-sap-300));
+  --cx-color-text-inverse: light-dark(var(--cx-primitive-color-ash-50), var(--cx-primitive-color-ash-900));
+  --cx-color-text-on-accent: light-dark(var(--cx-primitive-color-ash-0), var(--cx-primitive-color-ash-1000));
+
+  /* color.link */
+  --cx-color-link-rest: light-dark(var(--cx-primitive-color-sap-800), var(--cx-primitive-color-sap-300));
+  --cx-color-link-hover: light-dark(var(--cx-primitive-color-sap-900), var(--cx-primitive-color-sap-200));
+
+  /* color.border */
+  --cx-color-border-subtle: light-dark(var(--cx-primitive-color-ash-200), var(--cx-primitive-color-ash-800));
+  --cx-color-border-default: light-dark(var(--cx-primitive-color-ash-300), var(--cx-primitive-color-ash-700));
+  --cx-color-border-strong: light-dark(var(--cx-primitive-color-ash-500), var(--cx-primitive-color-ash-500));
+
+  /* color.accent */
+  --cx-color-accent-fill-rest: light-dark(var(--cx-primitive-color-sap-700), var(--cx-primitive-color-sap-300));
+  --cx-color-accent-fill-hover: light-dark(var(--cx-primitive-color-sap-800), var(--cx-primitive-color-sap-200));
+  --cx-color-accent-border: light-dark(var(--cx-primitive-color-sap-600), var(--cx-primitive-color-sap-400));
+
+  /* color.focus */
+  --cx-color-focus-ring: light-dark(var(--cx-primitive-color-woad-700), var(--cx-primitive-color-woad-300));
+
+  /* color.ornament */
+  --cx-color-ornament-rest: light-dark(var(--cx-primitive-color-sap-600), var(--cx-primitive-color-sap-400));
+  --cx-color-ornament-strong: light-dark(var(--cx-primitive-color-sap-800), var(--cx-primitive-color-sap-200));
+  --cx-color-ornament-muted: light-dark(var(--cx-primitive-color-ash-400), var(--cx-primitive-color-ash-700));
+
+  /* color.status */
+  --cx-color-status-success-text: light-dark(var(--cx-primitive-color-sap-700), var(--cx-primitive-color-sap-300));
+  --cx-color-status-success-surface: light-dark(var(--cx-primitive-color-sap-50), var(--cx-primitive-color-sap-950));
+  --cx-color-status-success-border: light-dark(var(--cx-primitive-color-sap-600), var(--cx-primitive-color-sap-400));
+  --cx-color-status-warning-text: light-dark(var(--cx-primitive-color-weld-700), var(--cx-primitive-color-weld-300));
+  --cx-color-status-warning-surface: light-dark(var(--cx-primitive-color-weld-50), var(--cx-primitive-color-weld-950));
+  --cx-color-status-warning-border: light-dark(var(--cx-primitive-color-weld-600), var(--cx-primitive-color-weld-400));
+  --cx-color-status-danger-text: light-dark(var(--cx-primitive-color-madder-700), var(--cx-primitive-color-madder-300));
+  --cx-color-status-danger-surface: light-dark(var(--cx-primitive-color-madder-50), var(--cx-primitive-color-madder-950));
+  --cx-color-status-danger-border: light-dark(var(--cx-primitive-color-madder-600), var(--cx-primitive-color-madder-400));
+  --cx-color-status-info-text: light-dark(var(--cx-primitive-color-woad-700), var(--cx-primitive-color-woad-300));
+  --cx-color-status-info-surface: light-dark(var(--cx-primitive-color-woad-50), var(--cx-primitive-color-woad-950));
+  --cx-color-status-info-border: light-dark(var(--cx-primitive-color-woad-600), var(--cx-primitive-color-woad-400));
+
+  /* color.syntax */
+  --cx-color-syntax-comment: light-dark(var(--cx-primitive-color-ash-700), var(--cx-primitive-color-ash-400));
+  --cx-color-syntax-keyword: light-dark(var(--cx-primitive-color-madder-700), var(--cx-primitive-color-madder-300));
+  --cx-color-syntax-string: light-dark(var(--cx-primitive-color-sap-700), var(--cx-primitive-color-sap-300));
+  --cx-color-syntax-number: light-dark(var(--cx-primitive-color-weld-700), var(--cx-primitive-color-weld-300));
+  --cx-color-syntax-function: light-dark(var(--cx-primitive-color-woad-700), var(--cx-primitive-color-woad-300));
+  --cx-color-syntax-type: light-dark(var(--cx-primitive-color-woad-800), var(--cx-primitive-color-woad-200));
+  --cx-color-syntax-tag: light-dark(var(--cx-primitive-color-madder-800), var(--cx-primitive-color-madder-200));
+  --cx-color-syntax-attribute: light-dark(var(--cx-primitive-color-weld-800), var(--cx-primitive-color-weld-200));
+  --cx-color-syntax-variable: light-dark(var(--cx-primitive-color-ash-950), var(--cx-primitive-color-ash-100));
+  --cx-color-syntax-operator: light-dark(var(--cx-primitive-color-ash-800), var(--cx-primitive-color-ash-300));
+  --cx-color-syntax-meta: light-dark(var(--cx-primitive-color-sap-800), var(--cx-primitive-color-sap-200));
+  --cx-color-syntax-inserted: light-dark(var(--cx-primitive-color-sap-800), var(--cx-primitive-color-sap-200));
+  --cx-color-syntax-deleted: light-dark(var(--cx-primitive-color-madder-800), var(--cx-primitive-color-madder-200));
+  --cx-color-syntax-heading: light-dark(var(--cx-primitive-color-woad-800), var(--cx-primitive-color-woad-200));
+  --cx-color-syntax-line-number: light-dark(var(--cx-primitive-color-ash-700), var(--cx-primitive-color-ash-400));
+  --cx-color-syntax-line-highlight: light-dark(var(--cx-primitive-color-ash-200), var(--cx-primitive-color-ash-900));
+
+  /* color.data */
+  --cx-color-data-1: light-dark(var(--cx-primitive-color-woad-600), var(--cx-primitive-color-woad-400));
+  --cx-color-data-2: light-dark(var(--cx-primitive-color-sap-600), var(--cx-primitive-color-sap-400));
+  --cx-color-data-3: light-dark(var(--cx-primitive-color-madder-600), var(--cx-primitive-color-madder-400));
+  --cx-color-data-4: light-dark(var(--cx-primitive-color-weld-600), var(--cx-primitive-color-weld-400));
+  --cx-color-data-5: light-dark(var(--cx-primitive-color-ash-600), var(--cx-primitive-color-ash-400));
+
+  /* primitive.motion.duration */
+  --cx-primitive-motion-duration-0: 0ms;
+  --cx-primitive-motion-duration-1: 120ms;
+  --cx-primitive-motion-duration-2: 200ms;
+  --cx-primitive-motion-duration-3: 320ms;
+  --cx-primitive-motion-duration-4: 1600ms;
+  --cx-primitive-motion-duration-5: 3200ms;
+
+  /* primitive.motion.easing */
+  --cx-primitive-motion-easing-out-strong: cubic-bezier(0.2, 0, 0, 1);
+  --cx-primitive-motion-easing-decelerate: cubic-bezier(0, 0, 0.2, 1);
+  --cx-primitive-motion-easing-accelerate: cubic-bezier(0.4, 0, 1, 1);
+  --cx-primitive-motion-easing-linear: cubic-bezier(0, 0, 1, 1);
+  --cx-primitive-motion-easing-in-out: cubic-bezier(0.45, 0, 0.55, 1);
+
+  /* primitive.motion.distance */
+  --cx-primitive-motion-distance-1: 0.125rem;
+
+  /* motion.duration */
+  --cx-motion-duration-instant: var(--cx-primitive-motion-duration-0);
+  --cx-motion-duration-fast: var(--cx-primitive-motion-duration-1);
+  --cx-motion-duration-base: var(--cx-primitive-motion-duration-2);
+  --cx-motion-duration-slow: var(--cx-primitive-motion-duration-3);
+  --cx-motion-duration-plate: var(--cx-primitive-motion-duration-4);
+  --cx-motion-duration-pulse: var(--cx-primitive-motion-duration-5);
+
+  /* motion.easing */
+  --cx-motion-easing-standard: var(--cx-primitive-motion-easing-out-strong);
+  --cx-motion-easing-enter: var(--cx-primitive-motion-easing-decelerate);
+  --cx-motion-easing-exit: var(--cx-primitive-motion-easing-accelerate);
+  --cx-motion-easing-linear: var(--cx-primitive-motion-easing-linear);
+  --cx-motion-easing-pulse: var(--cx-primitive-motion-easing-in-out);
+
+  /* motion.distance */
+  --cx-motion-distance-nudge: var(--cx-primitive-motion-distance-1);
+
+  /* primitive.radius.0 */
+  --cx-primitive-radius-0: 0;
+
+  /* primitive.radius.1 */
+  --cx-primitive-radius-1: 2px;
+
+  /* primitive.radius.full */
+  --cx-primitive-radius-full: 9999px;
+
+  /* radius.none */
+  --cx-radius-none: var(--cx-primitive-radius-0);
+
+  /* radius.control */
+  --cx-radius-control: var(--cx-primitive-radius-0);
+
+  /* radius.pill */
+  --cx-radius-pill: var(--cx-primitive-radius-full);
+
+  /* radius.round */
+  --cx-radius-round: var(--cx-primitive-radius-full);
+
+  /* primitive.size.width */
+  --cx-primitive-size-width-xs: 15rem;
+  --cx-primitive-size-width-sm: 20rem;
+  --cx-primitive-size-width-md: 40rem;
+  --cx-primitive-size-width-lg: 60rem;
+  --cx-primitive-size-width-xl: 69rem;
+
+  /* primitive.size.measure */
+  --cx-primitive-size-measure-narrow: 52ch;
+  --cx-primitive-size-measure-base: 66ch;
+  --cx-primitive-size-measure-wide: 80ch;
+
+  /* primitive.size.control */
+  --cx-primitive-size-control-1: 1.5rem;
+  --cx-primitive-size-control-2: 2.5rem;
+  --cx-primitive-size-control-3: 2.75rem;
+
+  /* primitive.size.icon */
+  --cx-primitive-size-icon-1: 1rem;
+  --cx-primitive-size-icon-2: 1.25rem;
+  --cx-primitive-size-icon-3: 1.5rem;
+
+  /* primitive.size.glyph */
+  --cx-primitive-size-glyph-1: 0.75rem;
+  --cx-primitive-size-glyph-2: 1.5rem;
+  --cx-primitive-size-glyph-3: 2.25rem;
+  --cx-primitive-size-glyph-4: 3rem;
+
+  /* primitive.size.breakpoint */
+  --cx-primitive-size-breakpoint-sm: 30rem;
+  --cx-primitive-size-breakpoint-md: 48rem;
+  --cx-primitive-size-breakpoint-lg: 64rem;
+  --cx-primitive-size-breakpoint-xl: 80rem;
+
+  /* size.container */
+  --cx-size-container-page: var(--cx-primitive-size-width-xl);
+  --cx-size-container-breakout: var(--cx-primitive-size-width-lg);
+
+  /* size.measure */
+  --cx-size-measure-prose: var(--cx-primitive-size-measure-base);
+  --cx-size-measure-caption: var(--cx-primitive-size-measure-narrow);
+  --cx-size-measure-code: var(--cx-primitive-size-measure-wide);
+
+  /* size.column */
+  --cx-size-column-sidebar: var(--cx-primitive-size-width-xs);
+  --cx-size-column-card: var(--cx-primitive-size-width-sm);
+
+  /* size.target */
+  --cx-size-target-min: var(--cx-primitive-size-control-1);
+  --cx-size-target-control: var(--cx-primitive-size-control-2);
+  --cx-size-target-touch: var(--cx-primitive-size-control-3);
+
+  /* size.icon */
+  --cx-size-icon-sm: var(--cx-primitive-size-icon-1);
+  --cx-size-icon-md: var(--cx-primitive-size-icon-2);
+  --cx-size-icon-lg: var(--cx-primitive-size-icon-3);
+
+  /* size.ornament */
+  --cx-size-ornament-sm: var(--cx-primitive-size-glyph-1);
+  --cx-size-ornament-md: var(--cx-primitive-size-glyph-2);
+  --cx-size-ornament-lg: var(--cx-primitive-size-glyph-4);
+
+  /* size.mark */
+  --cx-size-mark-tick: var(--cx-primitive-space-2);
+
+  /* size.breakpoint */
+  --cx-size-breakpoint-md: var(--cx-primitive-size-breakpoint-md);
+  --cx-size-breakpoint-lg: var(--cx-primitive-size-breakpoint-lg);
+
+  /* primitive.space.0 */
+  --cx-primitive-space-0: 0;
+
+  /* primitive.space.1 */
+  --cx-primitive-space-1: 0.25rem;
+
+  /* primitive.space.2 */
+  --cx-primitive-space-2: 0.5rem;
+
+  /* primitive.space.3 */
+  --cx-primitive-space-3: 0.75rem;
+
+  /* primitive.space.4 */
+  --cx-primitive-space-4: 1rem;
+
+  /* primitive.space.5 */
+  --cx-primitive-space-5: 1.25rem;
+
+  /* primitive.space.6 */
+  --cx-primitive-space-6: 1.5rem;
+
+  /* primitive.space.8 */
+  --cx-primitive-space-8: 2rem;
+
+  /* primitive.space.10 */
+  --cx-primitive-space-10: 2.5rem;
+
+  /* primitive.space.12 */
+  --cx-primitive-space-12: 3rem;
+
+  /* primitive.space.16 */
+  --cx-primitive-space-16: 4rem;
+
+  /* primitive.space.20 */
+  --cx-primitive-space-20: 5rem;
+
+  /* primitive.space.24 */
+  --cx-primitive-space-24: 6rem;
+
+  /* space.inset */
+  --cx-space-inset-xs: var(--cx-primitive-space-1);
+  --cx-space-inset-sm: var(--cx-primitive-space-2);
+  --cx-space-inset-md: var(--cx-primitive-space-4);
+  --cx-space-inset-lg: var(--cx-primitive-space-6);
+  --cx-space-inset-xl: var(--cx-primitive-space-8);
+
+  /* space.stack */
+  --cx-space-stack-xs: var(--cx-primitive-space-1);
+  --cx-space-stack-sm: var(--cx-primitive-space-2);
+  --cx-space-stack-md: var(--cx-primitive-space-4);
+  --cx-space-stack-lg: var(--cx-primitive-space-6);
+  --cx-space-stack-xl: var(--cx-primitive-space-10);
+
+  /* space.inline */
+  --cx-space-inline-xs: var(--cx-primitive-space-1);
+  --cx-space-inline-sm: var(--cx-primitive-space-2);
+  --cx-space-inline-md: var(--cx-primitive-space-3);
+  --cx-space-inline-lg: var(--cx-primitive-space-4);
+
+  /* space.section */
+  --cx-space-section-sm: clamp(2rem, 1.6667rem + 1.4815vw, 3rem);
+  --cx-space-section-md: clamp(3rem, 2.6667rem + 1.4815vw, 4rem);
+  --cx-space-section-lg: clamp(4rem, 3.3333rem + 2.963vw, 6rem);
+
+  /* space.gutter */
+  --cx-space-gutter-page: clamp(1rem, 0.5rem + 2.2222vw, 2.5rem);
+  --cx-space-gutter-grid: clamp(1rem, 0.8333rem + 0.7407vw, 1.5rem);
+
+  /* primitive.font.family */
+  --cx-primitive-font-family-national-park: "National Park", ui-sans-serif, system-ui, -apple-system, "Segoe UI", "Roboto", sans-serif;
+  --cx-primitive-font-family-jetbrains-mono: "JetBrains Mono", ui-monospace, "SFMono-Regular", "Menlo", "Consolas", monospace;
+  --cx-primitive-font-family-yarndings-12: "Yarndings 12";
+
+  /* primitive.font.size */
+  --cx-primitive-font-size-1: 0.75rem;
+  --cx-primitive-font-size-2: clamp(0.875rem, 0.8667rem + 0.037vw, 0.9rem);
+  --cx-primitive-font-size-3: clamp(1.0625rem, 1.0417rem + 0.0926vw, 1.125rem);
+  --cx-primitive-font-size-4: clamp(1.275rem, 1.2313rem + 0.1941vw, 1.406rem);
+  --cx-primitive-font-size-5: clamp(1.53rem, 1.454rem + 0.3378vw, 1.758rem);
+  --cx-primitive-font-size-6: clamp(1.836rem, 1.7157rem + 0.5348vw, 2.197rem);
+  --cx-primitive-font-size-7: clamp(2.203rem, 2.0217rem + 0.8059vw, 2.747rem);
+  --cx-primitive-font-size-8: clamp(2.644rem, 2.381rem + 1.1689vw, 3.433rem);
+
+  /* primitive.font.weight */
+  --cx-primitive-font-weight-light: 300;
+  --cx-primitive-font-weight-regular: 400;
+  --cx-primitive-font-weight-medium: 500;
+  --cx-primitive-font-weight-semibold: 600;
+  --cx-primitive-font-weight-bold: 700;
+  --cx-primitive-font-weight-extrabold: 800;
+
+  /* primitive.font.line-height */
+  --cx-primitive-font-line-height-tight: 1.1;
+  --cx-primitive-font-line-height-snug: 1.25;
+  --cx-primitive-font-line-height-normal: 1.4;
+  --cx-primitive-font-line-height-relaxed: 1.6;
+
+  /* primitive.font.relative */
+  --cx-primitive-font-relative-code: 0.875em;
+
+  /* primitive.font.tracking */
+  --cx-primitive-font-tracking-tighter: -0.025em;
+  --cx-primitive-font-tracking-tight: -0.015em;
+  --cx-primitive-font-tracking-none: 0em;
+  --cx-primitive-font-tracking-wide: 0.04em;
+  --cx-primitive-font-tracking-wider: 0.08em;
+
+  /* font.family */
+  --cx-font-family-display: var(--cx-primitive-font-family-national-park);
+  --cx-font-family-body: var(--cx-primitive-font-family-national-park);
+  --cx-font-family-mono: var(--cx-primitive-font-family-jetbrains-mono);
+  --cx-font-family-ornament: var(--cx-primitive-font-family-yarndings-12);
+
+  /* font.size */
+  --cx-font-size-display: var(--cx-primitive-font-size-8);
+  --cx-font-size-heading-1: var(--cx-primitive-font-size-7);
+  --cx-font-size-heading-2: var(--cx-primitive-font-size-6);
+  --cx-font-size-heading-3: var(--cx-primitive-font-size-5);
+  --cx-font-size-heading-4: var(--cx-primitive-font-size-4);
+  --cx-font-size-lede: var(--cx-primitive-font-size-4);
+  --cx-font-size-body: var(--cx-primitive-font-size-3);
+  --cx-font-size-small: var(--cx-primitive-font-size-2);
+  --cx-font-size-label: var(--cx-primitive-font-size-1);
+  --cx-font-size-code-inline: var(--cx-primitive-font-relative-code);
+
+  /* font.weight */
+  --cx-font-weight-body: var(--cx-primitive-font-weight-regular);
+  --cx-font-weight-ui: var(--cx-primitive-font-weight-medium);
+  --cx-font-weight-strong: var(--cx-primitive-font-weight-semibold);
+  --cx-font-weight-heading: var(--cx-primitive-font-weight-semibold);
+  --cx-font-weight-display: var(--cx-primitive-font-weight-bold);
+
+  /* font.line-height */
+  --cx-font-line-height-display: var(--cx-primitive-font-line-height-tight);
+  --cx-font-line-height-heading: var(--cx-primitive-font-line-height-snug);
+  --cx-font-line-height-ui: var(--cx-primitive-font-line-height-normal);
+  --cx-font-line-height-body: var(--cx-primitive-font-line-height-relaxed);
+  --cx-font-line-height-code: var(--cx-primitive-font-line-height-relaxed);
+
+  /* font.tracking */
+  --cx-font-tracking-display: var(--cx-primitive-font-tracking-tighter);
+  --cx-font-tracking-heading: var(--cx-primitive-font-tracking-tight);
+  --cx-font-tracking-body: var(--cx-primitive-font-tracking-none);
+  --cx-font-tracking-label: var(--cx-primitive-font-tracking-wider);
+  --cx-font-tracking-ui: var(--cx-primitive-font-tracking-wide);
+}
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"] { color-scheme: dark; }

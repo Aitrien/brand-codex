@@ -1,0 +1,53 @@
+{
+  "primitive": {
+    "radius": {
+      "$type": "dimension",
+      "0": {
+        "$value": {
+          "value": 0,
+          "unit": "px"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      },
+      "1": {
+        "$value": {
+          "value": 2,
+          "unit": "px"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      },
+      "full": {
+        "$value": {
+          "value": 9999,
+          "unit": "px"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      }
+    }
+  },
+  "radius": {
+    "$type": "dimension",
+    "none": {
+      "$value": "{primitive.radius.0}",
+      "$description": "Default for every structural object: cards, labels, tags, tables, code, figures, callouts."
+    },
+    "control": {
+      "$value": "{primitive.radius.0}",
+      "$description": "Non-button controls: text inputs, selects and keyboard keys. Square, to match structure; kept separate so form controls can change without touching cards."
+    },
+    "pill": {
+      "$value": "{primitive.radius.full}",
+      "$description": "Buttons and icon-only controls, and nothing else: cx-button (primary, secondary, disabled), the code copy button, the theme toggle and heading anchors. The one rounded shape in the system, so a pill always means something you can press. Never on cards, tags, labels, tooltips, nav items or inputs."
+    },
+    "round": {
+      "$value": "{primitive.radius.full}",
+      "$description": "Status dots and the toggle thumb only. Never on text containers."
+    }
+  }
+}

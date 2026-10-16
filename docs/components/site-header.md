@@ -1,0 +1,105 @@
+---
+name: site-header
+status: stable
+tokens:
+  - border.focus.offset
+  - border.focus.width
+  - border.width.hairline
+  - color.accent.fill.rest
+  - color.border.subtle
+  - color.focus.ring
+  - color.surface.base
+  - color.surface.highlight
+  - color.surface.hover
+  - color.text.muted
+  - color.text.on-accent
+  - color.text.primary
+  - color.text.secondary
+  - font.family.display
+  - font.family.mono
+  - font.line-height.ui
+  - font.size.heading-4
+  - font.size.label
+  - font.tracking.heading
+  - font.tracking.label
+  - font.weight.display
+  - font.weight.strong
+  - font.weight.ui
+  - motion.duration.fast
+  - motion.easing.standard
+  - radius.none
+  - radius.pill
+  - size.container.page
+  - size.target.touch
+  - space.gutter.page
+  - space.inline.lg
+  - space.inline.sm
+  - space.inline.xs
+  - space.inset.md
+  - space.inset.sm
+---
+
+# Site header and nav
+
+The sticky bar at the top of every page: wordmark, primary nav, and the theme toggle.
+
+## When to use
+
+- On every page of a site, including the 404, so a reader is never stranded.
+- For three to five primary destinations with plain, functional labels (Work, Writing, About).
+
+## When not to use
+
+- For in-page navigation; use `table-of-contents`.
+- For more than five links. Move the rest to the footer.
+- For calls to action. The header holds destinations, not buttons.
+
+## Markup
+
+```html preview
+<a class="cx-skip-link" href="#main">Skip to content</a>
+<header class="cx-header">
+  <div class="cx-container cx-header__inner">
+    <a class="cx-wordmark" href="/">Liam Marshall <span class="cx-wordmark__role">Web engineer</span></a>
+    <div class="cx-header__end">
+      <nav class="cx-nav" aria-label="Main">
+        <ul>
+          <li><a href="/work/" aria-current="page">Work</a></li>
+          <li><a href="/writing/">Writing</a></li>
+          <li><a href="/about/">About</a></li>
+        </ul>
+      </nav>
+      <button class="cx-theme-toggle" type="button" data-theme-toggle hidden aria-label="Switch to dark theme">
+        <svg class="cx-icon" data-icon="to-dark" aria-hidden="true" focusable="false"><use href="#cx-icon-theme-dark"></use></svg>
+        <svg class="cx-icon" data-icon="to-light" aria-hidden="true" focusable="false"><use href="#cx-icon-theme-light"></use></svg>
+        <span class="cx-tooltip" aria-hidden="true">Switch to dark theme</span>
+      </button>
+    </div>
+  </div>
+</header>
+```
+
+## Do
+
+- Mark the current section with `aria-current="page"`, including on child pages (a post marks Writing). It gets a `color.surface.highlight` background, not an underline.
+- Nav items stay square; hover shows `color.surface.hover`.
+- Keep labels to one functional word each.
+- Ship the toggle with `hidden` and let the script reveal it, so no dead control appears without JavaScript.
+- Make the toggle an icon-only circle that shows the action, not the state: a moon while light is showing, a sun while dark is showing. Its tooltip says the same ("Switch to dark theme").
+- Each click flips the theme you see. If the result matches the system setting, clear the stored choice (`auto`) so the page follows the system again; otherwise store `light` or `dark` on `data-theme`.
+- Include both icons. CSS picks the right one from `data-theme` and `prefers-color-scheme`, so the script only updates the label.
+
+## Don't
+
+- Don't hide the nav behind a menu button at small widths. The list scrolls inside its row instead.
+- Don't add icons or ornaments to nav items. The toggle is the only header control with an icon.
+- Don't animate the header on scroll (no shrink, hide or reveal).
+
+## Accessibility
+
+- The skip link is the first focusable element and targets `<main id="main">`.
+- `<nav aria-label="Main">`; only one nav per page uses that label.
+- Nav links and the toggle are 44px (`size.target.touch`); the toggle is a pill with equal sides, so it renders as a circle.
+- The toggle's `aria-label` is its action ("Switch to light theme"); the visible tooltip repeats it and is `aria-hidden`. Escape hides the tooltip without moving the pointer (see `tooltip.md`).
+- `aria-current` carries the current state for assistive tech; the highlight is the visual cue.
+- Pairs: `color.text.secondary` and `color.text.primary` on `color.surface.base` (7:1); `color.text.primary` on `color.surface.highlight` (current) and `color.surface.hover` (7:1).

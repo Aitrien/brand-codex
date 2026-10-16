@@ -10,3 +10,7 @@
   [[module.mounts]]
     source = "dist"
     target = "assets/brand-codex"
+
+  [[module.mounts]]
+    source = "fonts"
+    target = "static/fonts"

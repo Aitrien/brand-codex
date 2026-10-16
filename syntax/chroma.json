@@ -1,0 +1,27 @@
+{
+  "$description": "Maps Hugo Chroma CSS classes (markup.highlight.noClasses = false) to semantic tokens. Theme switching comes from the tokens; there is one stylesheet for both themes. Comments stay upright because no mono italic is loaded.",
+  "container": {
+    "selector": ".chroma",
+    "background": "color.surface.sunken",
+    "color": "color.syntax.variable"
+  },
+  "rules": [
+    { "role": "Keywords", "classes": ["k", "kd", "kn", "kp", "kr", "ow", "bp"], "color": "color.syntax.keyword", "weight": "font.weight.strong" },
+    { "role": "Type keywords, classes, built-ins, namespaces, exceptions", "classes": ["kt", "nb", "nc", "nn", "ne"], "color": "color.syntax.type" },
+    { "role": "Constants: numbers, booleans, null, dates, symbols, entities, escapes", "classes": ["kc", "no", "m", "mb", "mf", "mh", "mi", "il", "mo", "ld", "ss", "ni", "se"], "color": "color.syntax.number" },
+    { "role": "Strings and regex", "classes": ["s", "sa", "sb", "sc", "dl", "s2", "sh", "sx", "sr", "s1", "cpf"], "color": "color.syntax.string" },
+    { "role": "Functions", "classes": ["nf", "fm"], "color": "color.syntax.function" },
+    { "role": "Markup tags", "classes": ["nt"], "color": "color.syntax.tag" },
+    { "role": "Attributes, properties, object keys", "classes": ["na", "py"], "color": "color.syntax.attribute" },
+    { "role": "Names and variables", "classes": ["n", "nx", "nv", "vc", "vg", "vi", "vm", "l"], "color": "color.syntax.variable" },
+    { "role": "Operators and punctuation", "classes": ["o", "p"], "color": "color.syntax.operator" },
+    { "role": "Comments and doc strings", "classes": ["c", "ch", "cm", "c1", "cs", "sd", "go"], "color": "color.syntax.comment" },
+    { "role": "Meta: decorators, preprocessor, labels, interpolation, prompts", "classes": ["nd", "cp", "nl", "si", "gp"], "color": "color.syntax.meta" },
+    { "role": "Diff: inserted", "classes": ["gi"], "color": "color.syntax.inserted" },
+    { "role": "Diff: deleted, errors, tracebacks", "classes": ["gd", "gr", "gt", "err"], "color": "color.syntax.deleted" },
+    { "role": "Headings and diff hunks", "classes": ["gh", "gu"], "color": "color.syntax.heading", "weight": "font.weight.strong" },
+    { "role": "Generic strong and emphasis (no italic available)", "classes": ["gs", "ge"], "weight": "font.weight.strong" },
+    { "role": "Line numbers", "classes": ["ln", "lnt"], "color": "color.syntax.line-number" },
+    { "role": "Highlighted lines (hl_lines)", "classes": ["hl"], "background": "color.syntax.line-highlight" }
+  ]
+}
