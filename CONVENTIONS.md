@@ -79,8 +79,10 @@ Generated CSS has a single `:root` block. Semantic colours are `light-dark(light
 | Change | Bump |
 |---|---|
 | Rename or remove a semantic token | **major** |
-| Add a token, add a component doc, add an icon to `icons/manifest.json` | minor |
+| Add a token, add a component doc, add an icon to `icons/manifest.json`, deprecate a token | minor |
 | Change a value, fix a description | patch |
+
+Deprecate before removing. A semantic token that is no longer used gets a DTCG `$deprecated` string saying why and in which major it goes (`"Unused since the contour plate; removed in 2.0.0."`), and is listed under Deprecated in `CHANGELOG.md`. It stays in `tokens.css` (with a comment) and in `tokens.json` (with a `deprecated` field) until that major. The validator fails if a component, the Chroma mapping, a script or a component doc uses a deprecated token. Removal is the only major change, so the Go module path stays `github.com/aitrien/brand-codex` until a removal is actually due.
 
 Consumers pin to a tag. Never move or delete a published tag.
 

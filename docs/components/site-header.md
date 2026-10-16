@@ -79,6 +79,20 @@ The sticky bar at the top of every page: wordmark, primary nav, and the theme to
 </header>
 ```
 
+### Scripts
+
+The toggle needs two scripts, both shipped in `dist/`. The first is a one-line snippet (`dist/theme-init.js`) inlined in `<head>` before the stylesheet, so a stored choice is on `<html>` before the first paint and the page never flashes the wrong theme. The second is `dist/codex.js`, loaded with `defer`, which reveals the toggle and wires it up (it also runs copy buttons, tooltip dismissal and the table of contents).
+
+```html
+<head>
+  <script>try{var t=localStorage.getItem('cx-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
+  <link rel="stylesheet" href="/brand-codex/codex.css">
+  <script src="/brand-codex/codex.js" defer></script>
+</head>
+```
+
+Copy the snippet as it is: the build fails if this doc and `js/theme-init.js` differ. It reads the same `cx-theme` key that `codex.js` writes (`light` or `dark`; no key means follow the system), and does nothing when storage is blocked. In Hugo, inline it from the mounted file: `{{ with resources.Get "brand-codex/theme-init.js" }}<script>{{ .Content | safeJS }}</script>{{ end }}`. If your Content-Security-Policy blocks inline scripts, allow this one by its hash.
+
 ## Do
 
 - Mark the current section with `aria-current="page"`, including on child pages (a post marks Writing). It gets a `color.surface.highlight` background, not an underline.

@@ -1,6 +1,6 @@
 {
   "name": "@aitrien/brand-codex",
-  "version": "1.6.0",
+  "version": "1.7.0",
   "private": true,
   "description": "Liam Marshall's design system: DTCG tokens, component rules and generated CSS.",
   "type": "module",
@@ -21,6 +21,8 @@
   "exports": {
     "./tokens.css": "./dist/tokens.css",
     "./codex.css": "./dist/codex.css",
+    "./codex.js": "./dist/codex.js",
+    "./theme-init.js": "./dist/theme-init.js",
     "./tokens.js": "./dist/tokens.js",
     "./tokens.json": "./dist/tokens.json",
     "./plate.js": "./dist/plate.js",

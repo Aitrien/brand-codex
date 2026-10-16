@@ -41,11 +41,13 @@ docs/templates.md   Content hierarchy for the six page templates
 docs/syntax-highlighting.md
 fonts/              Self-hosted WOFF2 (Latin subsets) and their OFL licences
 scripts/            validate, build and audit
+js/codex.js         Theme toggle, copy buttons, tooltip dismissal, TOC docking and active section (shared by sites and the showcase)
+js/theme-init.js    One-line <head> snippet that applies a stored theme before first paint
 js/plate.js         Specimen plate generator: draws the static contours at build time and animates them in the browser
 showcase/           Source of the system's showcase page
 mcp/                MCP server (Phase 3)
 hugo.toml, go.mod   Hugo module definition and its mounts
-dist/               Generated: tokens.css, components in codex.css, chroma.css, fonts.css, icons.svg (sprite), tokens.json (for MCP), tokens.js (ES module export), plate.html and plate.js (specimen plate), contrast.md, showcase.html (fragment for publishing), showcase.standalone.html (open locally)
+dist/               Generated: tokens.css, components in codex.css, chroma.css, fonts.css, icons.svg (sprite), tokens.json (for MCP), tokens.js (ES module export), codex.js and theme-init.js (behaviour), plate.html and plate.js (specimen plate), contrast.md, showcase.html (fragment for publishing), showcase.standalone.html (open locally)
 ```
 
 ## Commands
@@ -53,7 +55,7 @@ dist/               Generated: tokens.css, components in codex.css, chroma.css, 
 ```sh
 npm run validate  # naming rules, tiers, aliases, DTCG value shapes, every contrast pair in both themes
 npm run build     # validate, then write dist/ and refresh generated doc tables
-npm run audit     # prove dist/showcase.html has no raw colour, size or duration outside :root
+npm run audit     # prove dist/showcase.html and the shipped scripts have no raw colour, size or duration outside :root
 ```
 
 Node 20 or later, no dependencies.
@@ -71,13 +73,17 @@ Import the module. Its own `hugo.toml` mounts `dist/` at `assets/brand-codex` an
   noClasses = false
 ```
 
-Pin a release with `hugo mod get github.com/aitrien/brand-codex@v1.6.0`. Then load one stylesheet:
+Pin a release with `hugo mod get github.com/aitrien/brand-codex@v1.7.0`. Then, in `<head>`, apply any stored theme before first paint, load one stylesheet and the behaviour script:
 
 ```html
+{{ with resources.Get "brand-codex/theme-init.js" }}<script>{{ .Content | safeJS }}</script>{{ end }}
 <link rel="preload" href="/fonts/national-park-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/yarndings-12-latin.woff2" as="font" type="font/woff2" crossorigin>
 {{ with resources.Get "brand-codex/codex.css" | minify | fingerprint }}<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">{{ end }}
+{{ with resources.Get "brand-codex/codex.js" | minify | fingerprint }}<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}
 ```
+
+Keep the stylesheet's published path one level below the site root (Hugo publishes it at `/brand-codex/`): its font URLs are `../fonts/…`, which resolve to the mounted `/fonts/`.
 
 Inline the icon sprite once, first thing in `<body>`, so `<use href="#cx-icon-…">` resolves without a request:
 

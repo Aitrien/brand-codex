@@ -18,6 +18,8 @@ body {
 ::selection { background: var(--cx-color-surface-highlight); color: var(--cx-color-text-primary); }
 :focus-visible { outline: var(--cx-border-focus-width) solid var(--cx-color-focus-ring); outline-offset: var(--cx-border-focus-offset); }
 img, svg, video { max-width: 100%; height: auto; }
+/* Controls that need script ship `hidden`; component display rules must never reveal them. */
+[hidden]:not([hidden="until-found"]) { display: none !important; }
 h1, h2, h3, h4 { text-wrap: balance; }
 p, li, dd, figcaption { text-wrap: pretty; }
 .cx-visually-hidden {
@@ -508,7 +510,6 @@ a.cx-tag:hover { border-color: var(--cx-color-accent-border); color: var(--cx-co
 .cx-plate__pause :is(.cx-icon, .cx-tooltip [data-when]) { display: none; }
 .cx-plate__pause:not(:has(:checked)) [data-when="running"],
 .cx-plate__pause:has(:checked) [data-when="paused"] { display: inline-block; }
-.cx-plate__pause[hidden] { display: none; }
 @media (hover: none) { .cx-plate__pause { opacity: 1; } }
 .cx-plate-frame figcaption { font-family: var(--cx-font-family-mono); font-size: var(--cx-font-size-label); letter-spacing: var(--cx-font-tracking-ui); color: var(--cx-color-text-muted); max-width: var(--cx-size-column-card); }
 
