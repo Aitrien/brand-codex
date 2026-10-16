@@ -1,0 +1,289 @@
+{
+  "primitive": {
+    "space": {
+      "$type": "dimension",
+      "$description": "4px grid: step n = n x 4px. Primitive.",
+      "0": {
+        "$value": {
+          "value": 0.0,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      },
+      "1": {
+        "$value": {
+          "value": 0.25,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      },
+      "2": {
+        "$value": {
+          "value": 0.5,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      },
+      "3": {
+        "$value": {
+          "value": 0.75,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      },
+      "4": {
+        "$value": {
+          "value": 1.0,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      },
+      "5": {
+        "$value": {
+          "value": 1.25,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      },
+      "6": {
+        "$value": {
+          "value": 1.5,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      },
+      "8": {
+        "$value": {
+          "value": 2.0,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      },
+      "10": {
+        "$value": {
+          "value": 2.5,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      },
+      "12": {
+        "$value": {
+          "value": 3.0,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      },
+      "16": {
+        "$value": {
+          "value": 4.0,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      },
+      "20": {
+        "$value": {
+          "value": 5.0,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      },
+      "24": {
+        "$value": {
+          "value": 6.0,
+          "unit": "rem"
+        },
+        "$extensions": {
+          "codex.tier": "primitive"
+        }
+      }
+    }
+  },
+  "space": {
+    "$type": "dimension",
+    "inset": {
+      "xs": {
+        "$value": "{primitive.space.1}",
+        "$description": "Padding inside tags and keyboard keys."
+      },
+      "sm": {
+        "$value": "{primitive.space.2}",
+        "$description": "Padding inside compact controls, label fields and table cells."
+      },
+      "md": {
+        "$value": "{primitive.space.4}",
+        "$description": "Padding inside cards, callouts and code-block headers."
+      },
+      "lg": {
+        "$value": "{primitive.space.6}",
+        "$description": "Padding inside featured panels and code blocks."
+      },
+      "xl": {
+        "$value": "{primitive.space.8}",
+        "$description": "Padding inside page-level bands such as the footer."
+      }
+    },
+    "stack": {
+      "xs": {
+        "$value": "{primitive.space.1}",
+        "$description": "Vertical gap between a label and its value."
+      },
+      "sm": {
+        "$value": "{primitive.space.2}",
+        "$description": "Vertical gap between tightly related lines: title and meta."
+      },
+      "md": {
+        "$value": "{primitive.space.4}",
+        "$description": "Vertical gap between paragraphs and list items in prose."
+      },
+      "lg": {
+        "$value": "{primitive.space.6}",
+        "$description": "Vertical gap between components inside a section."
+      },
+      "xl": {
+        "$value": "{primitive.space.10}",
+        "$description": "Vertical gap before an h2 in prose."
+      }
+    },
+    "inline": {
+      "xs": {
+        "$value": "{primitive.space.1}",
+        "$description": "Horizontal gap between an icon and its text."
+      },
+      "sm": {
+        "$value": "{primitive.space.2}",
+        "$description": "Horizontal gap between tags or between meta items."
+      },
+      "md": {
+        "$value": "{primitive.space.3}",
+        "$description": "Horizontal gap between buttons and nav items."
+      },
+      "lg": {
+        "$value": "{primitive.space.4}",
+        "$description": "Horizontal gap between columns of a ledger row."
+      }
+    },
+    "section": {
+      "sm": {
+        "$value": "{primitive.space.12}",
+        "$description": "Gap between related page sections.",
+        "$extensions": {
+          "codex.fluid": {
+            "min": "{primitive.space.8}",
+            "viewport": {
+              "min": {
+                "value": 22.5,
+                "unit": "rem"
+              },
+              "max": {
+                "value": 90,
+                "unit": "rem"
+              }
+            }
+          }
+        }
+      },
+      "md": {
+        "$value": "{primitive.space.16}",
+        "$description": "Gap between top-level page sections.",
+        "$extensions": {
+          "codex.fluid": {
+            "min": "{primitive.space.12}",
+            "viewport": {
+              "min": {
+                "value": 22.5,
+                "unit": "rem"
+              },
+              "max": {
+                "value": 90,
+                "unit": "rem"
+              }
+            }
+          }
+        }
+      },
+      "lg": {
+        "$value": "{primitive.space.24}",
+        "$description": "Gap above the footer and around the home statement.",
+        "$extensions": {
+          "codex.fluid": {
+            "min": "{primitive.space.16}",
+            "viewport": {
+              "min": {
+                "value": 22.5,
+                "unit": "rem"
+              },
+              "max": {
+                "value": 90,
+                "unit": "rem"
+              }
+            }
+          }
+        }
+      }
+    },
+    "gutter": {
+      "page": {
+        "$value": "{primitive.space.10}",
+        "$description": "Side padding of the page container. Never below 16px at any width.",
+        "$extensions": {
+          "codex.fluid": {
+            "min": "{primitive.space.4}",
+            "viewport": {
+              "min": {
+                "value": 22.5,
+                "unit": "rem"
+              },
+              "max": {
+                "value": 90,
+                "unit": "rem"
+              }
+            }
+          }
+        }
+      },
+      "grid": {
+        "$value": "{primitive.space.6}",
+        "$description": "Gap between cards in a grid.",
+        "$extensions": {
+          "codex.fluid": {
+            "min": "{primitive.space.4}",
+            "viewport": {
+              "min": {
+                "value": 22.5,
+                "unit": "rem"
+              },
+              "max": {
+                "value": 90,
+                "unit": "rem"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

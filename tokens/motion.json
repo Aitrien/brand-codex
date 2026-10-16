@@ -1,0 +1,192 @@
+{
+  "primitive": {
+    "motion": {
+      "duration": {
+        "$type": "duration",
+        "0": {
+          "$value": {
+            "value": 0,
+            "unit": "ms"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "1": {
+          "$value": {
+            "value": 120,
+            "unit": "ms"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "2": {
+          "$value": {
+            "value": 200,
+            "unit": "ms"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "3": {
+          "$value": {
+            "value": 320,
+            "unit": "ms"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "4": {
+          "$value": {
+            "value": 1600,
+            "unit": "ms"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "5": {
+          "$value": {
+            "value": 3200,
+            "unit": "ms"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        }
+      },
+      "easing": {
+        "$type": "cubicBezier",
+        "out-strong": {
+          "$value": [
+            0.2,
+            0,
+            0,
+            1
+          ],
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "decelerate": {
+          "$value": [
+            0,
+            0,
+            0.2,
+            1
+          ],
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "accelerate": {
+          "$value": [
+            0.4,
+            0,
+            1,
+            1
+          ],
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "linear": {
+          "$value": [
+            0,
+            0,
+            1,
+            1
+          ],
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "in-out": {
+          "$value": [
+            0.45,
+            0,
+            0.55,
+            1
+          ],
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        }
+      },
+      "distance": {
+        "$type": "dimension",
+        "1": {
+          "$value": {
+            "value": 0.125,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        }
+      }
+    }
+  },
+  "motion": {
+    "duration": {
+      "$type": "duration",
+      "instant": {
+        "$value": "{primitive.motion.duration.0}",
+        "$description": "Theme changes, focus rings, and every duration under prefers-reduced-motion."
+      },
+      "fast": {
+        "$value": "{primitive.motion.duration.1}",
+        "$description": "Hover and press feedback: colour, border, the button-arrow nudge."
+      },
+      "base": {
+        "$value": "{primitive.motion.duration.2}",
+        "$description": "Disclosures (details, TOC) and the active-section marker."
+      },
+      "slow": {
+        "$value": "{primitive.motion.duration.3}",
+        "$description": "One-off confirmations such as a copied state settling. Rare."
+      },
+      "plate": {
+        "$value": "{primitive.motion.duration.4}",
+        "$description": "The specimen plate's single draw-in on load. Decoration only; never for content."
+      },
+      "pulse": {
+        "$value": "{primitive.motion.duration.5}",
+        "$description": "One full cycle of the specimen plate's outward pulse. The only looping motion in the system; it must have a visible pause control and stop under prefers-reduced-motion."
+      }
+    },
+    "easing": {
+      "$type": "cubicBezier",
+      "standard": {
+        "$value": "{primitive.motion.easing.out-strong}",
+        "$description": "Default for state changes."
+      },
+      "enter": {
+        "$value": "{primitive.motion.easing.decelerate}",
+        "$description": "Elements appearing: disclosures opening, a toast arriving."
+      },
+      "exit": {
+        "$value": "{primitive.motion.easing.accelerate}",
+        "$description": "Elements leaving."
+      },
+      "linear": {
+        "$value": "{primitive.motion.easing.linear}",
+        "$description": "Staggered decoration (plate seeds) and progress only."
+      },
+      "pulse": {
+        "$value": "{primitive.motion.easing.in-out}",
+        "$description": "Symmetric ease for looping decoration (the plate pulse), so growth and shrink feel even. Never for state changes."
+      }
+    },
+    "distance": {
+      "$type": "dimension",
+      "nudge": {
+        "$value": "{primitive.motion.distance.1}",
+        "$description": "The only allowed translation: a button arrow moving forward on hover. Text never moves."
+      }
+    }
+  }
+}

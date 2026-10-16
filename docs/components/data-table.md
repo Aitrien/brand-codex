@@ -1,0 +1,73 @@
+---
+name: data-table
+status: stable
+tokens:
+  - border.focus.offset
+  - border.focus.width
+  - border.width.hairline
+  - color.border.default
+  - color.border.subtle
+  - color.focus.ring
+  - color.surface.hover
+  - color.surface.raised
+  - color.surface.sunken
+  - color.text.muted
+  - color.text.secondary
+  - font.family.mono
+  - font.line-height.ui
+  - font.size.label
+  - font.size.small
+  - font.tracking.label
+  - font.weight.strong
+  - font.weight.ui
+  - size.container.breakout
+  - size.measure.prose
+  - space.inset.md
+  - space.inset.sm
+  - space.stack.lg
+---
+
+# Data table
+
+A framed table for comparing values: mono headers, hairline rows, right-aligned figures, and horizontal scroll when needed.
+
+## When to use
+
+- For real tabular data: metrics, version histories, font budgets, recipe quantities, API parameters.
+- In prose, with `cx-table--breakout` when it has more than four columns.
+
+## When not to use
+
+- For layout.
+- For two-column key–value facts about an entry; use `accession-label`.
+
+## Markup
+
+```html preview
+<div class="cx-table" role="region" aria-labelledby="tbl-fonts" tabindex="0">
+  <table>
+    <caption id="tbl-fonts">Font budget <span class="cx-sep" aria-hidden="true">|</span> Latin subset</caption>
+    <thead><tr><th scope="col">Family</th><th scope="col">Role</th><th scope="col" class="is-num">KB</th></tr></thead>
+    <tbody>
+      <tr><th scope="row">National Park</th><td>Display, body</td><td class="is-num">38.1</td></tr>
+    </tbody>
+  </table>
+</div>
+```
+
+## Do
+
+- Give every table a `<caption>`.
+- Mark numeric columns `is-num` (right-aligned, tabular, mono).
+- Use `<th scope="row">` for the first cell when it names the row.
+
+## Don't
+
+- Don't zebra-stripe; rows are separated by hairlines and highlight on hover.
+- Don't put interactive controls in cells.
+
+## Accessibility
+
+- The wrapper is a focusable region named by the caption, so keyboard users can scroll it.
+- Header cells use `scope`.
+- Pairs: `color.text.secondary` headers on `color.surface.sunken` (7:1); `color.text.primary` cells on `color.surface.raised` and `color.surface.hover` (7:1).

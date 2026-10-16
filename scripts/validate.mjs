@@ -1,49 +1,55 @@
-// Validates tokens/*.json against CONVENTIONS.md.
-// Phase 0: parse check + naming rules. Phase 1 adds reference and contrast checks.
-import { readdir, readFile } from "node:fs/promises";
-import { join } from "node:path";
+// npm run validate — naming rules, tiers, aliases, value shapes and every contrast pair in both themes.
+import { readdirSync, readFileSync } from 'node:fs';
+import { join } from 'node:path';
+import { ROOT, loadTokens, validate, contrastReport } from './lib.mjs';
 
-const DIR = new URL("../tokens/", import.meta.url);
-const SEGMENT = /^([a-z][a-z0-9]*(-[a-z0-9]+)*|[0-9]+)$/;
-const MAX_DEPTH = 4;
-const errors = [];
-const warnings = [];
-let count = 0;
+const { tokens, errors: loadErrors } = loadTokens();
+const errors = [...loadErrors, ...validate(tokens)];
 
-function walk(node, path, file) {
-  if (node && typeof node === "object" && "$value" in node) {
-    count++;
-    const name = path.join(".");
-    if (!node.$type) errors.push(`${file}: ${name} is missing $type`);
-    if (!node.$description) warnings.push(`${file}: ${name} has no $description`);
-    const semanticDepth = path[0] === "primitive" ? path.length - 1 : path.length;
-    if (semanticDepth > MAX_DEPTH) errors.push(`${file}: ${name} is deeper than ${MAX_DEPTH} segments`);
-    return;
+// Component docs follow docs/components/_template.md and only list semantic tokens that exist.
+const SECTIONS = ['## When to use', '## When not to use', '## Markup', '```html preview', '## Do', "## Don't", '## Accessibility'];
+const docsDir = join(ROOT, 'docs', 'components');
+for (const file of readdirSync(docsDir).filter((f) => f.endsWith('.md') && !f.startsWith('_'))) {
+  const doc = readFileSync(join(docsDir, file), 'utf8');
+  const fm = doc.match(/^---\n([\s\S]*?)\n---\n/);
+  if (!fm) { errors.push(`docs/components/${file}: no front matter`); continue; }
+  const name = fm[1].match(/^name: (.+)$/m)?.[1];
+  if (name !== file.replace(/\.md$/, '')) errors.push(`docs/components/${file}: name "${name}" does not match file name`);
+  if (!/^status: (draft|stable|deprecated)\b/m.test(fm[1])) errors.push(`docs/components/${file}: status must be draft, stable or deprecated`);
+  for (const t of fm[1].match(/^  - (.+)$/gm) ?? []) {
+    const path = t.slice(4).trim();
+    if (path !== 'AUTO' && (!tokens.has(path) || tokens.get(path).tier !== 'semantic')) errors.push(`docs/components/${file}: tokens lists unknown or non-semantic ${path}`);
   }
-  for (const [key, child] of Object.entries(node ?? {})) {
-    if (key.startsWith("$")) continue;
-    if (!SEGMENT.test(key)) errors.push(`${file}: "${[...path, key].join(".")}" segment "${key}" must be lowercase kebab-case or an integer`);
-    walk(child, [...path, key], file);
+  let at = 0;
+  for (const s of SECTIONS) {
+    const i = doc.indexOf(s, at);
+    if (i < 0) errors.push(`docs/components/${file}: missing or out-of-order "${s}"`); else at = i;
   }
+  if (!/^# .+/m.test(doc)) errors.push(`docs/components/${file}: missing title`);
 }
-
-let files = [];
-try {
-  files = (await readdir(DIR)).filter((f) => f.endsWith(".json"));
-} catch {
-  console.log("No tokens/ directory yet. Nothing to validate.");
-  process.exit(0);
-}
-
-for (const file of files) {
-  try {
-    walk(JSON.parse(await readFile(join(DIR.pathname, file), "utf8")), [], file);
-  } catch (e) {
-    errors.push(`${file}: invalid JSON (${e.message})`);
+// Ornament glyph catalogue: unique, kebab-case keys, never a forbidden glyph.
+const glyphs = tokens.get('font.family.ornament')?.extensions['codex.glyphs'];
+if (glyphs) {
+  const seen = new Map();
+  for (const [key, g] of Object.entries(glyphs.glyphs)) {
+    if (!/^[a-z]+(?:-[a-z]+)*$/.test(key)) errors.push(`codex.glyphs: key "${key}" is not kebab-case`);
+    if (!glyphs.groups[g.group]) errors.push(`codex.glyphs: ${key} has unknown group "${g.group}"`);
+    if (glyphs.forbidden.chars.includes(g.char)) errors.push(`codex.glyphs: ${key} uses forbidden glyph "${g.char}"`);
+    if (seen.has(g.char)) errors.push(`codex.glyphs: ${key} and ${seen.get(g.char)} share "${g.char}"`);
+    seen.set(g.char, key);
   }
 }
+const pairs = contrastReport(tokens);
+const failing = pairs.filter((p) => !p.pass);
 
-warnings.forEach((w) => console.warn(`warn  ${w}`));
-errors.forEach((e) => console.error(`error ${e}`));
-console.log(`${files.length} file(s), ${count} token(s), ${errors.length} error(s), ${warnings.length} warning(s)`);
-process.exit(errors.length ? 1 : 0);
+for (const e of errors) console.error(`✗ ${e}`);
+for (const p of failing) {
+  console.error(`✗ contrast ${p.fg} on ${p.bg}: light ${p.light.ratio.toFixed(2)}, dark ${p.dark.ratio.toFixed(2)} (min ${p.min})`);
+}
+const semantic = [...tokens.values()].filter((t) => t.tier === 'semantic').length;
+console.log(`${tokens.size} tokens (${semantic} semantic), ${pairs.length} contrast pairs × 2 themes.`);
+if (errors.length || failing.length) {
+  console.error(`${errors.length} rule errors, ${failing.length} failing pairs.`);
+  process.exit(1);
+}
+console.log('All naming rules pass. All component docs follow the template. All contrast pairs meet their targets in light and dark.');

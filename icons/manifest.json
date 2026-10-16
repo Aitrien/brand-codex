@@ -1,0 +1,75 @@
+{
+  "$description": "Approved icons. Material Symbols Sharp, weight 300, unfilled, from @material-symbols/svg-300 (Apache-2.0). Build compiles them into an SVG sprite; ids are cx-icon-{key}. Use an icon only for the role listed; anything else is a new entry in this file (minor version).",
+  "source": {
+    "package": "@material-symbols/svg-300",
+    "version": "0.48.0",
+    "style": "sharp",
+    "license": "Apache-2.0"
+  },
+  "icons": {
+    "arrow-forward": {
+      "symbol": "arrow_forward",
+      "use": "Forward journeys: primary and secondary buttons, standalone links, Next in pagination."
+    },
+    "arrow-back": {
+      "symbol": "arrow_back",
+      "use": "Back links at the top of posts and case studies; Previous in pagination."
+    },
+    "arrow-upward": {
+      "symbol": "arrow_upward",
+      "use": "Back to top, in the footer only."
+    },
+    "arrow-outward": {
+      "symbol": "arrow_outward",
+      "use": "After the text of a link that leaves the site."
+    },
+    "content-copy": {
+      "symbol": "content_copy",
+      "use": "Copy button on code blocks, at rest."
+    },
+    "check": {
+      "symbol": "check",
+      "use": "Confirmation that a copy (or similar one-off action) succeeded."
+    },
+    "theme-light": {
+      "symbol": "light_mode",
+      "use": "Theme toggle while the dark theme is showing: the action is switch to light."
+    },
+    "theme-dark": {
+      "symbol": "dark_mode",
+      "use": "Theme toggle while the light theme is showing: the action is switch to dark."
+    },
+    "note": {
+      "symbol": "info",
+      "use": "Title of a note (info) callout."
+    },
+    "tip": {
+      "symbol": "lightbulb",
+      "use": "Title of a tip (success) callout."
+    },
+    "warning": {
+      "symbol": "warning",
+      "use": "Title of a warning callout."
+    },
+    "danger": {
+      "symbol": "report",
+      "use": "Title of a danger callout."
+    },
+    "rss": {
+      "symbol": "rss_feed",
+      "use": "Before the RSS feed link."
+    },
+    "expand": {
+      "symbol": "keyboard_arrow_down",
+      "use": "Disclosure indicator on <summary>; rotates when open."
+    },
+    "pause": {
+      "symbol": "pause",
+      "use": "Pause control for ambient motion (the specimen plate's pulse) while it is running."
+    },
+    "play": {
+      "symbol": "play_arrow",
+      "use": "Resume control for ambient motion while it is paused."
+    }
+  }
+}

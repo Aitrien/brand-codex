@@ -1,0 +1,859 @@
+{
+  "primitive": {
+    "font": {
+      "family": {
+        "$type": "fontFamily",
+        "national-park": {
+          "$value": [
+            "National Park",
+            "ui-sans-serif",
+            "system-ui",
+            "-apple-system",
+            "Segoe UI",
+            "Roboto",
+            "sans-serif"
+          ],
+          "$description": "National Park (OFL), variable wght 200-800, Latin subset 38 KB. Primitive.",
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "jetbrains-mono": {
+          "$value": [
+            "JetBrains Mono",
+            "ui-monospace",
+            "SFMono-Regular",
+            "Menlo",
+            "Consolas",
+            "monospace"
+          ],
+          "$description": "JetBrains Mono (OFL), variable wght 100-800, Latin subset 40 KB. Primitive.",
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "yarndings-12": {
+          "$value": [
+            "Yarndings 12"
+          ],
+          "$description": "Yarndings 12 (OFL) knitting-chart dingbats, 11 KB. No text fallback by design. Primitive.",
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        }
+      },
+      "size": {
+        "$type": "dimension",
+        "$description": "Modular scale. Ratio 1.2 at 360px rising to 1.25 at 1440px; steps 1-2 are fixed for legibility. Primitive.",
+        "1": {
+          "$value": {
+            "value": 0.75,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "2": {
+          "$value": {
+            "value": 0.9,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.fluid": {
+              "min": {
+                "value": 0.875,
+                "unit": "rem"
+              },
+              "max": {
+                "value": 0.9,
+                "unit": "rem"
+              },
+              "viewport": {
+                "min": {
+                  "value": 22.5,
+                  "unit": "rem"
+                },
+                "max": {
+                  "value": 90,
+                  "unit": "rem"
+                }
+              }
+            }
+          }
+        },
+        "3": {
+          "$value": {
+            "value": 1.125,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.fluid": {
+              "min": {
+                "value": 1.0625,
+                "unit": "rem"
+              },
+              "max": {
+                "value": 1.125,
+                "unit": "rem"
+              },
+              "viewport": {
+                "min": {
+                  "value": 22.5,
+                  "unit": "rem"
+                },
+                "max": {
+                  "value": 90,
+                  "unit": "rem"
+                }
+              }
+            }
+          }
+        },
+        "4": {
+          "$value": {
+            "value": 1.406,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.fluid": {
+              "min": {
+                "value": 1.275,
+                "unit": "rem"
+              },
+              "max": {
+                "value": 1.406,
+                "unit": "rem"
+              },
+              "viewport": {
+                "min": {
+                  "value": 22.5,
+                  "unit": "rem"
+                },
+                "max": {
+                  "value": 90,
+                  "unit": "rem"
+                }
+              }
+            }
+          }
+        },
+        "5": {
+          "$value": {
+            "value": 1.758,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.fluid": {
+              "min": {
+                "value": 1.53,
+                "unit": "rem"
+              },
+              "max": {
+                "value": 1.758,
+                "unit": "rem"
+              },
+              "viewport": {
+                "min": {
+                  "value": 22.5,
+                  "unit": "rem"
+                },
+                "max": {
+                  "value": 90,
+                  "unit": "rem"
+                }
+              }
+            }
+          }
+        },
+        "6": {
+          "$value": {
+            "value": 2.197,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.fluid": {
+              "min": {
+                "value": 1.836,
+                "unit": "rem"
+              },
+              "max": {
+                "value": 2.197,
+                "unit": "rem"
+              },
+              "viewport": {
+                "min": {
+                  "value": 22.5,
+                  "unit": "rem"
+                },
+                "max": {
+                  "value": 90,
+                  "unit": "rem"
+                }
+              }
+            }
+          }
+        },
+        "7": {
+          "$value": {
+            "value": 2.747,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.fluid": {
+              "min": {
+                "value": 2.203,
+                "unit": "rem"
+              },
+              "max": {
+                "value": 2.747,
+                "unit": "rem"
+              },
+              "viewport": {
+                "min": {
+                  "value": 22.5,
+                  "unit": "rem"
+                },
+                "max": {
+                  "value": 90,
+                  "unit": "rem"
+                }
+              }
+            }
+          }
+        },
+        "8": {
+          "$value": {
+            "value": 3.433,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.fluid": {
+              "min": {
+                "value": 2.644,
+                "unit": "rem"
+              },
+              "max": {
+                "value": 3.433,
+                "unit": "rem"
+              },
+              "viewport": {
+                "min": {
+                  "value": 22.5,
+                  "unit": "rem"
+                },
+                "max": {
+                  "value": 90,
+                  "unit": "rem"
+                }
+              }
+            }
+          }
+        }
+      },
+      "weight": {
+        "$type": "fontWeight",
+        "light": {
+          "$value": 300,
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "regular": {
+          "$value": 400,
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "medium": {
+          "$value": 500,
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "semibold": {
+          "$value": 600,
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "bold": {
+          "$value": 700,
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "extrabold": {
+          "$value": 800,
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        }
+      },
+      "line-height": {
+        "$type": "number",
+        "tight": {
+          "$value": 1.1,
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "snug": {
+          "$value": 1.25,
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "normal": {
+          "$value": 1.4,
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "relaxed": {
+          "$value": 1.6,
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        }
+      },
+      "relative": {
+        "$type": "number",
+        "code": {
+          "$value": 0.875,
+          "$description": "Size of inline code relative to its parent text (em). Primitive.",
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "em"
+          }
+        }
+      },
+      "tracking": {
+        "$type": "number",
+        "$description": "Letter-spacing in em (see codex.unit). Primitive.",
+        "tighter": {
+          "$value": -0.025,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "em"
+          }
+        },
+        "tight": {
+          "$value": -0.015,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "em"
+          }
+        },
+        "none": {
+          "$value": 0,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "em"
+          }
+        },
+        "wide": {
+          "$value": 0.04,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "em"
+          }
+        },
+        "wider": {
+          "$value": 0.08,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "em"
+          }
+        }
+      }
+    }
+  },
+  "font": {
+    "family": {
+      "$type": "fontFamily",
+      "display": {
+        "$value": "{primitive.font.family.national-park}",
+        "$description": "Headings, the wordmark and the home statement."
+      },
+      "body": {
+        "$value": "{primitive.font.family.national-park}",
+        "$description": "Running text, UI text, nav and buttons. The default family on body."
+      },
+      "mono": {
+        "$value": "{primitive.font.family.jetbrains-mono}",
+        "$description": "Code, plus short machine-like labels: accession numbers, dates, tags, eyebrow labels, table headers. Never for paragraphs."
+      },
+      "ornament": {
+        "$value": "{primitive.font.family.yarndings-12}",
+        "$description": "Decorative knitting-chart glyphs only. Always aria-hidden, never conveys meaning, at most one ornament group per viewport. Use any glyph listed in codex.glyphs.glyphs; never one in codex.glyphs.forbidden.",
+        "$extensions": {
+          "codex.glyphs": {
+            "groups": {
+              "botanical": "Plants and flowers. The default choice for end marks, empty states and dividers.",
+              "frost": "Snowflakes, stars and bursts. Use one at a time; they are dense and draw the eye.",
+              "stitch": "Crosses, checks and small squares from knitting charts. Good for bands and repeating rules.",
+              "diamond": "Diamonds and rings. Good for dividers and band centres.",
+              "mark": "Corners, bars, dots and triangles. Structural accents: registration corners, rules, list ends."
+            },
+            "glyphs": {
+              "leaf": {
+                "char": "h",
+                "group": "botanical"
+              },
+              "sprout": {
+                "char": "f",
+                "group": "botanical"
+              },
+              "flower": {
+                "char": "g",
+                "group": "botanical"
+              },
+              "potted": {
+                "char": "c",
+                "group": "botanical"
+              },
+              "bloom": {
+                "char": "b",
+                "group": "botanical"
+              },
+              "blossom": {
+                "char": "m",
+                "group": "botanical"
+              },
+              "petals": {
+                "char": "P",
+                "group": "botanical"
+              },
+              "flower-outline": {
+                "char": "R",
+                "group": "botanical"
+              },
+              "rosette": {
+                "char": "U",
+                "group": "botanical"
+              },
+              "seedhead": {
+                "char": "a",
+                "group": "botanical"
+              },
+              "corolla": {
+                "char": "8",
+                "group": "botanical"
+              },
+              "bud": {
+                "char": "9",
+                "group": "botanical"
+              },
+              "small-flower": {
+                "char": "5",
+                "group": "botanical"
+              },
+              "seed": {
+                "char": "t",
+                "group": "botanical"
+              },
+              "clover": {
+                "char": "E",
+                "group": "botanical"
+              },
+              "clover-long": {
+                "char": "F",
+                "group": "botanical"
+              },
+              "clover-tall": {
+                "char": "G",
+                "group": "botanical"
+              },
+              "band-large": {
+                "char": "W",
+                "group": "botanical"
+              },
+              "lobe-outline": {
+                "char": "X",
+                "group": "botanical"
+              },
+              "snowflake": {
+                "char": "S",
+                "group": "frost"
+              },
+              "snowflake-dense": {
+                "char": "H",
+                "group": "frost"
+              },
+              "snowflake-small": {
+                "char": "d",
+                "group": "frost"
+              },
+              "snowflake-blocks": {
+                "char": "e",
+                "group": "frost"
+              },
+              "snowflake-large": {
+                "char": "q",
+                "group": "frost"
+              },
+              "frost": {
+                "char": "i",
+                "group": "frost"
+              },
+              "frost-open": {
+                "char": "j",
+                "group": "frost"
+              },
+              "frost-grid": {
+                "char": "l",
+                "group": "frost"
+              },
+              "frost-dense": {
+                "char": "n",
+                "group": "frost"
+              },
+              "frost-x": {
+                "char": "s",
+                "group": "frost"
+              },
+              "burst": {
+                "char": "V",
+                "group": "frost"
+              },
+              "spark-dotted": {
+                "char": "Q",
+                "group": "frost"
+              },
+              "x-dense": {
+                "char": "T",
+                "group": "frost"
+              },
+              "x-bold": {
+                "char": "O",
+                "group": "frost"
+              },
+              "band-small": {
+                "char": "k",
+                "group": "stitch"
+              },
+              "cross": {
+                "char": "A",
+                "group": "stitch"
+              },
+              "cross-solid": {
+                "char": "\"",
+                "group": "stitch"
+              },
+              "cross-outline": {
+                "char": "'",
+                "group": "stitch"
+              },
+              "cross-small": {
+                "char": "2",
+                "group": "stitch"
+              },
+              "cross-blocks": {
+                "char": "B",
+                "group": "stitch"
+              },
+              "cross-barred": {
+                "char": "C",
+                "group": "stitch"
+              },
+              "maltese": {
+                "char": "D",
+                "group": "stitch"
+              },
+              "cross-notched": {
+                "char": "7",
+                "group": "stitch"
+              },
+              "pinwheel-cross": {
+                "char": "3",
+                "group": "stitch"
+              },
+              "corners": {
+                "char": "J",
+                "group": "stitch"
+              },
+              "grid": {
+                "char": "I",
+                "group": "stitch"
+              },
+              "x-small": {
+                "char": "K",
+                "group": "stitch"
+              },
+              "x": {
+                "char": "L",
+                "group": "stitch"
+              },
+              "x-dotted": {
+                "char": "M",
+                "group": "stitch"
+              },
+              "x-thin": {
+                "char": "N",
+                "group": "stitch"
+              },
+              "checker-x": {
+                "char": "+",
+                "group": "stitch"
+              },
+              "checker-small": {
+                "char": "0",
+                "group": "stitch"
+              },
+              "diamond-dots": {
+                "char": "1",
+                "group": "stitch"
+              },
+              "knot": {
+                "char": "4",
+                "group": "stitch"
+              },
+              "square-dot": {
+                "char": "6",
+                "group": "stitch"
+              },
+              "square-hole": {
+                "char": ":",
+                "group": "stitch"
+              },
+              "square-outline": {
+                "char": ";",
+                "group": "stitch"
+              },
+              "square": {
+                "char": ",",
+                "group": "stitch"
+              },
+              "stack": {
+                "char": "<",
+                "group": "stitch"
+              },
+              "pinwheel": {
+                "char": ">",
+                "group": "stitch"
+              },
+              "pinwheel-small": {
+                "char": "Y",
+                "group": "stitch"
+              },
+              "pinwheel-tiny": {
+                "char": "Z",
+                "group": "stitch"
+              },
+              "diamond": {
+                "char": "–",
+                "group": "diamond"
+              },
+              "diamond-hollow": {
+                "char": "—",
+                "group": "diamond"
+              },
+              "diamond-cross": {
+                "char": "o",
+                "group": "diamond"
+              },
+              "diamond-nested": {
+                "char": "p",
+                "group": "diamond"
+              },
+              "diamond-outline": {
+                "char": "r",
+                "group": "diamond"
+              },
+              "diamond-stack": {
+                "char": "=",
+                "group": "diamond"
+              },
+              "circle": {
+                "char": "!",
+                "group": "diamond"
+              },
+              "ring": {
+                "char": "?",
+                "group": "diamond"
+              },
+              "summit": {
+                "char": "·",
+                "group": "mark"
+              },
+              "funnel": {
+                "char": "•",
+                "group": "mark"
+              },
+              "dot": {
+                "char": ".",
+                "group": "mark"
+              },
+              "bar": {
+                "char": "(",
+                "group": "mark"
+              },
+              "bar-outline": {
+                "char": ")",
+                "group": "mark"
+              },
+              "rule": {
+                "char": "-",
+                "group": "mark"
+              },
+              "tick": {
+                "char": "_",
+                "group": "mark"
+              },
+              "corner-top-left": {
+                "char": "/",
+                "group": "mark"
+              },
+              "corner-top-right": {
+                "char": "\\",
+                "group": "mark"
+              },
+              "corner-bottom-left": {
+                "char": "*",
+                "group": "mark"
+              },
+              "corner-bottom-right": {
+                "char": "#",
+                "group": "mark"
+              }
+            },
+            "roles": {
+              "band": "band-small + band-large, alternating (footer band)",
+              "divider": "band-small, band-large, band-small (prose <hr>)",
+              "end-mark": "flower (after an article's last sentence)",
+              "empty-state": "sprout (404 and empty lists)"
+            },
+            "forbidden": {
+              "chars": "uvwxyz[]{}",
+              "reason": "Faces, a robot, hearts and animals read as emoji. Never use them."
+            }
+          }
+        }
+      }
+    },
+    "size": {
+      "$type": "dimension",
+      "display": {
+        "$value": "{primitive.font.size.8}",
+        "$description": "The single largest line on a page (home statement). Once per page at most."
+      },
+      "heading-1": {
+        "$value": "{primitive.font.size.7}",
+        "$description": "Page titles: h1 on posts, projects and indexes."
+      },
+      "heading-2": {
+        "$value": "{primitive.font.size.6}",
+        "$description": "Section headings (h2) in prose and on index pages."
+      },
+      "heading-3": {
+        "$value": "{primitive.font.size.5}",
+        "$description": "Sub-section headings (h3) and card titles in featured layouts."
+      },
+      "heading-4": {
+        "$value": "{primitive.font.size.4}",
+        "$description": "Minor headings (h4) and standard card titles."
+      },
+      "lede": {
+        "$value": "{primitive.font.size.4}",
+        "$description": "The introductory paragraph under a page title. One per page."
+      },
+      "body": {
+        "$value": "{primitive.font.size.3}",
+        "$description": "Running text and default UI text."
+      },
+      "small": {
+        "$value": "{primitive.font.size.2}",
+        "$description": "Captions, metadata, table cells, code blocks, button labels."
+      },
+      "label": {
+        "$value": "{primitive.font.size.1}",
+        "$description": "Mono uppercase labels: accession fields, eyebrows, tags, table headers. Always with font.tracking.label."
+      },
+      "code-inline": {
+        "$type": "number",
+        "$value": "{primitive.font.relative.code}",
+        "$extensions": {
+          "codex.unit": "em"
+        },
+        "$description": "Inline code relative to surrounding text, so mono matches the x-height of National Park."
+      }
+    },
+    "weight": {
+      "$type": "fontWeight",
+      "body": {
+        "$value": "{primitive.font.weight.regular}",
+        "$description": "Running text."
+      },
+      "ui": {
+        "$value": "{primitive.font.weight.medium}",
+        "$description": "Nav items, labels and mono metadata."
+      },
+      "strong": {
+        "$value": "{primitive.font.weight.semibold}",
+        "$description": "<strong>, button labels and table header text. National Park has no italic, so <em> uses a synthetic oblique; use strong for real emphasis."
+      },
+      "heading": {
+        "$value": "{primitive.font.weight.semibold}",
+        "$description": "h2-h4 and card titles."
+      },
+      "display": {
+        "$value": "{primitive.font.weight.bold}",
+        "$description": "h1 and the display statement only."
+      }
+    },
+    "line-height": {
+      "$type": "number",
+      "display": {
+        "$value": "{primitive.font.line-height.tight}",
+        "$description": "Display and h1, set with tight tracking."
+      },
+      "heading": {
+        "$value": "{primitive.font.line-height.snug}",
+        "$description": "h2-h4 and card titles."
+      },
+      "ui": {
+        "$value": "{primitive.font.line-height.normal}",
+        "$description": "Single-line UI: nav, buttons, labels, table cells."
+      },
+      "body": {
+        "$value": "{primitive.font.line-height.relaxed}",
+        "$description": "Running text at the prose measure."
+      },
+      "code": {
+        "$value": "{primitive.font.line-height.relaxed}",
+        "$description": "Code blocks."
+      }
+    },
+    "tracking": {
+      "$type": "number",
+      "display": {
+        "$value": "{primitive.font.tracking.tighter}",
+        "$description": "Display and h1 sizes."
+      },
+      "heading": {
+        "$value": "{primitive.font.tracking.tight}",
+        "$description": "h2-h4 headings and card titles."
+      },
+      "body": {
+        "$value": "{primitive.font.tracking.none}",
+        "$description": "Running text. Never track lowercase body text."
+      },
+      "label": {
+        "$value": "{primitive.font.tracking.wider}",
+        "$description": "Mono uppercase labels."
+      },
+      "ui": {
+        "$value": "{primitive.font.tracking.wide}",
+        "$description": "Mono lowercase tags and small UI text."
+      }
+    }
+  }
+}

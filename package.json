@@ -1,26 +1,34 @@
 {
   "name": "@aitrien/brand-codex",
-  "version": "0.0.0",
-  "description": "Design tokens and component guidance shared across projects.",
+  "version": "1.6.0",
+  "private": true,
+  "description": "Liam Marshall's design system: DTCG tokens, component rules and generated CSS.",
   "type": "module",
-  "license": "UNLICENSED",
+  "license": "MIT",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/aitrien/brand-codex.git"
   },
+  "changelog": "https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md",
   "files": [
     "dist",
     "tokens",
-    "docs"
+    "docs",
+    "fonts",
+    "icons",
+    "CHANGELOG.md"
   ],
   "exports": {
     "./tokens.css": "./dist/tokens.css",
+    "./codex.css": "./dist/codex.css",
     "./tokens.js": "./dist/tokens.js",
+    "./tokens.json": "./dist/tokens.json",
     "./package.json": "./package.json"
   },
   "scripts": {
     "validate": "node scripts/validate.mjs",
-    "build": "echo \"Style Dictionary build arrives in Phase 1\""
+    "build": "node scripts/validate.mjs && node scripts/build.mjs",
+    "audit": "node scripts/audit.mjs"
   },
   "engines": {
     "node": ">=20"

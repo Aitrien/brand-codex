@@ -1,0 +1,50 @@
+{
+  "primitive": {
+    "border": {
+      "width": {
+        "$type": "dimension",
+        "1": {
+          "$value": {
+            "value": 1,
+            "unit": "px"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "2": {
+          "$value": {
+            "value": 2,
+            "unit": "px"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        }
+      }
+    }
+  },
+  "border": {
+    "$type": "dimension",
+    "width": {
+      "hairline": {
+        "$value": "{primitive.border.width.1}",
+        "$description": "Every structural rule and outline. The default border."
+      },
+      "emphasis": {
+        "$value": "{primitive.border.width.2}",
+        "$description": "Active-state rules (current nav item, active TOC entry) and callout leading edges."
+      }
+    },
+    "focus": {
+      "width": {
+        "$value": "{primitive.border.width.2}",
+        "$description": "Width of the focus outline."
+      },
+      "offset": {
+        "$value": "{primitive.border.width.2}",
+        "$description": "Gap between an element and its focus outline, so the ring is measured against the surface."
+      }
+    }
+  }
+}
