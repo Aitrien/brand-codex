@@ -47,14 +47,14 @@
       </div>
       <div class="sc-hero__plate">
         <figure class="cx-plate-frame">
-          <label class="cx-plate__pause">
+          <label class="cx-plate__pause" hidden>
             <input class="cx-visually-hidden" type="checkbox" aria-label="Pause animation">
             <svg class="cx-icon" data-when="running" aria-hidden="true" focusable="false"><use href="#cx-icon-pause"></use></svg>
             <svg class="cx-icon" data-when="paused" aria-hidden="true" focusable="false"><use href="#cx-icon-play"></use></svg>
             <span class="cx-tooltip" aria-hidden="true"><span data-when="running">Pause animation</span><span data-when="paused">Play animation</span></span>
           </label>
           {{PLATE}}
-          <figcaption>Plate 0 <span class="cx-sep" aria-hidden="true">|</span> Vogel's model <span class="cx-sep" aria-hidden="true">|</span> 233 seeds at 137.508°</figcaption>
+          <figcaption>Plate 0 <span class="cx-sep" aria-hidden="true">|</span> Contour survey <span class="cx-sep" aria-hidden="true">|</span> Simplex noise, 14 levels, index every fifth</figcaption>
         </figure>
       </div>
     </section>
@@ -72,7 +72,7 @@
         <li><strong>Measure it, don't eyeball it.</strong><span>Reading text meets 7:1, controls and focus meet 3:1, and every pair is checked in both themes on every build.</span></li>
         <li><strong>HTML first, script second.</strong><span>Content, navigation and code work without JavaScript. Scripts add the theme toggle, copy buttons and TOC tracking.</span></li>
         <li><strong>Square, hairline, labelled.</strong><span>Structure is drawn with 1px rules, square corners and mono labels, like a field ledger. Buttons and icon-only controls are the one exception: they are pills, so anything you can press is recognisable at a glance.</span></li>
-        <li><strong>Motion confirms a change.</strong><span>Only state changes animate, plus the specimen plate's pausable pulse; text never moves, and reduced motion means none.</span></li>
+        <li><strong>Motion confirms a change.</strong><span>Only state changes animate, plus the specimen plate's pausable drift; text never moves, and reduced motion means none.</span></li>
         <li><strong>One accent, one ornament.</strong><span>Sap green marks action. Yarndings and the specimen plate are the only decoration, once per view.</span></li>
       </ul>
     </section>
@@ -155,7 +155,7 @@
           <div class="sc-tile"><div class="sc-radius sc-radius--none"></div><code>radius.none</code><p>Cards, labels, tags, tables, code: everything structural.</p></div>
           <div class="sc-tile"><div class="sc-radius sc-radius--pill"></div><code>radius.pill</code><p>Buttons and icon-only controls: cx-button, copy, the theme toggle, heading anchors.</p></div>
           <div class="sc-tile"><div class="sc-radius sc-radius--control"></div><code>radius.control</code><p>Square. Text inputs, selects and keyboard keys.</p></div>
-          <div class="sc-tile"><div class="sc-radius sc-radius--round"></div><code>radius.round</code><p>Status dots and plate seeds only.</p></div>
+          <div class="sc-tile"><div class="sc-radius sc-radius--round"></div><code>radius.round</code><p>Status dots only.</p></div>
           <div class="sc-tile"><div class="sc-rule sc-rule--hairline"></div><code>border.width.hairline</code><p>1px. Every rule and outline.</p></div>
           <div class="sc-tile"><div class="sc-rule sc-rule--emphasis"></div><code>border.width.emphasis</code><p>2px. Active states and callout edges.</p></div>
           <div class="sc-tile"><span class="cx-button sc-focus-demo">Focused</span><code>border.focus.*</code><p>2px woad ring, 2px off the element.</p></div>
@@ -169,10 +169,10 @@
           <div class="sc-tile sc-motion sc-motion--fast" tabindex="0"><code>duration.fast <span class="cx-sep" aria-hidden="true">|</span> easing.standard</code><div class="sc-track"><i></i></div><p>120ms. Hover colour, borders, the button arrow.</p></div>
           <div class="sc-tile sc-motion sc-motion--base" tabindex="0"><code>duration.base <span class="cx-sep" aria-hidden="true">|</span> easing.standard</code><div class="sc-track"><i></i></div><p>200ms. Disclosures and the TOC marker.</p></div>
           <div class="sc-tile sc-motion sc-motion--slow" tabindex="0"><code>duration.slow <span class="cx-sep" aria-hidden="true">|</span> easing.enter</code><div class="sc-track"><i></i></div><p>320ms. Rare one-off confirmations.</p></div>
-          <div class="sc-tile sc-motion sc-motion--plate" tabindex="0"><code>duration.plate <span class="cx-sep" aria-hidden="true">|</span> easing.linear</code><div class="sc-track"><i></i></div><p>1600ms. The plate's draw-in, once, on load.</p></div>
-          <div class="sc-tile sc-motion sc-motion--pulse" tabindex="0"><code>duration.pulse <span class="cx-sep" aria-hidden="true">|</span> easing.pulse</code><div class="sc-track"><i></i></div><p>3200ms. One cycle of the plate's outward pulse, the only loop. Always pausable.</p></div>
+          <div class="sc-tile sc-motion sc-motion--plate" tabindex="0"><code>duration.plate <span class="cx-sep" aria-hidden="true">|</span> easing.enter</code><div class="sc-track"><i></i></div><p>1600ms. Each contour's draw-in, once, on load.</p></div>
+          <div class="sc-tile"><code>duration.drift <span class="cx-sep" aria-hidden="true">|</span> linear</code><p>60000ms for the plate's terrain to drift one noise unit. The only loop; always pausable, and still under reduced motion.</p></div>
         </div>
-        <p class="sc-note">Never moves: text, headings, layout, page transitions, scroll-triggered reveals. Theme changes and focus rings are instant. The plate pulse is the one loop: it has a pause control and stops under reduced motion.</p>
+        <p class="sc-note">Never moves: text, headings, layout, page transitions, scroll-triggered reveals. Theme changes and focus rings are instant. The plate's drift is the one loop: it has a pause control and stops under reduced motion.</p>
       </div>
     </section>
 

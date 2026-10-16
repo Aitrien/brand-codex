@@ -2,6 +2,19 @@
 
 Every release of brand-codex, newest first. Versions follow the rules in `CONVENTIONS.md`: renaming or removing a semantic token is major, adding tokens, components or icons is minor, and changing a value or fixing a description is a patch. `npm run build` fails if the version in `package.json` has no entry here.
 
+## [Unreleased]
+
+### Changed
+- Specimen plate: a contour survey of simplex-noise terrain replaces the Vogel phyllotaxis seed head. The build draws the contours as a static SVG; `js/plate.js` (shipped as `dist/plate.js`) reshapes them as the terrain drifts. Index contours every fifth line, a quarter grid, and a once-only draw-in.
+- `color.ornament.*` descriptions now name contour lines, index contours and the survey grid instead of seeds.
+
+### Added
+- `motion.duration.drift` (60000ms): time for the plate's terrain to drift one noise unit.
+- `dist/plate.html` and `dist/plate.js` for sites that use the plate, exported as `@aitrien/brand-codex/plate.html` and `/plate.js`.
+
+### Removed
+- `motion.duration.pulse` and `motion.easing.pulse`, which only the seed-head pulse used. Removing semantic tokens is a major change under `CONVENTIONS.md`.
+
 ## [1.6.0] - 2026-10-16
 
 ### Added

@@ -1221,7 +1221,7 @@
     "ornament": {
       "rest": {
         "$value": "{primitive.color.sap.600}",
-        "$description": "Yarndings ornaments and specimen-plate seeds. Decorative only: always aria-hidden, never carries meaning.",
+        "$description": "Yarndings ornaments and the specimen plate's contour lines. Decorative only: always aria-hidden, never carries meaning.",
         "$extensions": {
           "codex.modes": {
             "dark": "{primitive.color.sap.400}"
@@ -1236,7 +1236,7 @@
       },
       "strong": {
         "$value": "{primitive.color.sap.800}",
-        "$description": "Emphasised stitches and seeds that trace structure inside an ornament (one plate spiral arm). Decorative only; never for text.",
+        "$description": "Emphasised stitches that trace structure inside an ornament, and the plate's index contours (every fifth line). Decorative only; never for text.",
         "$extensions": {
           "codex.modes": {
             "dark": "{primitive.color.sap.200}"
@@ -1245,7 +1245,7 @@
       },
       "muted": {
         "$value": "{primitive.color.ash.400}",
-        "$description": "Registration ticks on framed objects and secondary plate seeds. Decorative only; no contrast requirement.",
+        "$description": "Registration ticks on framed objects and the plate's survey grid. Decorative only; no contrast requirement.",
         "$extensions": {
           "codex.modes": {
             "dark": "{primitive.color.ash.700}"

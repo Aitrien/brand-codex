@@ -9,7 +9,7 @@ Liam Marshall's design system: the single source of truth for aitrien.com and ev
 3. **Measure it, don't eyeball it.** Reading text meets 7:1, controls and focus meet 3:1, and every pair is checked in both themes on every build.
 4. **HTML first, script second.** Content, navigation and code work without JavaScript. Scripts add the theme toggle, copy buttons and TOC tracking.
 5. **Square, hairline, labelled.** Structure is drawn with 1px rules, square corners and mono labels, like a field ledger. Buttons and icon-only controls are the one exception: they are pills, so anything you can press is recognisable at a glance.
-6. **Motion confirms a change.** Only state changes animate, plus the specimen plate's pausable pulse; text never moves, and reduced motion means none.
+6. **Motion confirms a change.** Only state changes animate, plus the specimen plate's pausable drift; text never moves, and reduced motion means none.
 7. **One accent, one ornament.** Sap green marks action. Yarndings and the specimen plate are the only decoration, once per view.
 
 ## Rules for AI assistants
@@ -41,10 +41,11 @@ docs/templates.md   Content hierarchy for the six page templates
 docs/syntax-highlighting.md
 fonts/              Self-hosted WOFF2 (Latin subsets) and their OFL licences
 scripts/            validate, build and audit
+js/plate.js         Specimen plate generator: draws the static contours at build time and animates them in the browser
 showcase/           Source of the system's showcase page
 mcp/                MCP server (Phase 3)
 hugo.toml, go.mod   Hugo module definition and its mounts
-dist/               Generated: tokens.css, components in codex.css, chroma.css, fonts.css, icons.svg (sprite), tokens.json (for MCP), tokens.js (ES module export), contrast.md, showcase.html (fragment for publishing), showcase.standalone.html (open locally)
+dist/               Generated: tokens.css, components in codex.css, chroma.css, fonts.css, icons.svg (sprite), tokens.json (for MCP), tokens.js (ES module export), plate.html and plate.js (specimen plate), contrast.md, showcase.html (fragment for publishing), showcase.standalone.html (open locally)
 ```
 
 ## Commands
@@ -94,7 +95,7 @@ Themes follow the system. To pin one, set `data-theme="light"` or `"dark"` on `<
 | Colour | Five dye-plant hues generated in OKLCH: ash (neutral), sap (accent and success), woad (focus and info), weld (warning) and madder (danger). Cool paper in light mode, green-black in dark mode. |
 | Type | National Park (display and body), JetBrains Mono (code and labels), Yarndings 12 (ornament). 88 KB total. |
 | Signature | The accession label: every entry has a catalogue number (`LM-W-004`, `LM-P-031`) shown on a framed label with registration ticks. |
-| Decoration | The specimen plate (Plate 0), a CSS-only phyllotaxis seed head, and a knitted Yarndings band in the footer. |
+| Decoration | The specimen plate (Plate 0), a contour survey of generated terrain that slowly drifts, and a knitted Yarndings band in the footer. |
 | Icons | 16 Material Symbols (Sharp, weight 300) as a self-hosted SVG sprite: direction arrows, theme, copy, callout kinds, RSS, external links. Functional only. |
 | Separator | A muted pipe, `\|`, hidden from screen readers. |
 
