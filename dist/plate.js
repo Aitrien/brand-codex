@@ -1,5 +1,6 @@
-// Specimen plate: a contour survey of simplex-noise terrain.
-// The build runs contours() once (t = 0) to write the static SVG, so the plate is complete without JavaScript.
+// Specimen plate and backdrop: a contour survey of simplex-noise terrain.
+// The build runs contours() once (t = 0) to write the static SVG, so the plate and the backdrop are complete
+// without JavaScript.
 // In the browser, mount() redraws the same contours as the terrain drifts through time. Same code, same seed,
 // so the first animated frame matches the static one exactly.
 (function (g) {
@@ -209,22 +210,28 @@
   }
 
   // ------------------------------------------------------------ static markup (used by the build)
-  function markup(opts) {
+  // kind 'backdrop' draws the same survey full-bleed behind a page (docs/components/backdrop.md): sliced to cover
+  // the viewport instead of fitted into the plate's square.
+  function markup(opts, kind) {
+    var bg = kind === 'backdrop';
     var s = survey(opts), S = s.options.size, q = S / 4;
     var grid = [q, 2 * q, 3 * q].map(function (v) { return 'M' + v + ' 0V' + S + 'M0 ' + v + 'H' + S; }).join('');
     var paths = s.contours(0).map(function (c, i) {
       return '<path class="cx-plate__line' + (c.index ? ' cx-plate__line--index' : '') + '" style="--i: ' + i + '" pathLength="1" d="' + c.d + '"></path>';
     }).join('');
-    return '<div class="cx-plate" aria-hidden="true" data-plate-seed="' + s.options.seed + '">' +
-      '<svg class="cx-plate__map" viewBox="0 0 ' + S + ' ' + S + '" focusable="false">' +
+    return '<div class="' + (bg ? 'cx-backdrop' : 'cx-plate') + '" aria-hidden="true" data-plate-seed="' + s.options.seed + '">' +
+      '<svg class="cx-plate__map" viewBox="0 0 ' + S + ' ' + S + '"' + (bg ? ' preserveAspectRatio="xMidYMid slice"' : '') + ' focusable="false">' +
       '<path class="cx-plate__grid" d="' + grid + '"></path>' + paths + '</svg></div>';
   }
+  function backdrop(opts) { return markup(opts, 'backdrop'); }
 
   // ------------------------------------------------------------ animation (browser only)
   function mount(root) {
     var doc = root.ownerDocument, win = doc.defaultView;
-    var frame = root.closest('.cx-plate-frame') || root.parentElement;
-    var toggle = frame.querySelector('.cx-plate__pause');
+    // A plate's pause control sits in its frame; the backdrop's sits in the site header.
+    var toggle = root.classList.contains('cx-backdrop')
+      ? doc.querySelector('.cx-backdrop__pause')
+      : (root.closest('.cx-plate-frame') || root.parentElement).querySelector('.cx-plate__pause');
     var input = toggle && toggle.querySelector('input');
     var paths = root.querySelectorAll('.cx-plate__line');
     var reduce = win.matchMedia('(prefers-reduced-motion: reduce)');
@@ -258,11 +265,11 @@
     update();
   }
 
-  g.cxPlate = { survey: survey, markup: markup, mount: mount, defaults: DEFAULTS };
+  g.cxPlate = { survey: survey, markup: markup, backdrop: backdrop, mount: mount, defaults: DEFAULTS };
 
-  // In a browser, start every plate on the page. Without this script the static contours stay as they are.
+  // In a browser, start every plate and backdrop on the page. Without this script the static contours stay as they are.
   if (typeof document !== 'undefined' && document.querySelectorAll) {
-    var start = function () { Array.prototype.forEach.call(document.querySelectorAll('.cx-plate[data-plate-seed]'), mount); };
+    var start = function () { Array.prototype.forEach.call(document.querySelectorAll('.cx-plate[data-plate-seed], .cx-backdrop[data-plate-seed]'), mount); };
     if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start); else start();
   }
 })(typeof window !== 'undefined' ? window : globalThis);

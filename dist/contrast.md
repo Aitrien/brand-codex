@@ -99,3 +99,13 @@
 | `color.data.4` | `color.surface.raised` | 3 | 5.02 | 5.57 | pass |
 | `color.data.5` | `color.surface.base` | 3 | 4.69 | 6.34 | pass |
 | `color.data.5` | `color.surface.raised` | 3 | 4.95 | 5.61 | pass |
+
+## Text on the backdrop frost
+
+Worst case: an index contour directly under the text (peak coverage 13% after the blur), under color.backdrop.tint of the page surface. See docs/components/backdrop.md.
+
+| Foreground | Min | Light | Dark | Result |
+|---|---|---|---|---|
+| `color.text.primary` | 7 | 14.23 | 10.28 | pass |
+| `color.text.secondary` | 7 | 9.51 | 7.25 | pass |
+| `color.text.muted` | 4.5 | 5.86 | 5.12 | pass |

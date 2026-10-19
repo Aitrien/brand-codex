@@ -832,6 +832,38 @@
             "codex.tier": "primitive"
           }
         }
+      },
+      "amount": {
+        "$type": "number",
+        "$description": "Mixing, opacity and filter amounts in percent (see codex.unit). Primitive.",
+        "1": {
+          "$value": 10,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "%"
+          }
+        },
+        "2": {
+          "$value": 14,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "%"
+          }
+        },
+        "3": {
+          "$value": 40,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "%"
+          }
+        },
+        "4": {
+          "$value": 140,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "%"
+          }
+        }
       }
     }
   },
@@ -1842,6 +1874,48 @@
             }
           ]
         }
+      }
+    },
+    "backdrop": {
+      "$type": "number",
+      "tint": {
+        "$value": "{primitive.color.amount.3}",
+        "$description": "Share of color.surface.base laid over the blurred backdrop contours, in percent. It and the other backdrop tokens are measured together: header and footer text must keep their contrast over an index contour in both themes (codex.frost).",
+        "$extensions": {
+          "codex.frost": {
+            "line": "color.ornament.strong",
+            "surface": "color.surface.base",
+            "pairs": [
+              {
+                "token": "color.text.primary",
+                "min": 7
+              },
+              {
+                "token": "color.text.secondary",
+                "min": 7
+              },
+              {
+                "token": "color.text.muted",
+                "min": 4.5
+              }
+            ]
+          }
+        }
+      },
+      "grain": {
+        "$value": "{primitive.color.amount.2}",
+        "$description": "Opacity of the monochrome grain over the frost, in percent. Blended with overlay so it adds texture without lightening or darkening the frost on average. Never raise it until it competes with text."
+      },
+      "saturation": {
+        "$value": "{primitive.color.amount.4}",
+        "$description": "Saturation applied with the frost blur, in percent, so blurred contour colour stays green instead of greying out."
+      }
+    },
+    "wash": {
+      "$type": "number",
+      "hover": {
+        "$value": "{primitive.color.amount.1}",
+        "$description": "Share of color.text.primary mixed into a transparent hover background, in percent: header controls on the frosted backdrop, where a solid color.surface.hover would match the frost. Not for controls on a plain surface."
       }
     }
   }

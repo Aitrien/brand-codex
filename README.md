@@ -8,9 +8,9 @@ Liam Marshall's design system: the single source of truth for aitrien.com and ev
 2. **Colour and type carry meaning.** Hue marks a link, a status or focus. Ornaments are decoration, always hidden from assistive tech.
 3. **Measure it, don't eyeball it.** Reading text meets 7:1, controls and focus meet 3:1, and every pair is checked in both themes on every build.
 4. **HTML first, script second.** Content, navigation and code work without JavaScript. Scripts add the theme toggle, copy buttons and TOC tracking.
-5. **Square, hairline, labelled.** Structure is drawn with 1px rules, square corners and mono labels, like a field ledger. Buttons and icon-only controls are the one exception: they are pills, so anything you can press is recognisable at a glance.
-6. **Motion confirms a change.** Only state changes animate, plus the specimen plate's pausable drift; text never moves, and reduced motion means none.
-7. **One accent, one ornament.** Sap green marks action. Yarndings and the specimen plate are the only decoration, once per view.
+5. **Square, hairline, labelled.** Structure is drawn with 1px rules, square corners and mono labels, like a field ledger. Buttons, nav items and icon-only controls are the one exception: they are pills, so anything you can press is recognisable at a glance.
+6. **Motion confirms a change.** Only state changes animate, plus the pausable drift of the contour survey behind the page; text never moves, and reduced motion means none.
+7. **One accent, one ornament.** Sap green marks action. Yarndings and the contour survey (the backdrop, or the specimen plate) are the only decoration, once per view.
 
 ## Rules for AI assistants
 
@@ -43,17 +43,17 @@ fonts/              Self-hosted WOFF2 (Latin subsets) and their OFL licences
 scripts/            validate, build and audit
 js/codex.js         Theme toggle, copy buttons, tooltip dismissal, TOC docking and active section (shared by sites and the showcase)
 js/theme-init.js    One-line <head> snippet that applies a stored theme before first paint
-js/plate.js         Specimen plate generator: draws the static contours at build time and animates them in the browser
+js/plate.js         Contour survey generator for the backdrop and the specimen plate: draws the static contours at build time and animates them in the browser
 showcase/           Source of the system's showcase page
 mcp/                MCP server (Phase 3)
 hugo.toml, go.mod   Hugo module definition and its mounts
-dist/               Generated: tokens.css, components in codex.css, chroma.css, fonts.css, icons.svg (sprite), tokens.json (for MCP), tokens.js (ES module export), codex.js and theme-init.js (behaviour), plate.html and plate.js (specimen plate), contrast.md, showcase.html (fragment for publishing), showcase.standalone.html (open locally)
+dist/               Generated: tokens.css, components in codex.css, chroma.css, fonts.css, icons.svg (sprite), tokens.json (for MCP), tokens.js (ES module export), codex.js and theme-init.js (behaviour), backdrop.html, plate.html and plate.js (backdrop and specimen plate), contrast.md, showcase.html (fragment for publishing), showcase.standalone.html (open locally)
 ```
 
 ## Commands
 
 ```sh
-npm run validate  # naming rules, tiers, aliases, DTCG value shapes, every contrast pair in both themes
+npm run validate  # naming rules, tiers, aliases, DTCG value shapes, every contrast pair in both themes (text on the backdrop frost included)
 npm run build     # validate, then write dist/ and refresh generated doc tables
 npm run audit     # prove dist/showcase.html and the shipped scripts have no raw colour, size or duration outside :root
 ```
@@ -73,7 +73,7 @@ Import the module. Its own `hugo.toml` mounts `dist/` at `assets/brand-codex` an
   noClasses = false
 ```
 
-Pin a release with `hugo mod get github.com/aitrien/brand-codex@v1.7.0`. Then, in `<head>`, apply any stored theme before first paint, load one stylesheet and the behaviour script:
+Pin a release with `hugo mod get github.com/aitrien/brand-codex@v1.8.0`. Then, in `<head>`, apply any stored theme before first paint, load one stylesheet and the behaviour script:
 
 ```html
 {{ with resources.Get "brand-codex/theme-init.js" }}<script>{{ .Content | safeJS }}</script>{{ end }}
@@ -91,6 +91,16 @@ Inline the icon sprite once, first thing in `<body>`, so `<use href="#cx-icon-â€
 <div hidden>{{ with resources.Get "brand-codex/icons.svg" }}{{ .Content | safeHTML }}{{ end }}</div>
 ```
 
+Every page sits on the backdrop (`docs/components/backdrop.md`): give `<body>` the `cx-backdrop-page` class, put the backdrop first inside it, add the backdrop pause control to the header (`site-header.md`) and load the contour script on every page:
+
+```html
+<body class="cx-backdrop-page">
+  {{ (resources.Get "brand-codex/backdrop.html").Content | safeHTML }}
+  â€¦
+  {{ with resources.Get "brand-codex/plate.js" | minify | fingerprint }}<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}
+</body>
+```
+
 Themes follow the system. To pin one, set `data-theme="light"` or `"dark"` on `<html>`; the toggle in `site-header.md` does this and stores the choice.
 
 ## The identity in brief
@@ -101,7 +111,7 @@ Themes follow the system. To pin one, set `data-theme="light"` or `"dark"` on `<
 | Colour | Five dye-plant hues generated in OKLCH: ash (neutral), sap (accent and success), woad (focus and info), weld (warning) and madder (danger). Cool paper in light mode, green-black in dark mode. |
 | Type | National Park (display and body), JetBrains Mono (code and labels), Yarndings 12 (ornament). 88 KB total. |
 | Signature | The accession label: every entry has a catalogue number (`LM-W-004`, `LM-P-031`) shown on a framed label with registration ticks. |
-| Decoration | The specimen plate (Plate 0), a contour survey of generated terrain that slowly drifts, and a knitted Yarndings band in the footer. |
+| Decoration | The backdrop: a contour survey of generated terrain that slowly drifts behind every page under a grainy frost, showing through above the header and below the footer. The same survey framed as the specimen plate (Plate 0) for landing pages, and a knitted Yarndings band in the footer. |
 | Icons | 16 Material Symbols (Sharp, weight 300) as a self-hosted SVG sprite: direction arrows, theme, copy, callout kinds, RSS, external links. Functional only. |
 | Separator | A muted pipe, `\|`, hidden from screen readers. |
 

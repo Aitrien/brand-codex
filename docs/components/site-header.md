@@ -10,11 +10,11 @@ tokens:
   - color.focus.ring
   - color.surface.base
   - color.surface.highlight
-  - color.surface.hover
   - color.text.muted
   - color.text.on-accent
   - color.text.primary
   - color.text.secondary
+  - color.wash.hover
   - font.family.display
   - font.family.mono
   - font.line-height.ui
@@ -27,7 +27,6 @@ tokens:
   - font.weight.ui
   - motion.duration.fast
   - motion.easing.standard
-  - radius.none
   - radius.pill
   - size.container.page
   - size.target.touch
@@ -41,7 +40,7 @@ tokens:
 
 # Site header and nav
 
-The sticky bar at the top of every page: wordmark, primary nav, and the theme toggle.
+The bar at the top of every page: wordmark, primary nav, the backdrop pause control and the theme toggle. On a backdrop page (`backdrop.md`) it sits on the frost and scrolls away with the page; elsewhere it is sticky.
 
 ## When to use
 
@@ -69,6 +68,12 @@ The sticky bar at the top of every page: wordmark, primary nav, and the theme to
           <li><a href="/about/">About</a></li>
         </ul>
       </nav>
+      <label class="cx-backdrop__pause" hidden>
+        <input class="cx-visually-hidden" type="checkbox" aria-label="Pause background animation">
+        <svg class="cx-icon" data-when="running" aria-hidden="true" focusable="false"><use href="#cx-icon-pause"></use></svg>
+        <svg class="cx-icon" data-when="paused" aria-hidden="true" focusable="false"><use href="#cx-icon-play"></use></svg>
+        <span class="cx-tooltip" aria-hidden="true"><span data-when="running">Pause background</span><span data-when="paused">Play background</span></span>
+      </label>
       <button class="cx-theme-toggle" type="button" data-theme-toggle hidden aria-label="Switch to dark theme">
         <svg class="cx-icon" data-icon="to-dark" aria-hidden="true" focusable="false"><use href="#cx-icon-theme-dark"></use></svg>
         <svg class="cx-icon" data-icon="to-light" aria-hidden="true" focusable="false"><use href="#cx-icon-theme-light"></use></svg>
@@ -96,7 +101,9 @@ Copy the snippet as it is: the build fails if this doc and `js/theme-init.js` di
 ## Do
 
 - Mark the current section with `aria-current="page"`, including on child pages (a post marks Writing). It gets a `color.surface.highlight` background, not an underline.
-- Nav items stay square; hover shows `color.surface.hover`.
+- Nav items are pills (`radius.pill`), the same shape as the pause control and the theme toggle, so every header control reads as one set.
+- Every header control rests in `color.text.secondary` and shares one hover: `color.text.primary` text on a wash of `color.text.primary` at `color.wash.hover`. A solid `color.surface.hover` would all but match the frost.
+- Include the backdrop pause control on every backdrop page, between the nav and the theme toggle. It ships `hidden` and `dist/plate.js` reveals it when the drift starts; it never appears on a page without the backdrop.
 - Keep labels to one functional word each.
 - Ship the toggle with `hidden` and let the script reveal it, so no dead control appears without JavaScript.
 - Make the toggle an icon-only circle that shows the action, not the state: a moon while light is showing, a sun while dark is showing. Its tooltip says the same ("Switch to dark theme").
@@ -106,14 +113,16 @@ Copy the snippet as it is: the build fails if this doc and `js/theme-init.js` di
 ## Don't
 
 - Don't hide the nav behind a menu button at small widths. The list scrolls inside its row instead.
-- Don't add icons or ornaments to nav items. The toggle is the only header control with an icon.
+- Don't add icons or ornaments to nav items. The pause control and the theme toggle are the only header controls with icons.
+- Don't give the header a surface or make it sticky on a backdrop page; it would sit on the text below it.
 - Don't animate the header on scroll (no shrink, hide or reveal).
 
 ## Accessibility
 
 - The skip link is the first focusable element and targets `<main id="main">`.
 - `<nav aria-label="Main">`; only one nav per page uses that label.
-- Nav links and the toggle are 44px (`size.target.touch`); the toggle is a pill with equal sides, so it renders as a circle.
+- Nav links, the pause control and the toggle are 44px (`size.target.touch`); the pause control and the toggle are pills with equal sides, so they render as circles.
+- The pause control is a native checkbox named "Pause background animation" (checked means paused), focusable by keyboard, with its focus ring on the round control.
 - The toggle's `aria-label` is its action ("Switch to light theme"); the visible tooltip repeats it and is `aria-hidden`. Escape hides the tooltip without moving the pointer (see `tooltip.md`).
 - `aria-current` carries the current state for assistive tech; the highlight is the visual cue.
-- Pairs: `color.text.secondary` and `color.text.primary` on `color.surface.base` (7:1); `color.text.primary` on `color.surface.highlight` (current) and `color.surface.hover` (7:1).
+- Pairs: `color.text.secondary` and `color.text.primary` on `color.surface.base` (7:1) and on the backdrop frost (7:1, checked by the validator's frost model); `color.text.primary` on `color.surface.highlight` (current, 7:1).

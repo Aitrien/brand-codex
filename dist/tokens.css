@@ -1,4 +1,4 @@
-/* brand-codex 1.7.0 — generated from tokens/*.json. Do not edit.
+/* brand-codex 1.8.0 — generated from tokens/*.json. Do not edit.
    Themes: semantic colours use light-dark(); color-scheme follows the system unless
    <html data-theme="light|dark"> pins it. --cx-primitive-* are for this file only. */
 :root {
@@ -10,6 +10,7 @@
   /* border.width */
   --cx-border-width-hairline: var(--cx-primitive-border-width-1);
   --cx-border-width-emphasis: var(--cx-primitive-border-width-2);
+  --cx-border-width-contour: var(--cx-primitive-border-width-2);
 
   /* border.focus */
   --cx-border-focus-width: var(--cx-primitive-border-width-2);
@@ -82,6 +83,12 @@
   --cx-primitive-color-madder-800: #651916;
   --cx-primitive-color-madder-900: #4e0d0c;
   --cx-primitive-color-madder-950: #360404;
+
+  /* primitive.color.amount */
+  --cx-primitive-color-amount-1: 10%;
+  --cx-primitive-color-amount-2: 14%;
+  --cx-primitive-color-amount-3: 40%;
+  --cx-primitive-color-amount-4: 140%;
 
   /* color.surface */
   --cx-color-surface-base: light-dark(var(--cx-primitive-color-ash-50), var(--cx-primitive-color-ash-900));
@@ -159,6 +166,14 @@
   --cx-color-data-3: light-dark(var(--cx-primitive-color-madder-600), var(--cx-primitive-color-madder-400));
   --cx-color-data-4: light-dark(var(--cx-primitive-color-weld-600), var(--cx-primitive-color-weld-400));
   --cx-color-data-5: light-dark(var(--cx-primitive-color-ash-600), var(--cx-primitive-color-ash-400));
+
+  /* color.backdrop */
+  --cx-color-backdrop-tint: var(--cx-primitive-color-amount-3);
+  --cx-color-backdrop-grain: var(--cx-primitive-color-amount-2);
+  --cx-color-backdrop-saturation: var(--cx-primitive-color-amount-4);
+
+  /* color.wash */
+  --cx-color-wash-hover: var(--cx-primitive-color-amount-1);
 
   /* primitive.motion.duration */
   --cx-primitive-motion-duration-0: 0ms;
@@ -253,6 +268,10 @@
   --cx-primitive-size-breakpoint-lg: 64rem;
   --cx-primitive-size-breakpoint-xl: 80rem;
 
+  /* primitive.size.effect */
+  --cx-primitive-size-effect-1: 0.75rem;
+  --cx-primitive-size-effect-2: 30rem;
+
   /* size.container */
   --cx-size-container-page: var(--cx-primitive-size-width-xl);
   --cx-size-container-breakout: var(--cx-primitive-size-width-lg);
@@ -287,6 +306,10 @@
   /* size.breakpoint */
   --cx-size-breakpoint-md: var(--cx-primitive-size-breakpoint-md);
   --cx-size-breakpoint-lg: var(--cx-primitive-size-breakpoint-lg);
+
+  /* size.backdrop */
+  --cx-size-backdrop-blur: var(--cx-primitive-size-effect-1);
+  --cx-size-backdrop-fade: var(--cx-primitive-size-effect-2);
 
   /* primitive.space.0 */
   --cx-primitive-space-0: 0;

@@ -1,9 +1,9 @@
-// npm run build — tokens -> dist/*.css, dist/tokens.json, dist/tokens.js, dist/codex.js, dist/theme-init.js, dist/contrast.md, docs table, dist/showcase.html
+// npm run build — tokens -> dist/*.css, dist/tokens.json, dist/tokens.js, dist/codex.js, dist/theme-init.js, dist/plate.*, dist/backdrop.html, dist/contrast.md, docs table, dist/showcase.html
 import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import vm from 'node:vm';
 import {
-  ROOT, loadTokens, validate, resolve, resolveIn, isAlias, aliasTarget, cssVar, contrastReport, hexOf,
+  ROOT, loadTokens, validate, resolve, resolveIn, isAlias, aliasTarget, cssVar, contrastReport, frostReport, hexOf,
 } from './lib.mjs';
 
 const { tokens, errors } = loadTokens();
@@ -129,7 +129,8 @@ writeFileSync(join(DIST, 'codex.css'), [fontsCss, tokensCss, componentsCss, chro
 
 // ------------------------------------------------------------------ docs/components/*.md: tokens front matter from the CSS
 const DOC_SELECTORS = {
-  'site-header': ['.cx-header', '.cx-wordmark', '.cx-nav', '.cx-theme-toggle', '.cx-skip-link', '.cx-container'],
+  'site-header': ['.cx-header', '.cx-wordmark', '.cx-nav', '.cx-theme-toggle', '.cx-backdrop__pause', '.cx-skip-link', '.cx-container'],
+  'backdrop': ['.cx-backdrop', '.cx-backdrop-page'],
   'site-footer': ['.cx-footer', '.cx-band', '.cx-version'],
   'accession-label': ['.cx-label', '.cx-id', '.cx-status'],
   'project-card': ['.cx-cards', '.cx-card'],
@@ -195,7 +196,12 @@ const pairs = contrastReport(tokens);
 const md = [`# Contrast report (generated)\n`, `${pairs.length} declared pairs, each measured in both themes. Target is the pair's \`min\`.\n`,
   '| Foreground | Background | Min | Light | Dark | Result |', '|---|---|---|---|---|---|',
   ...pairs.map((p) => `| \`${p.fg}\` | \`${p.bg}\` | ${p.min} | ${p.light.ratio.toFixed(2)} | ${p.dark.ratio.toFixed(2)} | ${p.pass ? 'pass' : '**FAIL**'} |`)].join('\n');
-writeFileSync(join(DIST, 'contrast.md'), md + '\n');
+const frost = frostReport(tokens);
+const frostMd = frost.length ? ['', '', '## Text on the backdrop frost', '',
+  `Worst case: an index contour directly under the text (peak coverage ${(frost[0].coverage * 100).toFixed(0)}% after the blur), under color.backdrop.tint of the page surface. See docs/components/backdrop.md.`, '',
+  '| Foreground | Min | Light | Dark | Result |', '|---|---|---|---|---|',
+  ...frost.map((p) => `| \`${p.fg}\` | ${p.min} | ${p.light.ratio.toFixed(2)} | ${p.dark.ratio.toFixed(2)} | ${p.pass ? 'pass' : '**FAIL**'} |`)].join('\n') : '';
+writeFileSync(join(DIST, 'contrast.md'), md + frostMd + '\n');
 
 // ------------------------------------------------------------------ docs/syntax-highlighting.md table
 const synDoc = join(ROOT, 'docs', 'syntax-highlighting.md');
@@ -273,6 +279,8 @@ const plateCtx = {}; plateCtx.globalThis = plateCtx;
 vm.runInNewContext(plateJs, plateCtx, { filename: 'js/plate.js' });
 const PLATE = plateCtx.cxPlate.markup();
 writeFileSync(join(DIST, 'plate.html'), PLATE + '\n');
+const BACKDROP = plateCtx.cxPlate.backdrop();
+writeFileSync(join(DIST, 'backdrop.html'), BACKDROP + '\n');
 writeFileSync(join(DIST, 'plate.js'), plateJs);
 
 const CHROMA_TABLE = `<div class="cx-table" role="region" aria-label="Chroma mapping" tabindex="0"><table><thead><tr><th scope="col">Role</th><th scope="col">Chroma classes</th><th scope="col">Token</th><th scope="col">Sample</th></tr></thead><tbody>${
@@ -315,6 +323,7 @@ src = src
   .replace('{{PALETTE}}', PALETTE).replace('{{SEMANTIC}}', SEMANTIC).replace('{{PAIRS}}', PAIRS)
   .replace('{{SCALE}}', SCALE).replace('{{SPACE}}', SPACE).replace('{{CHROMA_TABLE}}', CHROMA_TABLE).replace('{{ICONS}}', ICONS).replace('{{GLYPHS}}', GLYPHS)
   .replace('{{PLATE}}', PLATE)
+  .replace('{{BACKDROP}}', BACKDROP)
   .replace(/\{\{([A-Z_]+)\}\}/g, (m, k) => (k in stats ? String(stats[k]) : m));
 const leftover = src.match(/\{\{[A-Z_:0-9]+\}\}|<!-- CX:[A-Z_]+ -->/g);
 if (leftover) throw new Error(`unfilled placeholders: ${leftover.join(', ')}`);
@@ -322,5 +331,5 @@ writeFileSync(join(DIST, 'showcase.html'), src);
 // A complete document for opening locally (the publishing host supplies the doctype for showcase.html).
 writeFileSync(join(DIST, 'showcase.standalone.html'), `<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">\n</head>\n<body>\n${src}\n</body>\n</html>\n`);
 
-console.log(`Built dist/: tokens.css, chroma.css, fonts.css, codex.css, codex.js, theme-init.js, icons.svg, tokens.json, tokens.js, plate.html, plate.js, contrast.md, showcase.html (${(src.length / 1024).toFixed(0)} KB).`);
+console.log(`Built dist/: tokens.css, chroma.css, fonts.css, codex.css, codex.js, theme-init.js, icons.svg, tokens.json, tokens.js, plate.html, plate.js, backdrop.html, contrast.md, showcase.html (${(src.length / 1024).toFixed(0)} KB).`);
 console.log(`${tokens.size} tokens, ${pairs.length} pairs, fonts ${stats.FONT_KB} KB.`);

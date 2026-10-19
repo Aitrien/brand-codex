@@ -81,6 +81,7 @@ The closing band of every page: a knitted ornament band, grouped links, a coloph
 
 - Keep two to four columns; the grid wraps on its own.
 - Use the footer band as the page's single ornament when the page has no other.
+- On a backdrop page, let the footer sit on the frost: `cx-backdrop-page` removes its raised surface, and the bottom fade starts above it.
 - Put the codex version in the base row on sites that consume it, as a `cx-version` link to the changelog (`changelog` in `package.json`, also served in `dist/tokens.json`). Its tooltip opens above (`cx-tooltip--above`) because it sits at the bottom of the page.
 
 ## Don't
@@ -94,4 +95,4 @@ The closing band of every page: a knitted ornament band, grouped links, a coloph
 - `<footer>` is the page's contentinfo landmark; column headings are `<h2>` so they appear in the headings list.
 - The band is `aria-hidden="true"` and has no text alternative because it carries no meaning.
 - Links are at least 24px tall (`size.target.min`).
-- Pairs: `color.text.secondary` on `color.surface.raised` (7:1); `color.text.muted` on `color.surface.raised` (4.5:1, labels only).
+- Pairs: `color.text.secondary` on `color.surface.raised` (7:1); `color.text.muted` on `color.surface.raised` (4.5:1, labels only). On a backdrop page the same tokens on the frost meet the same targets, checked by the validator's frost model.
