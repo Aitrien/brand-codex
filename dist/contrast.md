@@ -24,7 +24,7 @@
 | `color.text.accent` | `color.surface.base` | 4.5 | 6.41 | 9.18 | pass |
 | `color.text.accent` | `color.surface.raised` | 4.5 | 6.77 | 8.12 | pass |
 | `color.text.inverse` | `color.surface.inverse` | 7 | 13.61 | 12.71 | pass |
-| `color.text.on-accent` | `color.accent.fill.rest` | 4.5 | 6.77 | 12.02 | pass |
+| `color.text.on-accent` | `color.accent.fill.rest` | 4.5 | 11.20 | 12.02 | pass |
 | `color.text.on-accent` | `color.accent.fill.hover` | 4.5 | 11.20 | 15.03 | pass |
 | `color.link.rest` | `color.surface.base` | 7 | 10.61 | 9.18 | pass |
 | `color.link.rest` | `color.surface.raised` | 7 | 11.20 | 8.12 | pass |
@@ -34,8 +34,8 @@
 | `color.link.hover` | `color.surface.hover` | 7 | 12.34 | 9.21 | pass |
 | `color.border.strong` | `color.surface.base` | 3 | 3.23 | 4.21 | pass |
 | `color.border.strong` | `color.surface.raised` | 3 | 3.41 | 3.73 | pass |
-| `color.accent.fill.rest` | `color.surface.base` | 3 | 6.41 | 9.18 | pass |
-| `color.accent.fill.rest` | `color.surface.raised` | 3 | 6.77 | 8.12 | pass |
+| `color.accent.fill.rest` | `color.surface.base` | 3 | 10.61 | 9.18 | pass |
+| `color.accent.fill.rest` | `color.surface.raised` | 3 | 11.20 | 8.12 | pass |
 | `color.accent.fill.hover` | `color.surface.base` | 3 | 10.61 | 11.47 | pass |
 | `color.accent.border` | `color.surface.base` | 3 | 4.46 | 6.57 | pass |
 | `color.accent.border` | `color.surface.raised` | 3 | 4.71 | 5.81 | pass |

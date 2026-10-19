@@ -1139,7 +1139,7 @@
     "accent": {
       "fill": {
         "rest": {
-          "$value": "{primitive.color.sap.700}",
+          "$value": "{primitive.color.sap.800}",
           "$description": "Fill of the one primary action in a view. One per view; never for large panels.",
           "$extensions": {
             "codex.modes": {

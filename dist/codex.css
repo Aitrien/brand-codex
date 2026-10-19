@@ -113,7 +113,7 @@
   --cx-color-border-strong: light-dark(var(--cx-primitive-color-ash-500), var(--cx-primitive-color-ash-500));
 
   /* color.accent */
-  --cx-color-accent-fill-rest: light-dark(var(--cx-primitive-color-sap-700), var(--cx-primitive-color-sap-300));
+  --cx-color-accent-fill-rest: light-dark(var(--cx-primitive-color-sap-800), var(--cx-primitive-color-sap-300));
   --cx-color-accent-fill-hover: light-dark(var(--cx-primitive-color-sap-800), var(--cx-primitive-color-sap-200));
   --cx-color-accent-border: light-dark(var(--cx-primitive-color-sap-600), var(--cx-primitive-color-sap-400));
 
