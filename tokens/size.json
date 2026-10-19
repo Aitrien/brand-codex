@@ -212,6 +212,28 @@
             "codex.tier": "primitive"
           }
         }
+      },
+      "effect": {
+        "$type": "dimension",
+        "$description": "Lengths for page-level effects. Primitive.",
+        "1": {
+          "$value": {
+            "value": 0.5,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        },
+        "2": {
+          "$value": {
+            "value": 30,
+            "unit": "rem"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
+        }
       }
     }
   },
@@ -323,6 +345,17 @@
       "lg": {
         "$value": "{primitive.size.breakpoint.lg}",
         "$description": "For build-time media queries (SCSS) only. Wide layouts such as a sticky TOC beside prose."
+      }
+    },
+    "backdrop": {
+      "$type": "dimension",
+      "blur": {
+        "$value": "{primitive.size.effect.1}",
+        "$description": "Blur radius of the frost over the backdrop contours. Wide enough that the lines read as soft relief, never as text-like strokes behind the header and footer."
+      },
+      "fade": {
+        "$value": "{primitive.size.effect.2}",
+        "$description": "Length of the fade at the top and bottom of a backdrop page, over which the page surface gives way to the frost. The header and the opening statement sit inside it; reading text below it is on the plain surface."
       }
     }
   }

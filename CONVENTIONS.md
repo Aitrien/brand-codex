@@ -43,12 +43,12 @@ Categories and their files:
 
 | File | Category prefix | Covers |
 |---|---|---|
-| `tokens/color.json` | `color` | palette primitives, surface, text, link, border, accent, focus, ornament, status, syntax, data |
+| `tokens/color.json` | `color` | palette primitives, surface, text, link, border, accent, focus, ornament, status, syntax, data, the backdrop's tint, grain and saturation, the hover wash |
 | `tokens/typography.json` | `font` | families, size scale, weights, line heights, tracking |
 | `tokens/space.json` | `space` | spacing scale (4px base): inset, stack, inline, section, gutter |
-| `tokens/size.json` | `size` | containers, measures, columns, targets, ornament sizes, ticks, breakpoints |
+| `tokens/size.json` | `size` | containers, measures, columns, targets, ornament sizes, ticks, breakpoints, the backdrop's blur and fade |
 | `tokens/radius.json` | `radius` | corner radii |
-| `tokens/border.json` | `border` | border widths and the focus outline |
+| `tokens/border.json` | `border` | border widths, the backdrop contour stroke and the focus outline |
 | `tokens/motion.json` | `motion` | durations, easings, the nudge distance |
 
 ## Extensions

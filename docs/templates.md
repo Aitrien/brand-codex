@@ -1,10 +1,10 @@
 # Page templates
 
-Content hierarchy for the six page types. Every template keeps the full site header (Work, Writing, About, theme toggle) and the footer. Every `<h2>` section heading carries a heading anchor.
+Content hierarchy for the six page types. Every template sits on the backdrop (`components/backdrop.md`): the frost shows through behind the header and the opening of the page, and again behind the footer. Every template keeps the full site header (Work, Writing, About, the backdrop pause, the theme toggle) and the footer. Every `<h2>` section heading carries a heading anchor.
 
 | Template | Order | Dominant | Secondary |
 |---|---|---|---|
-| **Home** | Header → statement (eyebrow, display h1, lede, primary + secondary button) beside the specimen plate → selected work (2–3 project cards) → recent writing (5 post rows) → capabilities table → footer | Statement and selected work | Writing rows, capabilities |
+| **Home** | Header → statement (eyebrow, display h1, lede, primary + secondary button) on the frost, inside the top fade → selected work (2–3 project cards) → recent writing (5 post rows) → capabilities table → footer | Statement and selected work | Writing rows, capabilities, the backdrop |
 | **Project index** | Header → page head (h1 "Work", entry count, one-line intro) → tag filter → project cards or ledger, newest first → footer | The list of projects | Filter and intro |
 | **Case study** | Header → back link "← All work" → accession label → h1 and lede → hero figure (Plate 1) → article layout: TOC + prose (Problem, Constraints, Approach, Outcome with a data table, What I'd change) → pagination → footer | Title and hero, then prose | Label, TOC |
 | **Writing list** | Header → page head (h1 "Writing", description, RSS link) → tag filter → post rows grouped by year → pagination → footer | Post titles | Numbers, dates, tags |

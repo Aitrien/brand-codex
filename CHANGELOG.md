@@ -2,6 +2,25 @@
 
 Every release of brand-codex, newest first. Versions follow the rules in `CONVENTIONS.md`: renaming or removing a semantic token is major, adding tokens, components or icons is minor, and changing a value or fixing a description is a patch. `npm run build` fails if the version in `package.json` has no entry here.
 
+## [1.8.0] - 2026-10-19
+
+### Added
+- Backdrop component (`docs/components/backdrop.md`, `cx-backdrop`, `cx-backdrop-page`): the contour survey drawn full-bleed behind every page under a grainy frost. The page surface fades out over its first and last 30rem, so the frost shows behind the header, the opening statement and the footer, and reading happens on the plain surface. Generated as `dist/backdrop.html` (`@aitrien/brand-codex/backdrop.html`); `dist/plate.js` drifts it.
+- Backdrop pause control (`cx-backdrop__pause`) in the site header: a native checkbox pill like the theme toggle, revealed by `dist/plate.js` when the drift starts and hidden under reduced motion.
+- Tokens: `size.backdrop.fade` (30rem), `size.backdrop.blur` (0.5rem), `border.width.contour` (3px; index contours twice that), `color.backdrop.tint` (40%), `color.backdrop.grain` (14%), `color.backdrop.saturation` (140%), and `color.wash.hover` (10%) for the header hover. Primitives `primitive.size.effect.*`, `primitive.border.width.3` and `primitive.color.amount.*` (percent, via `codex.unit`). The contours use the specimen plate's `color.ornament.rest` and `color.ornament.strong`.
+- `cxPlate.backdrop()` in `js/plate.js`, alongside `markup()`.
+- The blur is a CSS `filter` on the contours, over a layer three blur radii larger than the viewport. `backdrop-filter` was tried and rejected: Chromium blurs only what is on screen, which leaves lines sharp at the viewport edge.
+- The grain is monochrome fractal noise with no blend mode (blending it brought sharp lines back in Chromium).
+- Text over the frost is measured against `color.surface.base`; by design, contrast is not checked against the contour lines beneath it.
+
+### Changed
+- Every page template sits on the backdrop (`docs/templates.md`). The home statement sits on the frost inside the top fade instead of beside the specimen plate.
+- Specimen plate: no longer used on a page with the backdrop (one contour field per page; the showcase, which documents both, is the exception).
+- Site header: nav items are pills (`radius.pill`) like the icon-only controls. Nav links, the theme toggle and the pause control share one hover, a wash of `color.text.primary` at `color.wash.hover`, which stays visible on the frost. On a backdrop page the header and footer have no surface of their own and the header is no longer sticky.
+- `motion.duration.drift` and the `pause` icon now describe the contour drift on the backdrop as well as the plate.
+- README principles: pills include nav items; the contour survey (backdrop or plate) is the one decoration and the one loop per page.
+- The showcase sits on the backdrop, with the pause control in its header.
+
 ## [1.7.0] - 2026-10-16
 
 ### Changed
@@ -129,6 +148,7 @@ Every release of brand-codex, newest first. Versions follow the rules in `CONVEN
 - Component docs, Chroma syntax mapping, README principles and the showcase page.
 - `npm run validate`, `build` and `audit`.
 
+[1.8.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#180---2026-10-19
 [1.7.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#170---2026-10-16
 [1.6.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#160---2026-10-16
 [1.5.1]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#151---2026-10-15

@@ -75,6 +75,8 @@ p, li, dd, figcaption { text-wrap: pretty; }
   position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10;
   background: var(--cx-color-surface-base);
   border-bottom: var(--cx-border-width-hairline) solid var(--cx-color-border-subtle);
+  /* One hover for every header control: a wash of the text colour, which shows on the plain surface and on the frost. */
+  --_wash: color-mix(in srgb, var(--cx-color-text-primary) var(--cx-color-wash-hover), transparent);
 }
 .cx-header__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 var(--cx-space-inline-lg); }
 .cx-wordmark {
@@ -94,10 +96,10 @@ p, li, dd, figcaption { text-wrap: pretty; }
 .cx-nav li { flex: none; }
 .cx-nav a {
   display: inline-flex; align-items: center; min-height: var(--cx-size-target-touch); padding-inline: var(--cx-space-inset-md);
-  border-radius: var(--cx-radius-none); color: var(--cx-color-text-secondary); text-decoration: none; font-weight: var(--cx-font-weight-ui);
+  border-radius: var(--cx-radius-pill); color: var(--cx-color-text-secondary); text-decoration: none; font-weight: var(--cx-font-weight-ui);
   transition: color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard), background-color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard);
 }
-.cx-nav a:hover { color: var(--cx-color-text-primary); background: var(--cx-color-surface-hover); }
+.cx-nav a:hover { color: var(--cx-color-text-primary); background: var(--_wash); }
 /* The current section is highlighted, not underlined. */
 .cx-nav a[aria-current="page"] { color: var(--cx-color-text-primary); background: var(--cx-color-surface-highlight); }
 /* Theme toggle: an icon-only pill (a circle) that shows the action, with a tooltip. */
@@ -107,7 +109,20 @@ p, li, dd, figcaption { text-wrap: pretty; }
   border: 0; border-radius: var(--cx-radius-pill); background: transparent; color: var(--cx-color-text-secondary); cursor: pointer;
   transition: background-color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard), color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard);
 }
-.cx-theme-toggle:hover { color: var(--cx-color-text-primary); background: var(--cx-color-surface-hover); }
+.cx-theme-toggle:hover { color: var(--cx-color-text-primary); background: var(--_wash); }
+/* Backdrop pause: the same icon-only pill as the theme toggle. A native checkbox (checked = paused), so it works
+   without a click handler; it ships hidden and dist/plate.js reveals it when the backdrop starts to drift. */
+.cx-backdrop__pause {
+  position: relative; flex: none; display: inline-grid; place-items: center;
+  width: var(--cx-size-target-touch); height: var(--cx-size-target-touch);
+  border-radius: var(--cx-radius-pill); color: var(--cx-color-text-secondary); cursor: pointer;
+  transition: background-color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard), color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard);
+}
+.cx-backdrop__pause:hover { color: var(--cx-color-text-primary); background: var(--_wash); }
+.cx-backdrop__pause:has(:focus-visible) { outline: var(--cx-border-focus-width) solid var(--cx-color-focus-ring); outline-offset: var(--cx-border-focus-offset); }
+.cx-backdrop__pause :is(.cx-icon, .cx-tooltip [data-when]) { display: none; }
+.cx-backdrop__pause:not(:has(:checked)) [data-when="running"],
+.cx-backdrop__pause:has(:checked) [data-when="paused"] { display: inline-block; }
 .cx-theme-toggle .cx-icon { display: none; }
 .cx-theme-toggle [data-icon="to-dark"] { display: inline-block; }
 :root[data-theme="dark"] .cx-theme-toggle [data-icon="to-dark"] { display: none; }
@@ -517,6 +532,47 @@ a.cx-tag:hover { border-color: var(--cx-color-accent-border); color: var(--cx-co
 .cx-ornament { font-family: var(--cx-font-family-ornament); line-height: var(--cx-font-line-height-display); color: var(--cx-color-ornament-rest); font-size: var(--cx-size-ornament-md); }
 .cx-ornament--lg { font-size: var(--cx-size-ornament-lg); }
 
+/* ------------------------------------------------------------ backdrop (the contour survey behind every page, under a grainy frost) */
+/* Layers, bottom to top: the canvas (color.surface.base), the contours, the frost (tint + blur), the grain, then the
+   page. The page's own surface fades out over its first and last size.backdrop.fade, so the frost shows behind the
+   header and footer and reading happens on the plain surface. The backdrop is the first child of <body>. */
+:root:has(.cx-backdrop-page) { background: var(--cx-color-surface-base); }
+/* When the page class sits on a wrapper (a fragment such as the showcase), body's own surface would cover the backdrop. */
+body:not(.cx-backdrop-page):has(.cx-backdrop-page) { background: transparent; }
+.cx-backdrop-page {
+  background: linear-gradient(to top, transparent, var(--cx-color-surface-base) var(--cx-size-backdrop-fade),
+    var(--cx-color-surface-base) calc(100% - var(--cx-size-backdrop-fade)), transparent);
+}
+/* With no surface of their own, a sticky header would sit on the text below it; it scrolls away with the page. */
+.cx-backdrop-page .cx-header { position: relative; background: transparent; }
+.cx-backdrop-page .cx-footer { background: transparent; }
+.cx-backdrop {
+  /* Larger than the viewport by three blur radii on every side, so the blurred contours are whole at the screen edge. */
+  position: fixed; inset: calc(var(--cx-size-backdrop-blur) * -3); z-index: -1; overflow: hidden; pointer-events: none;
+  /* Read by js/plate.js, as on the plate. */
+  --cx-plate-drift: var(--cx-motion-duration-drift); --cx-plate-draw: var(--cx-motion-duration-plate);
+}
+.cx-backdrop .cx-plate__map {
+  position: relative; z-index: 0;
+  /* The frost's blur is applied to the contours themselves. The layer reaches three blur radii past the viewport, so
+     the blur never runs out of picture at the screen edge (backdrop-filter does, and leaves sharp lines there). */
+  filter: blur(var(--cx-size-backdrop-blur)) saturate(var(--cx-color-backdrop-saturation));
+}
+/* No draw-in: the backdrop is already there when a page opens. */
+.cx-backdrop .cx-plate__line { stroke-width: var(--cx-border-width-contour); stroke-dasharray: none; stroke-dashoffset: 0; animation: none; }
+.cx-backdrop .cx-plate__line--index { stroke-width: calc(var(--cx-border-width-contour) * 2); }
+.cx-backdrop::before {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background: color-mix(in srgb, var(--cx-color-surface-base) var(--cx-color-backdrop-tint), transparent);
+}
+/* Grain: monochrome fractal noise over the frost. No blend mode: in Chromium, blending this layer brought sharp,
+   unblurred lines back. */
+.cx-backdrop::after {
+  content: ""; position: absolute; inset: 0; z-index: 2; opacity: var(--cx-color-backdrop-grain);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
+}
+
+
 /* ------------------------------------------------------------ motion preferences */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -528,4 +584,6 @@ a.cx-tag:hover { border-color: var(--cx-color-accent-border); color: var(--cx-co
   /* The plate is drawn complete and stays still; its pause control disappears because there is nothing to pause. */
   .cx-plate__line { animation: none !important; stroke-dasharray: none; }
   .cx-plate__pause { display: none; }
+  /* The backdrop stays still too, so its header control goes. */
+  .cx-backdrop__pause { display: none; }
 }

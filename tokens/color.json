@@ -832,6 +832,38 @@
             "codex.tier": "primitive"
           }
         }
+      },
+      "amount": {
+        "$type": "number",
+        "$description": "Mixing, opacity and filter amounts in percent (see codex.unit). Primitive.",
+        "1": {
+          "$value": 10,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "%"
+          }
+        },
+        "2": {
+          "$value": 14,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "%"
+          }
+        },
+        "3": {
+          "$value": 40,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "%"
+          }
+        },
+        "4": {
+          "$value": 140,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "%"
+          }
+        }
       }
     }
   },
@@ -1842,6 +1874,28 @@
             }
           ]
         }
+      }
+    },
+    "backdrop": {
+      "$type": "number",
+      "tint": {
+        "$value": "{primitive.color.amount.3}",
+        "$description": "Share of color.surface.base laid over the blurred backdrop contours, in percent: enough to soften the lines into relief behind the header, the opening of a page and the footer."
+      },
+      "grain": {
+        "$value": "{primitive.color.amount.2}",
+        "$description": "Opacity of the monochrome grain over the frost, in percent. Texture only; never raise it until it competes with text."
+      },
+      "saturation": {
+        "$value": "{primitive.color.amount.4}",
+        "$description": "Saturation applied with the frost blur, in percent, so blurred contour colour stays green instead of greying out."
+      }
+    },
+    "wash": {
+      "$type": "number",
+      "hover": {
+        "$value": "{primitive.color.amount.1}",
+        "$description": "Share of color.text.primary mixed into a transparent hover background, in percent: header controls on the frosted backdrop, where a solid color.surface.hover would match the frost. Not for controls on a plain surface."
       }
     }
   }

@@ -4,6 +4,8 @@
 <!-- CX:THEME_INIT -->
 <!-- CX:STYLE -->
 
+<div class="cx-backdrop-page">
+{{BACKDROP}}
 <a class="cx-skip-link" href="#main">Skip to content</a>
 <!-- CX:ICONS -->
 
@@ -19,6 +21,7 @@
           <li><a href="#checks">Checks</a></li>
         </ul>
       </nav>
+      <label class="cx-backdrop__pause" hidden><input class="cx-visually-hidden" type="checkbox" aria-label="Pause background animation"><svg class="cx-icon" data-when="running" aria-hidden="true" focusable="false"><use href="#cx-icon-pause"></use></svg><svg class="cx-icon" data-when="paused" aria-hidden="true" focusable="false"><use href="#cx-icon-play"></use></svg><span class="cx-tooltip" aria-hidden="true"><span data-when="running">Pause background</span><span data-when="paused">Play background</span></span></label>
       <button class="cx-theme-toggle" type="button" data-theme-toggle hidden aria-label="Switch to dark theme"><svg class="cx-icon" data-icon="to-dark" aria-hidden="true" focusable="false"><use href="#cx-icon-theme-dark"></use></svg><svg class="cx-icon" data-icon="to-light" aria-hidden="true" focusable="false"><use href="#cx-icon-theme-light"></use></svg><span class="cx-tooltip" aria-hidden="true">Switch to dark theme</span></button>
     </div>
   </div>
@@ -71,9 +74,9 @@
         <li><strong>Colour and type carry meaning.</strong><span>Hue marks a link, a status or focus. Ornaments are decoration, always hidden from assistive tech.</span></li>
         <li><strong>Measure it, don't eyeball it.</strong><span>Reading text meets 7:1, controls and focus meet 3:1, and every pair is checked in both themes on every build.</span></li>
         <li><strong>HTML first, script second.</strong><span>Content, navigation and code work without JavaScript. Scripts add the theme toggle, copy buttons and TOC tracking.</span></li>
-        <li><strong>Square, hairline, labelled.</strong><span>Structure is drawn with 1px rules, square corners and mono labels, like a field ledger. Buttons and icon-only controls are the one exception: they are pills, so anything you can press is recognisable at a glance.</span></li>
-        <li><strong>Motion confirms a change.</strong><span>Only state changes animate, plus the specimen plate's pausable drift; text never moves, and reduced motion means none.</span></li>
-        <li><strong>One accent, one ornament.</strong><span>Sap green marks action. Yarndings and the specimen plate are the only decoration, once per view.</span></li>
+        <li><strong>Square, hairline, labelled.</strong><span>Structure is drawn with 1px rules, square corners and mono labels, like a field ledger. Buttons, nav items and icon-only controls are the one exception: they are pills, so anything you can press is recognisable at a glance.</span></li>
+        <li><strong>Motion confirms a change.</strong><span>Only state changes animate, plus the pausable drift of the contour survey behind the page; text never moves, and reduced motion means none.</span></li>
+        <li><strong>One accent, one ornament.</strong><span>Sap green marks action. Yarndings and the contour survey (the backdrop, or the specimen plate) are the only decoration, once per view.</span></li>
       </ul>
     </section>
 
@@ -170,9 +173,9 @@
           <div class="sc-tile sc-motion sc-motion--base" tabindex="0"><code>duration.base <span class="cx-sep" aria-hidden="true">|</span> easing.standard</code><div class="sc-track"><i></i></div><p>200ms. Disclosures and the TOC marker.</p></div>
           <div class="sc-tile sc-motion sc-motion--slow" tabindex="0"><code>duration.slow <span class="cx-sep" aria-hidden="true">|</span> easing.enter</code><div class="sc-track"><i></i></div><p>320ms. Rare one-off confirmations.</p></div>
           <div class="sc-tile sc-motion sc-motion--plate" tabindex="0"><code>duration.plate <span class="cx-sep" aria-hidden="true">|</span> easing.enter</code><div class="sc-track"><i></i></div><p>1600ms. Each contour's draw-in, once, on load.</p></div>
-          <div class="sc-tile"><code>duration.drift <span class="cx-sep" aria-hidden="true">|</span> linear</code><p>60000ms for the plate's terrain to drift one noise unit. The only loop; always pausable, and still under reduced motion.</p></div>
+          <div class="sc-tile"><code>duration.drift <span class="cx-sep" aria-hidden="true">|</span> linear</code><p>60000ms for the contour terrain to drift one noise unit, behind the frost or on the plate. The only loop; always pausable, and still under reduced motion.</p></div>
         </div>
-        <p class="sc-note">Never moves: text, headings, layout, page transitions, scroll-triggered reveals. Theme changes and focus rings are instant. The plate's drift is the one loop: it has a pause control and stops under reduced motion.</p>
+        <p class="sc-note">Never moves: text, headings, layout, page transitions, scroll-triggered reveals. Theme changes and focus rings are instant. The contour drift is the one loop: it has a pause control and stops under reduced motion.</p>
       </div>
     </section>
 
@@ -490,14 +493,14 @@
       <div class="sc-part__head">
         <p class="cx-eyebrow">Step 1 hierarchy</p>
         <h2><span id="templates-title">Templates</span> <a class="cx-anchor" href="#templates" aria-label="Link to Templates">#</a></h2>
-        <p>Six page types at thumbnail scale. The outlined block is what dominates; dashed blocks are secondary. Every template keeps the full header nav.</p>
+        <p>Six page types at thumbnail scale. The outlined block is what dominates; dashed blocks are secondary. Every template sits on the backdrop and keeps the full header nav.</p>
       </div>
       <ul class="sc-templates">
         <li><figure class="sc-tpl">
           <div class="sc-tpl__frame" aria-hidden="true">
             <div class="sc-tpl__bar"><b>Liam Marshall</b><span>Work Writing About</span></div>
             <div class="sc-tpl__body">
-              <div class="sc-tpl__split"><div class="sc-b sc-b--dominant sc-b--tall">Statement h1</div><div class="sc-b sc-b--ornament">·W·</div></div>
+              <div class="sc-b sc-b--dominant sc-b--tall">Statement h1 on the frost</div>
               <div class="sc-b">View work <svg class="cx-icon cx-icon--sm" aria-hidden="true" focusable="false"><use href="#cx-icon-arrow-forward"></use></svg>&nbsp;| Writing</div>
               <div class="sc-tpl__split"><div class="sc-b sc-b--dominant">Card</div><div class="sc-b sc-b--dominant">Card</div></div>
               <div class="sc-b sc-b--muted">Recent writing ×5</div>
@@ -608,4 +611,5 @@
   </div>
   <div class="cx-container"><div class="cx-footer__base"><span>© 2026 Liam Marshall</span><a class="cx-version" href="{{CHANGELOG_URL}}" aria-label="Version {{VERSION}}: view changelog">Codex v{{VERSION}}<svg class="cx-icon cx-icon--sm" aria-hidden="true" focusable="false"><use href="#cx-icon-arrow-outward"></use></svg><span class="cx-tooltip cx-tooltip--above" aria-hidden="true">View changelog</span></a><a href="#top">Back to top<svg class="cx-icon cx-icon--sm" aria-hidden="true" focusable="false"><use href="#cx-icon-arrow-upward"></use></svg></a></div></div>
 </footer>
+</div>
 <!-- CX:SCRIPT -->
