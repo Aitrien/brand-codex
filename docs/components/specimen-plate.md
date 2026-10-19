@@ -7,6 +7,7 @@ tokens:
   - border.width.contour
   - border.width.emphasis
   - border.width.hairline
+  - color.backdrop.saturation
   - color.border.default
   - color.border.strong
   - color.focus.ring
@@ -27,6 +28,7 @@ tokens:
   - motion.easing.enter
   - motion.easing.standard
   - radius.pill
+  - size.backdrop.blur
   - size.column.card
   - size.mark.tick
   - size.target.touch

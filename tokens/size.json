@@ -218,7 +218,7 @@
         "$description": "Lengths for page-level effects. Primitive.",
         "1": {
           "$value": {
-            "value": 0.75,
+            "value": 0.5,
             "unit": "rem"
           },
           "$extensions": {

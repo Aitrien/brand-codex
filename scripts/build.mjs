@@ -3,7 +3,7 @@ import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
 import vm from 'node:vm';
 import {
-  ROOT, loadTokens, validate, resolve, resolveIn, isAlias, aliasTarget, cssVar, contrastReport, frostReport, hexOf,
+  ROOT, loadTokens, validate, resolve, resolveIn, isAlias, aliasTarget, cssVar, contrastReport, hexOf,
 } from './lib.mjs';
 
 const { tokens, errors } = loadTokens();
@@ -196,12 +196,7 @@ const pairs = contrastReport(tokens);
 const md = [`# Contrast report (generated)\n`, `${pairs.length} declared pairs, each measured in both themes. Target is the pair's \`min\`.\n`,
   '| Foreground | Background | Min | Light | Dark | Result |', '|---|---|---|---|---|---|',
   ...pairs.map((p) => `| \`${p.fg}\` | \`${p.bg}\` | ${p.min} | ${p.light.ratio.toFixed(2)} | ${p.dark.ratio.toFixed(2)} | ${p.pass ? 'pass' : '**FAIL**'} |`)].join('\n');
-const frost = frostReport(tokens);
-const frostMd = frost.length ? ['', '', '## Text on the backdrop frost', '',
-  `Worst case: an index contour directly under the text (peak coverage ${(frost[0].coverage * 100).toFixed(0)}% after the blur), under color.backdrop.tint of the page surface. See docs/components/backdrop.md.`, '',
-  '| Foreground | Min | Light | Dark | Result |', '|---|---|---|---|---|',
-  ...frost.map((p) => `| \`${p.fg}\` | ${p.min} | ${p.light.ratio.toFixed(2)} | ${p.dark.ratio.toFixed(2)} | ${p.pass ? 'pass' : '**FAIL**'} |`)].join('\n') : '';
-writeFileSync(join(DIST, 'contrast.md'), md + frostMd + '\n');
+writeFileSync(join(DIST, 'contrast.md'), md + '\n');
 
 // ------------------------------------------------------------------ docs/syntax-highlighting.md table
 const synDoc = join(ROOT, 'docs', 'syntax-highlighting.md');

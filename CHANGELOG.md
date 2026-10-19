@@ -7,9 +7,11 @@ Every release of brand-codex, newest first. Versions follow the rules in `CONVEN
 ### Added
 - Backdrop component (`docs/components/backdrop.md`, `cx-backdrop`, `cx-backdrop-page`): the contour survey drawn full-bleed behind every page under a grainy frost. The page surface fades out over its first and last 30rem, so the frost shows behind the header, the opening statement and the footer, and reading happens on the plain surface. Generated as `dist/backdrop.html` (`@aitrien/brand-codex/backdrop.html`); `dist/plate.js` drifts it.
 - Backdrop pause control (`cx-backdrop__pause`) in the site header: a native checkbox pill like the theme toggle, revealed by `dist/plate.js` when the drift starts and hidden under reduced motion.
-- Tokens: `size.backdrop.fade` (30rem), `size.backdrop.blur` (0.75rem), `border.width.contour` (2px; index contours twice that), `color.backdrop.tint` (40%), `color.backdrop.grain` (14%), `color.backdrop.saturation` (140%), and `color.wash.hover` (10%) for the header hover. Primitives `primitive.size.effect.*` and `primitive.color.amount.*` (percent, via `codex.unit`).
-- Frost contrast check: `codex.frost` on `color.backdrop.tint` lists the text that sits on the frost. The validator models the worst case (an index contour directly under the text, after the blur, under the tint) and requires `text.primary` and `text.secondary` at 7:1 and `text.muted` at 4.5:1 in both themes. Results are in `dist/contrast.md`.
+- Tokens: `size.backdrop.fade` (30rem), `size.backdrop.blur` (0.5rem), `border.width.contour` (3px; index contours twice that), `color.backdrop.tint` (40%), `color.backdrop.grain` (14%), `color.backdrop.saturation` (140%), and `color.wash.hover` (10%) for the header hover. Primitives `primitive.size.effect.*`, `primitive.border.width.3` and `primitive.color.amount.*` (percent, via `codex.unit`). The contours use the specimen plate's `color.ornament.rest` and `color.ornament.strong`.
 - `cxPlate.backdrop()` in `js/plate.js`, alongside `markup()`.
+- The blur is a CSS `filter` on the contours, over a layer three blur radii larger than the viewport. `backdrop-filter` was tried and rejected: Chromium blurs only what is on screen, which leaves lines sharp at the viewport edge.
+- The grain is monochrome fractal noise with no blend mode (blending it brought sharp lines back in Chromium).
+- Text over the frost is measured against `color.surface.base`; by design, contrast is not checked against the contour lines beneath it.
 
 ### Changed
 - Every page template sits on the backdrop (`docs/templates.md`). The home statement sits on the frost inside the top fade instead of beside the specimen plate.

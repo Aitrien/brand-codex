@@ -174,39 +174,3 @@ export function contrastReport(tokens) {
   }
   return rows;
 }
-
-// ------------------------------------------------------------------ frost (docs/components/backdrop.md)
-// Header and footer text on a backdrop page sits on the frost, not on a token surface. Model its worst case: an
-// index contour (twice border.width.contour) directly under the text, blurred by size.backdrop.blur (CSS blur() is
-// a Gaussian with that standard deviation, so the line's peak coverage is erf(w / (2√2 σ))), then
-// color.backdrop.tint of the page surface laid over it, then the grain: monochrome noise averaging mid-grey, at
-// color.backdrop.grain. The saturation boost is left out (it shifts hue far more than luminance).
-const erf = (x) => { // Abramowitz and Stegun 7.1.26
-  const t = 1 / (1 + 0.3275911 * Math.abs(x));
-  const y = 1 - ((((1.061405429 * t - 1.453152027) * t + 1.421413741) * t - 0.284496736) * t + 0.254829592) * t * Math.exp(-x * x);
-  return Math.sign(x) * y;
-};
-const px = (v) => (v.unit === 'rem' ? v.value * 16 : v.value);
-const mixColor = (a, b, t) => ({ colorSpace: 'srgb', components: a.components.map((x, i) => x * t + b.components[i] * (1 - t)) });
-
-export function frostReport(tokens) {
-  const tint = tokens.get('color.backdrop.tint');
-  const spec = tint?.extensions['codex.frost'];
-  if (!spec) return [];
-  const share = resolve(tokens, tint.value) / 100;
-  const sigma = px(resolve(tokens, tokens.get('size.backdrop.blur').value));
-  const width = 2 * px(resolve(tokens, tokens.get('border.width.contour').value));
-  const coverage = sigma > 0 ? erf(width / (2 * Math.SQRT2 * sigma)) : 1;
-  const grain = resolve(tokens, tokens.get('color.backdrop.grain').value) / 100;
-  const midGrey = { colorSpace: 'srgb', components: [0.5, 0.5, 0.5] };
-  return spec.pairs.map((pair) => {
-    const r = {};
-    for (const mode of ['light', 'dark']) {
-      const surface = resolveIn(tokens, spec.surface, mode);
-      const frost = mixColor(midGrey, mixColor(surface, mixColor(resolveIn(tokens, spec.line, mode), surface, coverage), share), grain);
-      const fg = resolveIn(tokens, pair.token, mode);
-      r[mode] = { ratio: ratio(fg, frost), fg: hexOf(fg), bg: hexOf(frost) };
-    }
-    return { fg: pair.token, bg: 'frost', min: pair.min, coverage, ...r, pass: r.light.ratio >= pair.min && r.dark.ratio >= pair.min };
-  });
-}

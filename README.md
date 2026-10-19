@@ -53,7 +53,7 @@ dist/               Generated: tokens.css, components in codex.css, chroma.css, 
 ## Commands
 
 ```sh
-npm run validate  # naming rules, tiers, aliases, DTCG value shapes, every contrast pair in both themes (text on the backdrop frost included)
+npm run validate  # naming rules, tiers, aliases, DTCG value shapes, every contrast pair in both themes
 npm run build     # validate, then write dist/ and refresh generated doc tables
 npm run audit     # prove dist/showcase.html and the shipped scripts have no raw colour, size or duration outside :root
 ```

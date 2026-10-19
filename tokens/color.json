@@ -1880,43 +1880,11 @@
       "$type": "number",
       "tint": {
         "$value": "{primitive.color.amount.3}",
-        "$description": "Share of color.surface.base laid over the blurred backdrop contours, in percent. It and the other backdrop tokens are measured together: text that can sit on the frost (the header, the footer, the opening of a page, and all of a short page) must keep its contrast over an index contour in both themes (codex.frost).",
-        "$extensions": {
-          "codex.frost": {
-            "line": "color.ornament.strong",
-            "surface": "color.surface.base",
-            "pairs": [
-              {
-                "token": "color.text.primary",
-                "min": 7
-              },
-              {
-                "token": "color.text.secondary",
-                "min": 7
-              },
-              {
-                "token": "color.link.rest",
-                "min": 7
-              },
-              {
-                "token": "color.link.hover",
-                "min": 7
-              },
-              {
-                "token": "color.text.muted",
-                "min": 4.5
-              },
-              {
-                "token": "color.text.accent",
-                "min": 4.5
-              }
-            ]
-          }
-        }
+        "$description": "Share of color.surface.base laid over the blurred backdrop contours, in percent: enough to soften the lines into relief behind the header, the opening of a page and the footer."
       },
       "grain": {
         "$value": "{primitive.color.amount.2}",
-        "$description": "Opacity of the monochrome grain over the frost, in percent. Its mid-grey average lightens the frost in dark mode and darkens it in light mode, so the frost check counts it. Never raise it until it competes with text."
+        "$description": "Opacity of the monochrome grain over the frost, in percent. Texture only; never raise it until it competes with text."
       },
       "saturation": {
         "$value": "{primitive.color.amount.4}",

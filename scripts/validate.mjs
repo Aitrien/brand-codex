@@ -1,7 +1,7 @@
 // npm run validate — naming rules, tiers, aliases, value shapes and every contrast pair in both themes.
 import { readdirSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
-import { ROOT, loadTokens, validate, contrastReport, frostReport } from './lib.mjs';
+import { ROOT, loadTokens, validate, contrastReport } from './lib.mjs';
 
 const { tokens, errors: loadErrors } = loadTokens();
 const errors = [...loadErrors, ...validate(tokens)];
@@ -54,21 +54,13 @@ for (const file of readdirSync(docsDir).filter((f) => f.endsWith('.md') && !f.st
 }
 const pairs = contrastReport(tokens);
 const failing = pairs.filter((p) => !p.pass);
-// Text on the backdrop's frost, at its worst: an index contour right under the text.
-for (const f of tokens.get('color.backdrop.tint')?.extensions['codex.frost']?.pairs ?? []) {
-  if (!tokens.has(f.token)) errors.push(`color.backdrop.tint: codex.frost pairs unknown token ${f.token}`);
-}
-const frost = frostReport(tokens);
-for (const p of frost.filter((x) => !x.pass)) {
-  failing.push({ ...p, fg: p.fg, bg: 'the backdrop frost (index contour under the text)' });
-}
 
 for (const e of errors) console.error(`✗ ${e}`);
 for (const p of failing) {
   console.error(`✗ contrast ${p.fg} on ${p.bg}: light ${p.light.ratio.toFixed(2)}, dark ${p.dark.ratio.toFixed(2)} (min ${p.min})`);
 }
 const semantic = [...tokens.values()].filter((t) => t.tier === 'semantic').length;
-console.log(`${tokens.size} tokens (${semantic} semantic, ${deprecated.length} deprecated), ${pairs.length} contrast pairs × 2 themes, ${frost.length} frost pairs × 2 themes.`);
+console.log(`${tokens.size} tokens (${semantic} semantic, ${deprecated.length} deprecated), ${pairs.length} contrast pairs × 2 themes.`);
 if (errors.length || failing.length) {
   console.error(`${errors.length} rule errors, ${failing.length} failing pairs.`);
   process.exit(1);

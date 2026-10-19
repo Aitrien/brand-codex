@@ -54,20 +54,21 @@ The build writes the backdrop to `dist/backdrop.html` (the contours at time zero
 </body>
 ```
 
-From the bottom up: the canvas (`color.surface.base`), the contours (`border.width.contour`, index contours twice that), the frost (`color.backdrop.tint` of the surface, `size.backdrop.blur`, `color.backdrop.saturation`), the grain (`color.backdrop.grain`, overlay-blended), then the page, whose surface is solid between the two fades.
+From the bottom up: the canvas (`color.surface.base`), the contours (the specimen plate's `color.ornament.rest` lines and `color.ornament.strong` index contours, at `border.width.contour` and twice that, blurred by `size.backdrop.blur` and `color.backdrop.saturation`), the frost (`color.backdrop.tint` of the surface), the grain (monochrome noise at `color.backdrop.grain`), then the page, whose surface is solid between the two fades.
 
 ## Do
 
 - Load `dist/plate.js` on every page that has the backdrop. It starts the drift and reveals the header's pause control; without it the contours stay still and the control stays hidden.
 - Let the header and footer sit on the frost. `cx-backdrop-page` removes their surfaces, and the header scrolls away with the page instead of sticking, because with no surface it would sit on top of the text below.
-- Tune the look through the backdrop tokens only. The validator measures header and footer text over an index contour after every change (`codex.frost` on `color.backdrop.tint`), in both themes.
+- Tune the look through the backdrop tokens only.
 - Keep the opening statement inside the top fade, so it is the one piece of content that sits on the frost.
 
 ## Don't
 
 - Don't give sections, panels or cards a frosted background of their own.
 - Don't position `<body>` or give it a `z-index`. The backdrop paints at `z-index: -1` in the root stacking context, under the page's own surface.
-- Don't raise `color.backdrop.grain` until the noise competes with text, or lower `color.backdrop.tint` below what the frost check allows.
+- Don't raise `color.backdrop.grain` until the noise competes with text.
+- Don't switch the blur to `backdrop-filter`. Chromium blurs only what is on screen, so lines crossing the viewport edge stay sharp there; the CSS `filter` on the contours, over a layer that reaches past the edge, does not. Don't give the grain a `mix-blend-mode` either: in Chromium it brought sharp lines back.
 - Don't put text, links or controls in the backdrop.
 
 ## Accessibility
@@ -75,5 +76,5 @@ From the bottom up: the canvas (`color.surface.base`), the contours (`border.wid
 - The backdrop is `aria-hidden` and carries no information.
 - WCAG 2.2.2 (Pause, Stop, Hide): the drift runs longer than five seconds, so the header's pause control (a native checkbox named "Pause background animation"; checked means paused) stops it. It ships `hidden`; the script reveals it when the drift starts. The drift also stops off screen and in hidden tabs.
 - Under `prefers-reduced-motion: reduce` the contours never move and the pause control stays hidden.
-- Reading text below the top fade sits on `color.surface.base`, so the declared pairs apply. Header and footer text sits on the frost: the validator models its worst case (an index contour directly under the text) and requires `color.text.primary`, `color.text.secondary` and the link colours at 7:1, and `color.text.muted` and `color.text.accent` at 4.5:1, in both themes (`dist/contrast.md`). On a short page the two fades meet, so this covers its content too.
-- Without `backdrop-filter` support the frost becomes the plain surface, so contrast never depends on the blur.
+- Reading text below the top fade sits on `color.surface.base`, so the declared pairs apply. Text over the frost (the header, the footer, the opening of a page, and all of a short page) is measured against `color.surface.base` too: by design, contrast is not checked against the blurred contour lines beneath it.
+- The blur is a CSS `filter`, supported everywhere the rest of the system is, so contrast never depends on `backdrop-filter` support.

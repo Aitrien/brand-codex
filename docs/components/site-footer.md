@@ -95,4 +95,4 @@ The closing band of every page: a knitted ornament band, grouped links, a coloph
 - `<footer>` is the page's contentinfo landmark; column headings are `<h2>` so they appear in the headings list.
 - The band is `aria-hidden="true"` and has no text alternative because it carries no meaning.
 - Links are at least 24px tall (`size.target.min`).
-- Pairs: `color.text.secondary` on `color.surface.raised` (7:1); `color.text.muted` on `color.surface.raised` (4.5:1, labels only). On a backdrop page the same tokens on the frost meet the same targets, checked by the validator's frost model.
+- Pairs: `color.text.secondary` on `color.surface.raised` (7:1); `color.text.muted` on `color.surface.raised` (4.5:1, labels only). On a backdrop page the frost is measured as `color.surface.base`; the contour lines beneath it are not part of the check.

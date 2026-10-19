@@ -6,11 +6,12 @@
   /* primitive.border.width */
   --cx-primitive-border-width-1: 1px;
   --cx-primitive-border-width-2: 2px;
+  --cx-primitive-border-width-3: 3px;
 
   /* border.width */
   --cx-border-width-hairline: var(--cx-primitive-border-width-1);
   --cx-border-width-emphasis: var(--cx-primitive-border-width-2);
-  --cx-border-width-contour: var(--cx-primitive-border-width-2);
+  --cx-border-width-contour: var(--cx-primitive-border-width-3);
 
   /* border.focus */
   --cx-border-focus-width: var(--cx-primitive-border-width-2);
@@ -269,7 +270,7 @@
   --cx-primitive-size-breakpoint-xl: 80rem;
 
   /* primitive.size.effect */
-  --cx-primitive-size-effect-1: 0.75rem;
+  --cx-primitive-size-effect-1: 0.5rem;
   --cx-primitive-size-effect-2: 30rem;
 
   /* size.container */

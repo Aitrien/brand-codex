@@ -61,7 +61,6 @@ Categories and their files:
 | `codex.unit` | `number` tokens | A CSS unit DTCG dimensions don't allow (`em`, `ch`). The generator appends it. |
 | `codex.fluid` | dimensions | `{ "min", "max"?, "viewport": { "min", "max" } }`. The generator emits `clamp()` between 360px and 1440px. `max` defaults to `$value`. |
 | `codex.glyphs` | `font.family.ornament` | The approved Yarndings glyphs and the banned set. |
-| `codex.frost` | `color.backdrop.tint` | `{ "line", "surface", "pairs": [{ "token", "min" }] }`. Text that sits on the backdrop's frost, and the target each must meet. The validator models the worst case (an index contour under the text, blurred by `size.backdrop.blur`, under the tint) in both themes. |
 
 ## Generated names
 

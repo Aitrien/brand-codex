@@ -20,6 +20,15 @@
           "$extensions": {
             "codex.tier": "primitive"
           }
+        },
+        "3": {
+          "$value": {
+            "value": 3,
+            "unit": "px"
+          },
+          "$extensions": {
+            "codex.tier": "primitive"
+          }
         }
       }
     }
@@ -36,7 +45,7 @@
         "$description": "Active-state rules (current nav item, active TOC entry) and callout leading edges."
       },
       "contour": {
-        "$value": "{primitive.border.width.2}",
+        "$value": "{primitive.border.width.3}",
         "$description": "Stroke of the backdrop's contour lines; index contours are twice this. Thicker than a hairline so the lines survive the frost blur. Not for the specimen plate, which keeps hairlines."
       }
     },

@@ -125,4 +125,4 @@ Copy the snippet as it is: the build fails if this doc and `js/theme-init.js` di
 - The pause control is a native checkbox named "Pause background animation" (checked means paused), focusable by keyboard, with its focus ring on the round control.
 - The toggle's `aria-label` is its action ("Switch to light theme"); the visible tooltip repeats it and is `aria-hidden`. Escape hides the tooltip without moving the pointer (see `tooltip.md`).
 - `aria-current` carries the current state for assistive tech; the highlight is the visual cue.
-- Pairs: `color.text.secondary` and `color.text.primary` on `color.surface.base` (7:1) and on the backdrop frost (7:1, checked by the validator's frost model); `color.text.primary` on `color.surface.highlight` (current, 7:1).
+- Pairs: `color.text.secondary` and `color.text.primary` on `color.surface.base` (7:1); `color.text.primary` on `color.surface.highlight` (current, 7:1). On a backdrop page the frost is measured as `color.surface.base`; the contour lines beneath it are not part of the check.

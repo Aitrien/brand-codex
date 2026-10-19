@@ -21,11 +21,12 @@
   /* primitive.border.width */
   --cx-primitive-border-width-1: 1px;
   --cx-primitive-border-width-2: 2px;
+  --cx-primitive-border-width-3: 3px;
 
   /* border.width */
   --cx-border-width-hairline: var(--cx-primitive-border-width-1);
   --cx-border-width-emphasis: var(--cx-primitive-border-width-2);
-  --cx-border-width-contour: var(--cx-primitive-border-width-2);
+  --cx-border-width-contour: var(--cx-primitive-border-width-3);
 
   /* border.focus */
   --cx-border-focus-width: var(--cx-primitive-border-width-2);
@@ -284,7 +285,7 @@
   --cx-primitive-size-breakpoint-xl: 80rem;
 
   /* primitive.size.effect */
-  --cx-primitive-size-effect-1: 0.75rem;
+  --cx-primitive-size-effect-1: 0.5rem;
   --cx-primitive-size-effect-2: 30rem;
 
   /* size.container */
@@ -1024,29 +1025,31 @@ body:not(.cx-backdrop-page):has(.cx-backdrop-page) { background: transparent; }
 .cx-backdrop-page .cx-header { position: relative; background: transparent; }
 .cx-backdrop-page .cx-footer { background: transparent; }
 .cx-backdrop {
-  position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none;
+  /* Larger than the viewport by three blur radii on every side, so the blurred contours are whole at the screen edge. */
+  position: fixed; inset: calc(var(--cx-size-backdrop-blur) * -3); z-index: -1; overflow: hidden; pointer-events: none;
   /* Read by js/plate.js, as on the plate. */
   --cx-plate-drift: var(--cx-motion-duration-drift); --cx-plate-draw: var(--cx-motion-duration-plate);
 }
-.cx-backdrop .cx-plate__map { position: relative; z-index: 0; }
+.cx-backdrop .cx-plate__map {
+  position: relative; z-index: 0;
+  /* The frost's blur is applied to the contours themselves. The layer reaches three blur radii past the viewport, so
+     the blur never runs out of picture at the screen edge (backdrop-filter does, and leaves sharp lines there). */
+  filter: blur(var(--cx-size-backdrop-blur)) saturate(var(--cx-color-backdrop-saturation));
+}
 /* No draw-in: the backdrop is already there when a page opens. */
 .cx-backdrop .cx-plate__line { stroke-width: var(--cx-border-width-contour); stroke-dasharray: none; stroke-dashoffset: 0; animation: none; }
 .cx-backdrop .cx-plate__line--index { stroke-width: calc(var(--cx-border-width-contour) * 2); }
 .cx-backdrop::before {
   content: ""; position: absolute; inset: 0; z-index: 1;
   background: color-mix(in srgb, var(--cx-color-surface-base) var(--cx-color-backdrop-tint), transparent);
-  -webkit-backdrop-filter: blur(var(--cx-size-backdrop-blur)) saturate(var(--cx-color-backdrop-saturation));
-  backdrop-filter: blur(var(--cx-size-backdrop-blur)) saturate(var(--cx-color-backdrop-saturation));
 }
-/* Grain: monochrome fractal noise, overlay-blended so it textures the frost without shifting its average colour. */
+/* Grain: monochrome fractal noise over the frost. No blend mode: in Chromium, blending this layer brought sharp,
+   unblurred lines back. */
 .cx-backdrop::after {
-  content: ""; position: absolute; inset: 0; z-index: 2; opacity: var(--cx-color-backdrop-grain); mix-blend-mode: overlay;
+  content: ""; position: absolute; inset: 0; z-index: 2; opacity: var(--cx-color-backdrop-grain);
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0.33 0.33 0.33 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
 }
-/* Without backdrop-filter the lines would stay sharp behind text: the frost becomes the plain surface instead. */
-@supports not ((backdrop-filter: blur(0)) or (-webkit-backdrop-filter: blur(0))) {
-  .cx-backdrop::before { background: var(--cx-color-surface-base); }
-}
+
 
 /* ------------------------------------------------------------ motion preferences */
 @media (prefers-reduced-motion: reduce) {
@@ -1274,7 +1277,7 @@ body:not(.cx-backdrop-page):has(.cx-backdrop-page) { background: transparent; }
         <dl class="cx-label" aria-label="Accession label">
           <div class="cx-label__id"><dt>No.</dt><dd>LM-W-002</dd></div>
           <div><dt>Version</dt><dd><a class="cx-version" href="https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md" aria-label="Version 1.8.0: view changelog">1.8.0<svg class="cx-icon cx-icon--sm" aria-hidden="true" focusable="false"><use href="#cx-icon-arrow-outward"></use></svg><span class="cx-tooltip cx-tooltip--start" aria-hidden="true">View changelog</span></a></dd></div>
-          <div><dt>Tokens</dt><dd>296</dd></div>
+          <div><dt>Tokens</dt><dd>297</dd></div>
           <div><dt>Contrast</dt><dd>95/95 pass</dd></div>
           <div><dt>Fonts</dt><dd>88.0 KB</dd></div>
         </dl>
@@ -1839,7 +1842,7 @@ body:not(.cx-backdrop-page):has(.cx-backdrop-page) { background: transparent; }
       </div>
       <ul class="sc-checks">
         <li><span class="cx-status cx-status--live">Pass</span><div><p><b>Contrast.</b> 95 of 95 declared pairs meet their target in both light and dark. Lowest reading-text ratio: 7.20:1.</p></div></li>
-        <li><span class="cx-status cx-status--live">Pass</span><div><p><b>Naming.</b> 296 tokens (152 semantic): kebab-case or integer segments, four segments at most, every semantic token described and pointing at a primitive.</p></div></li>
+        <li><span class="cx-status cx-status--live">Pass</span><div><p><b>Naming.</b> 297 tokens (152 semantic): kebab-case or integer segments, four segments at most, every semantic token described and pointing at a primitive.</p></div></li>
         <li><span class="cx-status cx-status--live">Pass</span><div><p><b>No raw values.</b> Outside the generated <code class="cx-code-inline">:root</code> block, every colour, size and duration in this page's CSS, inline styles and script is a <code class="cx-code-inline">--cx-*</code> variable.</p></div></li>
         <li><span class="cx-status cx-status--live">Pass</span><div><p><b>Fonts.</b> 88.0 KB across three OFL families, against a 200 KB budget.</p></div></li>
       </ul>
