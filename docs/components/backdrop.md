@@ -15,6 +15,7 @@ tokens:
   - motion.duration.drift
   - motion.duration.fast
   - motion.duration.plate
+  - motion.duration.slow
   - motion.easing.standard
   - radius.pill
   - size.backdrop.blur
@@ -59,7 +60,7 @@ From the bottom up: the canvas (`color.surface.base`), the contours (the specime
 ## Do
 
 - Load `dist/plate.js` on every page that has the backdrop. It starts the drift and reveals the header's pause control; without it the contours stay still and the control stays hidden.
-- Let the header and footer sit on the frost. `cx-backdrop-page` removes their surfaces, and the header scrolls away with the page instead of sticking, because with no surface it would sit on top of the text below.
+- Let the header and footer sit on the frost. `cx-backdrop-page` removes their surfaces. Once the page scrolls, `dist/codex.js` makes the header sticky and fades its surface back in, so it never sits see-through on the text below; back at the top it returns to the frost (`site-header.md`). Without the script it scrolls away with the page.
 - Tune the look through the backdrop tokens only.
 - Keep the opening statement inside the top fade, so it is the one piece of content that sits on the frost.
 
@@ -74,7 +75,7 @@ From the bottom up: the canvas (`color.surface.base`), the contours (the specime
 ## Accessibility
 
 - The backdrop is `aria-hidden` and carries no information.
-- WCAG 2.2.2 (Pause, Stop, Hide): the drift runs longer than five seconds, so the header's pause control (a native checkbox named "Pause background animation"; checked means paused) stops it. It ships `hidden`; the script reveals it when the drift starts. The drift also stops off screen and in hidden tabs.
+- WCAG 2.2.2 (Pause, Stop, Hide): the drift runs longer than five seconds, so the header's pause control (a native checkbox named "Pause background animation"; checked means paused) stops it. It ships `hidden`; the script reveals it when the drift starts. The choice persists across pages, like the theme: it is stored as `paused` under the `cx-backdrop` key and restored before the drift starts, so a paused backdrop never moves on the next page. If storage is blocked, the pause still applies to the current page. The drift also stops off screen and in hidden tabs.
 - Under `prefers-reduced-motion: reduce` the contours never move and the pause control stays hidden.
 - Reading text below the top fade sits on `color.surface.base`, so the declared pairs apply. Text over the frost (the header, the footer, the opening of a page, and all of a short page) is measured against `color.surface.base` too: by design, contrast is not checked against the blurred contour lines beneath it.
 - The blur is a CSS `filter`, supported everywhere the rest of the system is, so contrast never depends on `backdrop-filter` support.

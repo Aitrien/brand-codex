@@ -1,4 +1,5 @@
-// brand-codex behaviour: theme toggle, tooltip dismissal, code copy buttons, TOC docking and active section.
+// brand-codex behaviour: theme toggle, the backdrop header's scroll state, tooltip dismissal, code copy buttons,
+// TOC docking and active section.
 // Shipped as dist/codex.js (@aitrien/brand-codex/codex.js) and inlined into the showcase, so there is one implementation.
 // Enhancement only. Without this script: themes follow the system, code is selectable, the TOC is a plain open list,
 // and every control that needs script stays hidden. Load it with `defer`; it also works inline at the end of <body>.
@@ -55,6 +56,24 @@
       var reset = function () { host.classList.remove('is-tooltip-dismissed'); };
       host.addEventListener('mouseleave', reset);
       host.addEventListener('focusout', reset);
+    });
+
+    // The sticky header's height, for scroll-padding-top and the docked TOC: it wraps to two rows on narrow screens.
+    var header = document.querySelector('.cx-header');
+    if (header) {
+      var measure = function () { root.style.setProperty('--_header-height', header.offsetHeight + 'px'); };
+      measure();
+      if ('ResizeObserver' in window) new ResizeObserver(measure).observe(header); else window.addEventListener('resize', measure);
+    }
+
+    // Backdrop pages: the header starts on the frost and scrolls with the page. Once the script marks it, it sticks,
+    // and data-scrolled="true" fades its surface in as soon as the page leaves the top; back at the top it fades out.
+    // Without this script it keeps scrolling away, which is safe: it never sits see-through over the text.
+    document.querySelectorAll('.cx-backdrop-page .cx-header').forEach(function (header) {
+      var queued = false;
+      var set = function () { queued = false; header.setAttribute('data-scrolled', window.scrollY > 0 ? 'true' : 'false'); };
+      set();
+      window.addEventListener('scroll', function () { if (!queued) { queued = true; window.requestAnimationFrame(set); } }, { passive: true });
     });
 
     // Copy buttons on code blocks.
