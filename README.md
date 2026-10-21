@@ -21,7 +21,7 @@ Liam Marshall's design system: the single source of truth for aitrien.com and ev
 - Ornaments come only from the 80 approved glyphs in `font.family.ornament` → `codex.glyphs.glyphs` (never `codex.glyphs.forbidden`), always `aria-hidden="true"`, at most one ornament group per viewport.
 - Icons come only from `icons/manifest.json`, each for its listed role, as `<svg class="cx-icon"><use href="#cx-icon-{key}"></use></svg>` beside text that says the same thing. Never the icon font, never a CDN.
 - Separate inline metadata with `<span class="cx-sep" aria-hidden="true">|</span>`. Never use "·" as a separator.
-- Lay out with flex-wrap, auto-fill grids and `min()`. Width media queries can't read custom properties, so `size.breakpoint.*` is for SCSS only.
+- Lay out with flex-wrap, auto-fill grids and `min()`. Width media queries can't read custom properties: when a layout must switch between alternate content at a width, write `@media (width < token(size.breakpoint.md))` in `css/components.css` and the build fills in the value. Nothing else may be written as `token(...)`.
 - JavaScript is enhancement. Anything a reader needs must work without it; controls that need script ship `hidden` and are revealed by it.
 - Use plain, functional labels: Work, Writing, About.
 - Write sample and placeholder content from scratch. Never copy wording from reference or competitor sites; quote only with a named person and a traceable source in the blockquote footer.

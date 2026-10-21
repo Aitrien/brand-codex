@@ -121,7 +121,13 @@ for (const f of iconSources) {
   }
 }
 
-const componentsCss = readFileSync(join(ROOT, 'css', 'components.css'), 'utf8');
+// Width media queries can't read custom properties, so css/components.css writes token(size.breakpoint.*) in the
+// condition and the build puts the resolved value there. Only breakpoint tokens, and only in @media.
+const componentsCss = readFileSync(join(ROOT, 'css', 'components.css'), 'utf8').replace(/token\(([a-z0-9.-]+)\)/g, (m, path, at, src) => {
+  if (!/^size\.breakpoint\.[a-z]+$/.test(path) || !tokens.get(path)) throw new Error(`css/components.css: ${m} — only size.breakpoint.* tokens can be written as token(...)`);
+  if (!/@media[^{;]*$/.test(src.slice(0, at))) throw new Error(`css/components.css: ${m} is only allowed in an @media condition`);
+  return dimValue(resolve(tokens, tokens.get(path).value));
+});
 writeFileSync(join(DIST, 'tokens.css'), tokensCss);
 writeFileSync(join(DIST, 'chroma.css'), chromaCss);
 writeFileSync(join(DIST, 'fonts.css'), fontsCss);

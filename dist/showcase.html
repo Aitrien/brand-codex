@@ -705,6 +705,12 @@ label:is(:hover, :has(:focus-visible)):not(.is-tooltip-dismissed) > .cx-tooltip 
 .cx-label dd { margin: 0; color: var(--cx-color-text-primary); font-weight: var(--cx-font-weight-ui); font-variant-numeric: tabular-nums; }
 .cx-label dd a { color: var(--cx-color-link-rest); }
 .cx-label .cx-label__id dd { color: var(--cx-color-text-accent); }
+/* A case study shows its label twice in the markup. Below the md breakpoint the lead label above the title keeps
+   only the number, date and status (role and stack are __detail fields), so the title stays near the top of a
+   phone screen; the full label follows the article as a card. From md up the lead label is complete and the card
+   is not shown. */
+@media (width < 48rem) { .cx-label--lead .cx-label__detail { display: none; } }
+@media (width >= 48rem) { .cx-label--card { display: none; } }
 /* Compact inline form for cards and list rows. */
 .cx-id {
   display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0 var(--cx-space-inline-sm); margin: 0;

@@ -2231,7 +2231,7 @@ export const tokens = [
     "type": "dimension",
     "references": "primitive.size.breakpoint.md",
     "value": "48rem",
-    "description": "For build-time media queries (SCSS) only; CSS custom properties cannot be used in @media. Prefer intrinsic layouts."
+    "description": "Width below which a layout counts as a phone. For width media queries only: write @media (width < token(size.breakpoint.md)) in css/components.css and the build fills in the value, because custom properties cannot be used in @media. Prefer intrinsic layouts; use it to choose between alternate content, such as the case study's lead label and card."
   },
   {
     "name": "size.breakpoint.lg",
@@ -2240,7 +2240,7 @@ export const tokens = [
     "type": "dimension",
     "references": "primitive.size.breakpoint.lg",
     "value": "64rem",
-    "description": "For build-time media queries (SCSS) only. Wide layouts such as a sticky TOC beside prose."
+    "description": "Width for wide layouts such as a sticky TOC beside prose. For width media queries only, written as token(size.breakpoint.lg) in css/components.css; prefer intrinsic layouts."
   },
   {
     "name": "size.backdrop.blur",
