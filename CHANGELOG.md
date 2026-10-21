@@ -2,6 +2,13 @@
 
 Every release of brand-codex, newest first. Versions follow the rules in `CONVENTIONS.md`: renaming or removing a semantic token is major, adding tokens, components or icons is minor, and changing a value or fixing a description is a patch. `npm run build` fails if the version in `package.json` has no entry here.
 
+## [1.9.0] - 2026-10-20
+
+### Changed
+- Site header on backdrop pages: it still starts on the frost, but once the page scrolls it becomes sticky and its `color.surface.base` surface fades in over `motion.duration.slow`. Back at the top the surface fades out again. `dist/codex.js` sets `data-scrolled` on the header (`"false"` at the top, `"true"` once scrolled); without the script the header scrolls away as before. `site-header.md` and `backdrop.md` updated, including the rule against animating the header on scroll, which now allows this one fade.
+- Linked headings and the docked table of contents clear the sticky header at its real height: `dist/codex.js` measures it into `--_header-height`, used by `scroll-padding-top` and the TOC's `top`. Before, one row was assumed, and a header wrapped to two rows on a narrow screen covered the heading.
+- Backdrop pause control: the choice persists across pages, like the theme. `dist/plate.js` stores `paused` under the `cx-backdrop` key and restores it before the drift starts. The specimen plate's own pause is not stored.
+
 ## [1.8.0] - 2026-10-19
 
 ### Added

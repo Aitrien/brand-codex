@@ -233,6 +233,15 @@
       ? doc.querySelector('.cx-backdrop__pause')
       : (root.closest('.cx-plate-frame') || root.parentElement).querySelector('.cx-plate__pause');
     var input = toggle && toggle.querySelector('input');
+    // The backdrop's pause is a reader preference, like the theme: it is stored under cx-backdrop ("paused", or no key
+    // for running) and restored on every page. A plate's pause belongs to that plate and isn't kept.
+    if (input && root.classList.contains('cx-backdrop')) {
+      try { if (win.localStorage.getItem('cx-backdrop') === 'paused') input.checked = true; } catch (e) { /* storage blocked */ }
+      input.addEventListener('change', function () {
+        try { if (input.checked) win.localStorage.setItem('cx-backdrop', 'paused'); else win.localStorage.removeItem('cx-backdrop'); }
+        catch (e) { /* storage blocked: the pause still applies to this page */ }
+      });
+    }
     var paths = root.querySelectorAll('.cx-plate__line');
     var reduce = win.matchMedia('(prefers-reduced-motion: reduce)');
     function ms(name) { // durations come from the tokens, through custom properties on the plate

@@ -3,7 +3,9 @@
 
 /* ------------------------------------------------------------ base */
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: calc(var(--cx-size-target-touch) + var(--cx-space-stack-xl)); }
+html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; scroll-padding-top: calc(var(--_header-height, var(--cx-size-target-touch)) + var(--cx-space-stack-xl)); }
+/* --_header-height is the sticky header's measured height, set on <html> by dist/codex.js, so a heading reached by a
+   link clears the header even when it wraps to two rows. Without the script, one row is assumed. */
 body {
   margin: 0;
   background: var(--cx-color-surface-base);
@@ -470,7 +472,7 @@ a.cx-tag:hover { border-color: var(--cx-color-accent-border); color: var(--cx-co
 
 /* ------------------------------------------------------------ table of contents */
 .cx-toc { min-width: 0; font-size: var(--cx-font-size-small); }
-.cx-toc.is-docked { position: sticky; top: calc(var(--cx-size-target-touch) + var(--cx-space-stack-xl)); }
+.cx-toc.is-docked { position: sticky; top: calc(var(--_header-height, var(--cx-size-target-touch)) + var(--cx-space-stack-xl)); }
 .cx-toc details { border-left: var(--cx-border-width-hairline) solid var(--cx-color-border-default); }
 .cx-toc summary { display: flex; align-items: center; min-height: var(--cx-size-target-min); padding-inline: var(--cx-space-inset-md); color: var(--cx-color-text-muted); cursor: pointer; list-style: none; }
 .cx-toc summary::-webkit-details-marker { display: none; }
@@ -543,8 +545,15 @@ body:not(.cx-backdrop-page):has(.cx-backdrop-page) { background: transparent; }
   background: linear-gradient(to top, transparent, var(--cx-color-surface-base) var(--cx-size-backdrop-fade),
     var(--cx-color-surface-base) calc(100% - var(--cx-size-backdrop-fade)), transparent);
 }
-/* With no surface of their own, a sticky header would sit on the text below it; it scrolls away with the page. */
+/* At the top of the page the header sits on the frost with no surface of its own. dist/codex.js marks it with
+   data-scrolled: from then on it sticks, and once the page leaves the top its surface fades in, so it never sits
+   see-through on the text below; back at the top the surface fades out again. Without the script it scrolls away. */
 .cx-backdrop-page .cx-header { position: relative; background: transparent; }
+.cx-backdrop-page .cx-header[data-scrolled] {
+  position: sticky;
+  transition: background-color var(--cx-motion-duration-slow) var(--cx-motion-easing-standard);
+}
+.cx-backdrop-page .cx-header[data-scrolled="true"] { background-color: var(--cx-color-surface-base); }
 .cx-backdrop-page .cx-footer { background: transparent; }
 .cx-backdrop {
   /* Larger than the viewport by three blur radii on every side, so the blurred contours are whole at the screen edge. */

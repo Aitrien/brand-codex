@@ -26,6 +26,7 @@ tokens:
   - font.weight.strong
   - font.weight.ui
   - motion.duration.fast
+  - motion.duration.slow
   - motion.easing.standard
   - radius.pill
   - size.container.page
@@ -86,7 +87,7 @@ The bar at the top of every page: wordmark, primary nav, the backdrop pause cont
 
 ### Scripts
 
-The toggle needs two scripts, both shipped in `dist/`. The first is a one-line snippet (`dist/theme-init.js`) inlined in `<head>` before the stylesheet, so a stored choice is on `<html>` before the first paint and the page never flashes the wrong theme. The second is `dist/codex.js`, loaded with `defer`, which reveals the toggle and wires it up (it also runs copy buttons, tooltip dismissal and the table of contents).
+The toggle needs two scripts, both shipped in `dist/`. The first is a one-line snippet (`dist/theme-init.js`) inlined in `<head>` before the stylesheet, so a stored choice is on `<html>` before the first paint and the page never flashes the wrong theme. The second is `dist/codex.js`, loaded with `defer`, which reveals the toggle and wires it up (it also sets the header's scroll state on backdrop pages, and runs copy buttons, tooltip dismissal and the table of contents).
 
 ```html
 <head>
@@ -103,7 +104,8 @@ Copy the snippet as it is: the build fails if this doc and `js/theme-init.js` di
 - Mark the current section with `aria-current="page"`, including on child pages (a post marks Writing). It gets a `color.surface.highlight` background, not an underline.
 - Nav items are pills (`radius.pill`), the same shape as the pause control and the theme toggle, so every header control reads as one set.
 - Every header control rests in `color.text.secondary` and shares one hover: `color.text.primary` text on a wash of `color.text.primary` at `color.wash.hover`. A solid `color.surface.hover` would all but match the frost.
-- Include the backdrop pause control on every backdrop page, between the nav and the theme toggle. It ships `hidden` and `dist/plate.js` reveals it when the drift starts; it never appears on a page without the backdrop.
+- Include the backdrop pause control on every backdrop page, between the nav and the theme toggle. It ships `hidden` and `dist/plate.js` reveals it when the drift starts; it never appears on a page without the backdrop. The choice is kept like the theme: `dist/plate.js` stores `paused` under `cx-backdrop` and restores it on every page.
+- On a backdrop page, let the header start on the frost. `dist/codex.js` sets `data-scrolled` on it: from then on it is sticky, and as soon as the page leaves the top (`"true"`) its `color.surface.base` surface fades in over `motion.duration.slow`. Back at the top (`"false"`) the surface fades out and the frost shows through again. Without the script the header has no surface and scrolls away with the page.
 - Keep labels to one functional word each.
 - Ship the toggle with `hidden` and let the script reveal it, so no dead control appears without JavaScript.
 - Make the toggle an icon-only circle that shows the action, not the state: a moon while light is showing, a sun while dark is showing. Its tooltip says the same ("Switch to dark theme").
@@ -114,8 +116,8 @@ Copy the snippet as it is: the build fails if this doc and `js/theme-init.js` di
 
 - Don't hide the nav behind a menu button at small widths. The list scrolls inside its row instead.
 - Don't add icons or ornaments to nav items. The pause control and the theme toggle are the only header controls with icons.
-- Don't give the header a surface or make it sticky on a backdrop page; it would sit on the text below it.
-- Don't animate the header on scroll (no shrink, hide or reveal).
+- Don't make the header sticky on a backdrop page without its surface; see-through, it would sit on the text below it. The `data-scrolled` rules keep the two together.
+- Don't animate the header on scroll beyond that surface fade (no shrink, hide or reveal).
 
 ## Accessibility
 
