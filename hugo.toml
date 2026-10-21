@@ -9,7 +9,7 @@
 
   [[module.mounts]]
     source = "dist"
-    target = "assets/brand-codex"
+    target = "assets/motifspec"
 
   [[module.mounts]]
     source = "fonts"

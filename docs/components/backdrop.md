@@ -46,13 +46,13 @@ The build writes the backdrop to `dist/backdrop.html` (the contours at time zero
 
 ```html preview
 <body class="cx-backdrop-page">
-  {{ (resources.Get "brand-codex/backdrop.html").Content | safeHTML }}
+  {{ (resources.Get "motifspec/backdrop.html").Content | safeHTML }}
   <!-- <div class="cx-backdrop" aria-hidden="true" data-plate-seed="3"><svg class="cx-plate__map" preserveAspectRatio="xMidYMid slice" …>…</svg></div> -->
   <a class="cx-skip-link" href="#main">Skip to content</a>
   <header class="cx-header"><!-- site-header.md, with the backdrop pause control --></header>
   <main id="main"><!-- the template --></main>
   <footer class="cx-footer"><!-- site-footer.md --></footer>
-  <script src="{{ (resources.Get "brand-codex/plate.js" | minify | fingerprint).RelPermalink }}" defer></script>
+  <script src="{{ (resources.Get "motifspec/plate.js" | minify | fingerprint).RelPermalink }}" defer></script>
 </body>
 ```
 

@@ -92,12 +92,12 @@ The toggle needs two scripts, both shipped in `dist/`. The first is a one-line s
 ```html
 <head>
   <script>try{var t=localStorage.getItem('cx-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t)}catch(e){}</script>
-  <link rel="stylesheet" href="/brand-codex/codex.css">
-  <script src="/brand-codex/codex.js" defer></script>
+  <link rel="stylesheet" href="/motifspec/codex.css">
+  <script src="/motifspec/codex.js" defer></script>
 </head>
 ```
 
-Copy the snippet as it is: the build fails if this doc and `js/theme-init.js` differ. It reads the same `cx-theme` key that `codex.js` writes (`light` or `dark`; no key means follow the system), and does nothing when storage is blocked. In Hugo, inline it from the mounted file: `{{ with resources.Get "brand-codex/theme-init.js" }}<script>{{ .Content | safeJS }}</script>{{ end }}`. If your Content-Security-Policy blocks inline scripts, allow this one by its hash.
+Copy the snippet as it is: the build fails if this doc and `js/theme-init.js` differ. It reads the same `cx-theme` key that `codex.js` writes (`light` or `dark`; no key means follow the system), and does nothing when storage is blocked. In Hugo, inline it from the mounted file: `{{ with resources.Get "motifspec/theme-init.js" }}<script>{{ .Content | safeJS }}</script>{{ end }}`. If your Content-Security-Policy blocks inline scripts, allow this one by its hash.
 
 ## Do
 

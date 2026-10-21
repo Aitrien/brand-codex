@@ -1,4 +1,4 @@
-// Shared token tooling for brand-codex: load, flatten, resolve, validate, contrast.
+// Shared token tooling for MotifSpec: load, flatten, resolve, validate, contrast.
 import { readFileSync, readdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';

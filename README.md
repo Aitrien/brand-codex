@@ -1,4 +1,4 @@
-# brand-codex
+# MotifSpec
 
 Liam Marshall's design system: the single source of truth for aitrien.com and every project after it. Tokens are [DTCG](https://www.designtokens.org/) JSON, components are documented rules with markup to copy, and an MCP server serves both to AI coding assistants.
 
@@ -62,42 +62,42 @@ Node 20 or later, no dependencies.
 
 ## Using it in Hugo
 
-Import the module. Its own `hugo.toml` mounts `dist/` at `assets/brand-codex` and `fonts/` at `static/fonts`, so the site needs only the import:
+Import the module. Its own `hugo.toml` mounts `dist/` at `assets/motifspec` and `fonts/` at `static/fonts`, so the site needs only the import:
 
 ```toml
 [module]
   [[module.imports]]
-    path = "github.com/aitrien/brand-codex"
+    path = "github.com/aitrien/motifspec"
 
 [markup.highlight]
   noClasses = false
 ```
 
-Pin a release with `hugo mod get github.com/aitrien/brand-codex@v1.9.0`. Then, in `<head>`, apply any stored theme before first paint, load one stylesheet and the behaviour script:
+Pin a release with `hugo mod get github.com/aitrien/motifspec@v1.10.0`. Then, in `<head>`, apply any stored theme before first paint, load one stylesheet and the behaviour script:
 
 ```html
-{{ with resources.Get "brand-codex/theme-init.js" }}<script>{{ .Content | safeJS }}</script>{{ end }}
+{{ with resources.Get "motifspec/theme-init.js" }}<script>{{ .Content | safeJS }}</script>{{ end }}
 <link rel="preload" href="/fonts/national-park-latin-wght.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/fonts/yarndings-12-latin.woff2" as="font" type="font/woff2" crossorigin>
-{{ with resources.Get "brand-codex/codex.css" | minify | fingerprint }}<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">{{ end }}
-{{ with resources.Get "brand-codex/codex.js" | minify | fingerprint }}<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}
+{{ with resources.Get "motifspec/codex.css" | minify | fingerprint }}<link rel="stylesheet" href="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}">{{ end }}
+{{ with resources.Get "motifspec/codex.js" | minify | fingerprint }}<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}
 ```
 
-Keep the stylesheet's published path one level below the site root (Hugo publishes it at `/brand-codex/`): its font URLs are `../fonts/…`, which resolve to the mounted `/fonts/`.
+Keep the stylesheet's published path one level below the site root (Hugo publishes it at `/motifspec/`): its font URLs are `../fonts/…`, which resolve to the mounted `/fonts/`.
 
 Inline the icon sprite once, first thing in `<body>`, so `<use href="#cx-icon-…">` resolves without a request:
 
 ```html
-<div hidden>{{ with resources.Get "brand-codex/icons.svg" }}{{ .Content | safeHTML }}{{ end }}</div>
+<div hidden>{{ with resources.Get "motifspec/icons.svg" }}{{ .Content | safeHTML }}{{ end }}</div>
 ```
 
 Every page sits on the backdrop (`docs/components/backdrop.md`): give `<body>` the `cx-backdrop-page` class, put the backdrop first inside it, add the backdrop pause control to the header (`site-header.md`) and load the contour script on every page:
 
 ```html
 <body class="cx-backdrop-page">
-  {{ (resources.Get "brand-codex/backdrop.html").Content | safeHTML }}
+  {{ (resources.Get "motifspec/backdrop.html").Content | safeHTML }}
   …
-  {{ with resources.Get "brand-codex/plate.js" | minify | fingerprint }}<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}
+  {{ with resources.Get "motifspec/plate.js" | minify | fingerprint }}<script src="{{ .RelPermalink }}" integrity="{{ .Data.Integrity }}" defer></script>{{ end }}
 </body>
 ```
 

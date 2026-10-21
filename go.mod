@@ -1,3 +1,3 @@
-module github.com/aitrien/brand-codex
+module github.com/aitrien/motifspec
 
 go 1.22

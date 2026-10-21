@@ -1,4 +1,4 @@
-/* Hugo Chroma classes -> brand-codex tokens (generated from syntax/chroma.json). Both themes via tokens. */
+/* Hugo Chroma classes -> MotifSpec tokens (generated from syntax/chroma.json). Both themes via tokens. */
 .chroma { color: var(--cx-color-syntax-variable); background: var(--cx-color-surface-sunken); }
 /* Keywords */
 .chroma .k, .chroma .kd, .chroma .kn, .chroma .kp, .chroma .kr, .chroma .ow, .chroma .bp { color: var(--cx-color-syntax-keyword); font-weight: var(--cx-font-weight-strong); }
