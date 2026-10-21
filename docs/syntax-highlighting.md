@@ -1,6 +1,6 @@
 # Syntax highlighting
 
-Hugo highlights code with [Chroma](https://github.com/alecthomas/chroma). brand-codex maps Chroma's CSS classes to `color.syntax.*` roles, so one stylesheet covers both themes and every colour is checked for contrast.
+Hugo highlights code with [Chroma](https://github.com/alecthomas/chroma). MotifSpec maps Chroma's CSS classes to `color.syntax.*` roles, so one stylesheet covers both themes and every colour is checked for contrast.
 
 ## Setup
 

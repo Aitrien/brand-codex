@@ -65,10 +65,10 @@ The build writes the plate to `dist/plate.html` (the contours at time zero) and 
     <svg class="cx-icon" data-when="paused" aria-hidden="true" focusable="false"><use href="#cx-icon-play"></use></svg>
     <span class="cx-tooltip" aria-hidden="true"><span data-when="running">Pause animation</span><span data-when="paused">Play animation</span></span>
   </label>
-  {{ (resources.Get "brand-codex/plate.html").Content | safeHTML }}
+  {{ (resources.Get "motifspec/plate.html").Content | safeHTML }}
   <figcaption>Plate 0 <span class="cx-sep" aria-hidden="true">|</span> Contour survey <span class="cx-sep" aria-hidden="true">|</span> Simplex noise, 14 levels, index every fifth</figcaption>
 </figure>
-<script src="{{ (resources.Get "brand-codex/plate.js" | minify | fingerprint).RelPermalink }}" defer></script>
+<script src="{{ (resources.Get "motifspec/plate.js" | minify | fingerprint).RelPermalink }}" defer></script>
 ```
 
 ## Do

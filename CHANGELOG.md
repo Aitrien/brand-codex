@@ -1,6 +1,19 @@
 # Changelog
 
-Every release of brand-codex, newest first. Versions follow the rules in `CONVENTIONS.md`: renaming or removing a semantic token is major, adding tokens, components or icons is minor, and changing a value or fixing a description is a patch. `npm run build` fails if the version in `package.json` has no entry here.
+Every release of MotifSpec (named brand-codex until 1.10.0), newest first. Entries before 1.10.0 keep the names they were released under. Versions follow the rules in `CONVENTIONS.md`: renaming or removing a semantic token is major, adding tokens, components or icons is minor, and changing a value or fixing a description is a patch. `npm run build` fails if the version in `package.json` has no entry here.
+
+## [1.10.0] - 2026-10-21
+
+### Changed
+- brand-codex is now **MotifSpec**. The repository is `github.com/Aitrien/motifspec` (GitHub redirects the old URL), the Hugo module path is `github.com/aitrien/motifspec`, the npm package is `@aitrien/motifspec`, and `hugo.toml` mounts `dist/` at `assets/motifspec` instead of `assets/brand-codex`. Docs, the README, the showcase, build banners and the planned MCP resource (`motifspec://readme`) use the new name.
+- Unchanged on purpose: the `cx-` class and `--cx-` token prefix, the `codex.*` token extensions, the file names `codex.css` and `codex.js`, and the `cx-theme` and `cx-backdrop` storage keys, so markup, tokens and readers' saved settings carry over.
+
+### Removed
+- `look/`: four QA screenshots committed by mistake in 1.8.0. Nothing referenced them.
+
+### Migrating a site
+1. In the site's config, change the module import path to `github.com/aitrien/motifspec`, then run `hugo mod get github.com/aitrien/motifspec@v1.10.0` and drop the old `brand-codex` lines from `go.mod` and `go.sum`. Earlier tags still declare the old module path, so 1.10.0 is the first release that can be fetched under the new one.
+2. Replace `resources.Get "brand-codex/…"` with `resources.Get "motifspec/…"`. The published asset folder becomes `/motifspec/`.
 
 ## [1.9.0] - 2026-10-20
 
@@ -162,15 +175,17 @@ Every release of brand-codex, newest first. Versions follow the rules in `CONVEN
 - Component docs, Chroma syntax mapping, README principles and the showcase page.
 - `npm run validate`, `build` and `audit`.
 
-[1.8.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#180---2026-10-19
-[1.7.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#170---2026-10-16
-[1.6.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#160---2026-10-16
-[1.5.1]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#151---2026-10-15
-[1.5.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#150---2026-10-15
-[1.4.1]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#141---2026-10-15
-[1.4.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#140---2026-10-15
-[1.3.1]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#131---2026-10-15
-[1.3.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#130---2026-10-15
-[1.2.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#120---2026-10-15
-[1.1.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#110---2026-10-15
-[1.0.0]: https://github.com/Aitrien/brand-codex/blob/main/CHANGELOG.md#100---2026-10-14
+[1.10.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#1100---2026-10-21
+[1.9.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#190---2026-10-20
+[1.8.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#180---2026-10-19
+[1.7.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#170---2026-10-16
+[1.6.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#160---2026-10-16
+[1.5.1]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#151---2026-10-15
+[1.5.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#150---2026-10-15
+[1.4.1]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#141---2026-10-15
+[1.4.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#140---2026-10-15
+[1.3.1]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#131---2026-10-15
+[1.3.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#130---2026-10-15
+[1.2.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#120---2026-10-15
+[1.1.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#110---2026-10-15
+[1.0.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#100---2026-10-14

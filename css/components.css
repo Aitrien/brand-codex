@@ -1,4 +1,4 @@
-/* brand-codex components. Every value is a --cx-* token; no raw colours, sizes or durations.
+/* MotifSpec components. Every value is a --cx-* token; no raw colours, sizes or durations.
    Class prefix: cx-. Layouts are intrinsic (flex-wrap, auto-fill grids), so no width media queries. */
 
 /* ------------------------------------------------------------ base */

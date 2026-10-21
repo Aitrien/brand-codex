@@ -64,7 +64,7 @@ for (const t of tokens.values()) {
   if (g !== lastGroup) { groups.push(`\n  /* ${g} */`); lastGroup = g; }
   groups.push(`  ${cssVar(t.path)}: ${tokenCss(t)};${t.deprecated ? ` /* Deprecated: ${t.deprecated} */` : ''}`);
 }
-const tokensCss = `/* brand-codex ${pkg.version} — generated from tokens/*.json. Do not edit.
+const tokensCss = `/* MotifSpec ${pkg.version} — generated from tokens/*.json. Do not edit.
    Themes: semantic colours use light-dark(); color-scheme follows the system unless
    <html data-theme="light|dark"> pins it. --cx-primitive-* are for this file only. */
 :root {
@@ -84,7 +84,7 @@ const decl = (r) => [
 for (const r of chroma.rules) for (const k of ['color', 'background', 'weight']) {
   if (r[k] && !tokens.has(r[k])) throw new Error(`chroma.json: unknown token ${r[k]}`);
 }
-const chromaCss = `/* Hugo Chroma classes -> brand-codex tokens (generated from syntax/chroma.json). Both themes via tokens. */
+const chromaCss = `/* Hugo Chroma classes -> MotifSpec tokens (generated from syntax/chroma.json). Both themes via tokens. */
 ${chroma.container.selector} { ${decl(chroma.container)} }
 ${chroma.rules.map((r) => `/* ${r.role} */\n${r.classes.map((c) => `.chroma .${c}`).join(', ')} { ${decl(r)} }`).join('\n')}
 `;

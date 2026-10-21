@@ -9,7 +9,7 @@ tokens:
 
 # Icon
 
-A Material Symbols glyph from the codex sprite, used to reinforce a control's direction, state or kind.
+A Material Symbols glyph from the MotifSpec sprite, used to reinforce a control's direction, state or kind.
 
 ## When to use
 
@@ -25,7 +25,7 @@ A Material Symbols glyph from the codex sprite, used to reinforce a control's di
 
 ## Markup
 
-Inline the sprite once per page, right after `<body>` (Hugo: `{{ readFile "assets/codex/icons.svg" | safeHTML }}` inside a hidden wrapper, or the build's inline sprite). Then reference symbols by id:
+Inline the sprite once per page, right after `<body>` (Hugo: `{{ readFile "assets/motifspec/icons.svg" | safeHTML }}` inside a hidden wrapper, or the build's inline sprite). Then reference symbols by id:
 
 ```html preview
 <a class="cx-button cx-button--primary" href="/work/">
