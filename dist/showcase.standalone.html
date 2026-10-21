@@ -575,11 +575,14 @@ p, li, dd, figcaption { text-wrap: pretty; }
 .cx-nav ul { display: flex; gap: 0 var(--cx-space-inline-xs); margin: 0; padding: 0; list-style: none; overflow-x: auto; scrollbar-width: thin; }
 .cx-nav li { flex: none; }
 .cx-nav a {
-  display: inline-flex; align-items: center; min-height: var(--cx-size-target-touch); padding-inline: var(--cx-space-inset-md);
+  /* Halfway between inset-sm and inset-md, so Work, Writing, About, the pause control and the toggle fit one row on a
+     360px phone; narrower than that, the list scrolls inside its row. */
+  display: inline-flex; align-items: center; min-height: var(--cx-size-target-touch); padding-inline: calc((var(--cx-space-inset-sm) + var(--cx-space-inset-md)) / 2);
   border-radius: var(--cx-radius-pill); color: var(--cx-color-text-secondary); text-decoration: none; font-weight: var(--cx-font-weight-ui);
   transition: color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard), background-color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard);
 }
-.cx-nav a:hover { color: var(--cx-color-text-primary); background: var(--_wash); }
+/* Hover only where there is a pointer that hovers: on touch screens :hover sticks after a tap. */
+@media (hover: hover) { .cx-nav a:hover { color: var(--cx-color-text-primary); background: var(--_wash); } }
 /* The current section is highlighted, not underlined. */
 .cx-nav a[aria-current="page"] { color: var(--cx-color-text-primary); background: var(--cx-color-surface-highlight); }
 /* Theme toggle: an icon-only pill (a circle) that shows the action, with a tooltip. */
@@ -589,7 +592,7 @@ p, li, dd, figcaption { text-wrap: pretty; }
   border: 0; border-radius: var(--cx-radius-pill); background: transparent; color: var(--cx-color-text-secondary); cursor: pointer;
   transition: background-color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard), color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard);
 }
-.cx-theme-toggle:hover { color: var(--cx-color-text-primary); background: var(--_wash); }
+@media (hover: hover) { .cx-theme-toggle:hover { color: var(--cx-color-text-primary); background: var(--_wash); } }
 /* Backdrop pause: the same icon-only pill as the theme toggle. A native checkbox (checked = paused), so it works
    without a click handler; it ships hidden and dist/plate.js reveals it when the backdrop starts to drift. */
 .cx-backdrop__pause {
@@ -598,7 +601,7 @@ p, li, dd, figcaption { text-wrap: pretty; }
   border-radius: var(--cx-radius-pill); color: var(--cx-color-text-secondary); cursor: pointer;
   transition: background-color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard), color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard);
 }
-.cx-backdrop__pause:hover { color: var(--cx-color-text-primary); background: var(--_wash); }
+@media (hover: hover) { .cx-backdrop__pause:hover { color: var(--cx-color-text-primary); background: var(--_wash); } }
 .cx-backdrop__pause:has(:focus-visible) { outline: var(--cx-border-focus-width) solid var(--cx-color-focus-ring); outline-offset: var(--cx-border-focus-offset); }
 .cx-backdrop__pause :is(.cx-icon, .cx-tooltip [data-when]) { display: none; }
 .cx-backdrop__pause:not(:has(:checked)) [data-when="running"],
@@ -1009,7 +1012,7 @@ a.cx-tag:hover { border-color: var(--cx-color-accent-border); color: var(--cx-co
   transition: opacity var(--cx-motion-duration-fast) var(--cx-motion-easing-standard), background-color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard);
 }
 .cx-plate-frame:is(:hover, :focus-within) .cx-plate__pause { opacity: 1; }
-.cx-plate__pause:hover { color: var(--cx-color-text-primary); background: var(--cx-color-surface-hover); }
+@media (hover: hover) { .cx-plate__pause:hover { color: var(--cx-color-text-primary); background: var(--cx-color-surface-hover); } }
 .cx-plate__pause:has(:focus-visible) { outline: var(--cx-border-focus-width) solid var(--cx-color-focus-ring); outline-offset: var(--cx-border-focus-offset); }
 .cx-plate__pause :is(.cx-icon, .cx-tooltip [data-when]) { display: none; }
 .cx-plate__pause:not(:has(:checked)) [data-when="running"],
