@@ -25,7 +25,6 @@ tokens:
   - space.inline.xs
   - space.inset.md
   - space.inset.sm
-  - space.stack.sm
   - space.stack.xs
 ---
 
@@ -77,6 +76,7 @@ Store the number in front matter (`accession: LM-W-004`) rather than deriving it
 - Use ISO dates (`2026-03-14`) in tabular figures.
 - Separate items inside a field with `cx-sep` (a hidden "|"). The compact form adds its own "|" between items.
 - Use `cx-status--live`, `--building` or `--archived`; each pairs a dot with a word.
+- Let the fields wrap. Each field grows to fill its row and carries a `color.border.subtle` rule on its right and below, so a label that wraps onto several rows reads as a ruled grid, with every row closed by a full-width rule; the frame stays `color.border.default`.
 
 ## Don't
 

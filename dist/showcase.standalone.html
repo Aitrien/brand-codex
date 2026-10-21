@@ -667,9 +667,12 @@ label:is(:hover, :has(:focus-visible)):not(.is-tooltip-dismissed) > .cx-tooltip 
 
 /* ------------------------------------------------------------ accession label (signature) */
 .cx-label {
-  position: relative; display: flex; flex-wrap: wrap; gap: var(--cx-space-stack-sm) 0; margin: var(--cx-size-mark-tick);
+  position: relative; display: flex; flex-wrap: wrap; margin: var(--cx-size-mark-tick);
   padding: 0; background: var(--cx-color-surface-raised);
   border: var(--cx-border-width-hairline) solid var(--cx-color-border-default);
+  /* The same line again as an outline over the border: outlines paint above children, so the cells' rules that run
+     out to the edge disappear under it and the frame stays one colour. */
+  outline: var(--cx-border-width-hairline) solid var(--cx-color-border-default); outline-offset: calc(var(--cx-border-width-hairline) * -1);
   font-family: var(--cx-font-family-mono); font-size: var(--cx-font-size-label); line-height: var(--cx-font-line-height-ui);
 }
 /* Registration ticks: eight hairlines extending each edge past the corners. */
@@ -687,8 +690,14 @@ label:is(:hover, :has(:focus-visible)):not(.is-tooltip-dismissed) > .cx-tooltip 
     linear-gradient(var(--_c), var(--_c)) right 0 bottom var(--_t) / var(--_t) var(--_h) no-repeat,
     linear-gradient(var(--_c), var(--_c)) right var(--_t) bottom 0 / var(--_h) var(--_t) no-repeat;
 }
-.cx-label > div { display: flex; flex-direction: column; gap: var(--cx-space-stack-xs); padding: var(--cx-space-inset-sm) var(--cx-space-inset-md); border-right: var(--cx-border-width-hairline) solid var(--cx-color-border-subtle); }
-.cx-label > div:last-child { border-right: 0; }
+/* Cells: a rule on the right and below each one. They grow to fill their row, so when the fields wrap onto several
+   rows each row is closed by a full-width rule; the negative margins push the rules on the outer edges under the frame. */
+.cx-label > div {
+  flex: 1 1 auto; display: flex; flex-direction: column; gap: var(--cx-space-stack-xs); padding: var(--cx-space-inset-sm) var(--cx-space-inset-md);
+  margin: 0 calc(var(--cx-border-width-hairline) * -1) calc(var(--cx-border-width-hairline) * -1) 0;
+  border-right: var(--cx-border-width-hairline) solid var(--cx-color-border-subtle);
+  border-bottom: var(--cx-border-width-hairline) solid var(--cx-color-border-subtle);
+}
 .cx-label dt { color: var(--cx-color-text-muted); }
 .cx-label dd { margin: 0; color: var(--cx-color-text-primary); font-weight: var(--cx-font-weight-ui); font-variant-numeric: tabular-nums; }
 .cx-label dd a { color: var(--cx-color-link-rest); }
