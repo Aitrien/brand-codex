@@ -277,6 +277,9 @@
   --cx-primitive-size-effect-1: 0.5rem;
   --cx-primitive-size-effect-2: 30rem;
 
+  /* primitive.size.viewport */
+  --cx-primitive-size-viewport-1: 100lvh;
+
   /* size.container */
   --cx-size-container-page: var(--cx-primitive-size-width-xl);
   --cx-size-container-breakout: var(--cx-primitive-size-width-lg);
@@ -315,6 +318,7 @@
   /* size.backdrop */
   --cx-size-backdrop-blur: var(--cx-primitive-size-effect-1);
   --cx-size-backdrop-fade: var(--cx-primitive-size-effect-2);
+  --cx-size-backdrop-height: var(--cx-primitive-size-viewport-1);
 
   /* primitive.space.0 */
   --cx-primitive-space-0: 0;
@@ -564,11 +568,14 @@ p, li, dd, figcaption { text-wrap: pretty; }
 .cx-nav ul { display: flex; gap: 0 var(--cx-space-inline-xs); margin: 0; padding: 0; list-style: none; overflow-x: auto; scrollbar-width: thin; }
 .cx-nav li { flex: none; }
 .cx-nav a {
-  display: inline-flex; align-items: center; min-height: var(--cx-size-target-touch); padding-inline: var(--cx-space-inset-md);
+  /* Halfway between inset-sm and inset-md, so Work, Writing, About, the pause control and the toggle fit one row on a
+     360px phone; narrower than that, the list scrolls inside its row. */
+  display: inline-flex; align-items: center; min-height: var(--cx-size-target-touch); padding-inline: calc((var(--cx-space-inset-sm) + var(--cx-space-inset-md)) / 2);
   border-radius: var(--cx-radius-pill); color: var(--cx-color-text-secondary); text-decoration: none; font-weight: var(--cx-font-weight-ui);
   transition: color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard), background-color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard);
 }
-.cx-nav a:hover { color: var(--cx-color-text-primary); background: var(--_wash); }
+/* Hover only where there is a pointer that hovers: on touch screens :hover sticks after a tap. */
+@media (hover: hover) { .cx-nav a:hover { color: var(--cx-color-text-primary); background: var(--_wash); } }
 /* The current section is highlighted, not underlined. */
 .cx-nav a[aria-current="page"] { color: var(--cx-color-text-primary); background: var(--cx-color-surface-highlight); }
 /* Theme toggle: an icon-only pill (a circle) that shows the action, with a tooltip. */
@@ -578,7 +585,7 @@ p, li, dd, figcaption { text-wrap: pretty; }
   border: 0; border-radius: var(--cx-radius-pill); background: transparent; color: var(--cx-color-text-secondary); cursor: pointer;
   transition: background-color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard), color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard);
 }
-.cx-theme-toggle:hover { color: var(--cx-color-text-primary); background: var(--_wash); }
+@media (hover: hover) { .cx-theme-toggle:hover { color: var(--cx-color-text-primary); background: var(--_wash); } }
 /* Backdrop pause: the same icon-only pill as the theme toggle. A native checkbox (checked = paused), so it works
    without a click handler; it ships hidden and dist/plate.js reveals it when the backdrop starts to drift. */
 .cx-backdrop__pause {
@@ -587,7 +594,7 @@ p, li, dd, figcaption { text-wrap: pretty; }
   border-radius: var(--cx-radius-pill); color: var(--cx-color-text-secondary); cursor: pointer;
   transition: background-color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard), color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard);
 }
-.cx-backdrop__pause:hover { color: var(--cx-color-text-primary); background: var(--_wash); }
+@media (hover: hover) { .cx-backdrop__pause:hover { color: var(--cx-color-text-primary); background: var(--_wash); } }
 .cx-backdrop__pause:has(:focus-visible) { outline: var(--cx-border-focus-width) solid var(--cx-color-focus-ring); outline-offset: var(--cx-border-focus-offset); }
 .cx-backdrop__pause :is(.cx-icon, .cx-tooltip [data-when]) { display: none; }
 .cx-backdrop__pause:not(:has(:checked)) [data-when="running"],
@@ -634,11 +641,14 @@ label:is(:hover, :has(:focus-visible)):not(.is-tooltip-dismissed) > .cx-tooltip 
 .cx-band::before { content: "kWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkWkW"; } /* 1,024 glyphs: wider than an 8K screen at 12px */
 .cx-footer { margin-top: var(--cx-space-section-lg); border-top: var(--cx-border-width-hairline) solid var(--cx-color-border-subtle); background: var(--cx-color-surface-raised); }
 .cx-footer .cx-band { padding-block: var(--cx-space-inset-md); border-bottom: var(--cx-border-width-hairline) solid var(--cx-color-border-subtle); }
+/* Columns of equal width that wrap: a link list needs half a sidebar column, prose (the colophon) a whole one. On a
+   phone the link lists sit side by side and the colophon takes the row below. */
 .cx-footer__grid {
-  display: grid; gap: var(--cx-space-stack-lg) var(--cx-space-gutter-grid);
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, var(--cx-size-column-sidebar)), 1fr));
+  display: flex; flex-wrap: wrap; gap: var(--cx-space-stack-lg) var(--cx-space-gutter-grid);
   padding-block: var(--cx-space-inset-xl);
 }
+.cx-footer__grid > * { flex: 1 1 0; min-width: min(100%, var(--cx-size-column-sidebar)); }
+.cx-footer__grid > :has(> ul) { min-width: calc(var(--cx-size-column-sidebar) / 2); }
 .cx-footer h2 { margin: 0 0 var(--cx-space-stack-sm); color: var(--cx-color-text-muted); }
 .cx-footer ul { margin: 0; padding: 0; list-style: none; }
 .cx-footer li a {
@@ -656,9 +666,12 @@ label:is(:hover, :has(:focus-visible)):not(.is-tooltip-dismissed) > .cx-tooltip 
 
 /* ------------------------------------------------------------ accession label (signature) */
 .cx-label {
-  position: relative; display: flex; flex-wrap: wrap; gap: var(--cx-space-stack-sm) 0; margin: var(--cx-size-mark-tick);
+  position: relative; display: flex; flex-wrap: wrap; margin: var(--cx-size-mark-tick);
   padding: 0; background: var(--cx-color-surface-raised);
   border: var(--cx-border-width-hairline) solid var(--cx-color-border-default);
+  /* The same line again as an outline over the border: outlines paint above children, so the cells' rules that run
+     out to the edge disappear under it and the frame stays one colour. */
+  outline: var(--cx-border-width-hairline) solid var(--cx-color-border-default); outline-offset: calc(var(--cx-border-width-hairline) * -1);
   font-family: var(--cx-font-family-mono); font-size: var(--cx-font-size-label); line-height: var(--cx-font-line-height-ui);
 }
 /* Registration ticks: eight hairlines extending each edge past the corners. */
@@ -676,12 +689,24 @@ label:is(:hover, :has(:focus-visible)):not(.is-tooltip-dismissed) > .cx-tooltip 
     linear-gradient(var(--_c), var(--_c)) right 0 bottom var(--_t) / var(--_t) var(--_h) no-repeat,
     linear-gradient(var(--_c), var(--_c)) right var(--_t) bottom 0 / var(--_h) var(--_t) no-repeat;
 }
-.cx-label > div { display: flex; flex-direction: column; gap: var(--cx-space-stack-xs); padding: var(--cx-space-inset-sm) var(--cx-space-inset-md); border-right: var(--cx-border-width-hairline) solid var(--cx-color-border-subtle); }
-.cx-label > div:last-child { border-right: 0; }
+/* Cells: a rule on the right and below each one. They grow to fill their row, so when the fields wrap onto several
+   rows each row is closed by a full-width rule; the negative margins push the rules on the outer edges under the frame. */
+.cx-label > div {
+  flex: 1 1 auto; display: flex; flex-direction: column; gap: var(--cx-space-stack-xs); padding: var(--cx-space-inset-sm) var(--cx-space-inset-md);
+  margin: 0 calc(var(--cx-border-width-hairline) * -1) calc(var(--cx-border-width-hairline) * -1) 0;
+  border-right: var(--cx-border-width-hairline) solid var(--cx-color-border-subtle);
+  border-bottom: var(--cx-border-width-hairline) solid var(--cx-color-border-subtle);
+}
 .cx-label dt { color: var(--cx-color-text-muted); }
 .cx-label dd { margin: 0; color: var(--cx-color-text-primary); font-weight: var(--cx-font-weight-ui); font-variant-numeric: tabular-nums; }
 .cx-label dd a { color: var(--cx-color-link-rest); }
 .cx-label .cx-label__id dd { color: var(--cx-color-text-accent); }
+/* A case study shows its label twice in the markup. Below the md breakpoint the lead label above the title keeps
+   only the number, date and status (role and stack are __detail fields), so the title stays near the top of a
+   phone screen; the full label follows the article as a card. From md up the lead label is complete and the card
+   is not shown. */
+@media (width < 48rem) { .cx-label--lead .cx-label__detail { display: none; } }
+@media (width >= 48rem) { .cx-label--card { display: none; } }
 /* Compact inline form for cards and list rows. */
 .cx-id {
   display: inline-flex; flex-wrap: wrap; align-items: center; gap: 0 var(--cx-space-inline-sm); margin: 0;
@@ -989,7 +1014,7 @@ a.cx-tag:hover { border-color: var(--cx-color-accent-border); color: var(--cx-co
   transition: opacity var(--cx-motion-duration-fast) var(--cx-motion-easing-standard), background-color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard);
 }
 .cx-plate-frame:is(:hover, :focus-within) .cx-plate__pause { opacity: 1; }
-.cx-plate__pause:hover { color: var(--cx-color-text-primary); background: var(--cx-color-surface-hover); }
+@media (hover: hover) { .cx-plate__pause:hover { color: var(--cx-color-text-primary); background: var(--cx-color-surface-hover); } }
 .cx-plate__pause:has(:focus-visible) { outline: var(--cx-border-focus-width) solid var(--cx-color-focus-ring); outline-offset: var(--cx-border-focus-offset); }
 .cx-plate__pause :is(.cx-icon, .cx-tooltip [data-when]) { display: none; }
 .cx-plate__pause:not(:has(:checked)) [data-when="running"],
@@ -1023,8 +1048,12 @@ body:not(.cx-backdrop-page):has(.cx-backdrop-page) { background: transparent; }
 .cx-backdrop-page .cx-header[data-scrolled="true"] { background-color: var(--cx-color-surface-base); }
 .cx-backdrop-page .cx-footer { background: transparent; }
 .cx-backdrop {
-  /* Larger than the viewport by three blur radii on every side, so the blurred contours are whole at the screen edge. */
-  position: fixed; inset: calc(var(--cx-size-backdrop-blur) * -3); z-index: -1; overflow: hidden; pointer-events: none;
+  /* Larger than the viewport by three blur radii on every side, so the blurred contours are whole at the screen edge.
+     Its height is the large viewport, not the bottom edge: on a phone the address bar slides away as you scroll, and
+     a layer pinned to the bottom would resize with it, re-fit the contours and make them jump. */
+  position: fixed; inset: calc(var(--cx-size-backdrop-blur) * -3); bottom: auto;
+  height: calc(var(--cx-size-backdrop-height) + var(--cx-size-backdrop-blur) * 6);
+  z-index: -1; overflow: hidden; pointer-events: none;
   /* Read by js/plate.js, as on the plate. */
   --cx-plate-drift: var(--cx-motion-duration-drift); --cx-plate-draw: var(--cx-motion-duration-plate);
 }

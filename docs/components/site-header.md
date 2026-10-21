@@ -103,7 +103,7 @@ Copy the snippet as it is: the build fails if this doc and `js/theme-init.js` di
 
 - Mark the current section with `aria-current="page"`, including on child pages (a post marks Writing). It gets a `color.surface.highlight` background, not an underline.
 - Nav items are pills (`radius.pill`), the same shape as the pause control and the theme toggle, so every header control reads as one set.
-- Every header control rests in `color.text.secondary` and shares one hover: `color.text.primary` text on a wash of `color.text.primary` at `color.wash.hover`. A solid `color.surface.hover` would all but match the frost.
+- Every header control rests in `color.text.secondary` and shares one hover, shown only where the pointer can hover (`@media (hover: hover)`), so it never sticks after a tap: `color.text.primary` text on a wash of `color.text.primary` at `color.wash.hover`. A solid `color.surface.hover` would all but match the frost.
 - Include the backdrop pause control on every backdrop page, between the nav and the theme toggle. It ships `hidden` and `dist/plate.js` reveals it when the drift starts; it never appears on a page without the backdrop. The choice is kept like the theme: `dist/plate.js` stores `paused` under `cx-backdrop` and restores it on every page.
 - On a backdrop page, let the header start on the frost. `dist/codex.js` sets `data-scrolled` on it: from then on it is sticky, and as soon as the page leaves the top (`"true"`) its `color.surface.base` surface fades in over `motion.duration.slow`. Back at the top (`"false"`) the surface fades out and the frost shows through again. Without the script the header has no surface and scrolls away with the page.
 - Keep labels to one functional word each.

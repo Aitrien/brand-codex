@@ -2065,6 +2065,13 @@ export const tokens = [
     "value": "30rem"
   },
   {
+    "name": "primitive.size.viewport.1",
+    "css": "--cx-primitive-size-viewport-1",
+    "tier": "primitive",
+    "type": "number",
+    "value": "100lvh"
+  },
+  {
     "name": "size.container.page",
     "css": "--cx-size-container-page",
     "tier": "semantic",
@@ -2224,7 +2231,7 @@ export const tokens = [
     "type": "dimension",
     "references": "primitive.size.breakpoint.md",
     "value": "48rem",
-    "description": "For build-time media queries (SCSS) only; CSS custom properties cannot be used in @media. Prefer intrinsic layouts."
+    "description": "Width below which a layout counts as a phone. For width media queries only: write @media (width < token(size.breakpoint.md)) in css/components.css and the build fills in the value, because custom properties cannot be used in @media. Prefer intrinsic layouts; use it to choose between alternate content, such as the case study's lead label and card."
   },
   {
     "name": "size.breakpoint.lg",
@@ -2233,7 +2240,7 @@ export const tokens = [
     "type": "dimension",
     "references": "primitive.size.breakpoint.lg",
     "value": "64rem",
-    "description": "For build-time media queries (SCSS) only. Wide layouts such as a sticky TOC beside prose."
+    "description": "Width for wide layouts such as a sticky TOC beside prose. For width media queries only, written as token(size.breakpoint.lg) in css/components.css; prefer intrinsic layouts."
   },
   {
     "name": "size.backdrop.blur",
@@ -2252,6 +2259,15 @@ export const tokens = [
     "references": "primitive.size.effect.2",
     "value": "30rem",
     "description": "Length of the fade at the top and bottom of a backdrop page, over which the page surface gives way to the frost. The header and the opening statement sit inside it; reading text below it is on the plain surface."
+  },
+  {
+    "name": "size.backdrop.height",
+    "css": "--cx-size-backdrop-height",
+    "tier": "semantic",
+    "type": "number",
+    "references": "primitive.size.viewport.1",
+    "value": "100lvh",
+    "description": "Height of the backdrop layer before its blur overhang: the large viewport, so the contours keep their size and position as a phone's address bar slides away. Never a dynamic or small viewport unit, which resize the layer as you scroll and make the contours jump."
   },
   {
     "name": "primitive.space.0",
