@@ -20,6 +20,7 @@ tokens:
   - radius.pill
   - size.backdrop.blur
   - size.backdrop.fade
+  - size.backdrop.height
   - size.target.touch
 ---
 
@@ -61,6 +62,7 @@ From the bottom up: the canvas (`color.surface.base`), the contours (the specime
 
 - Load `dist/plate.js` on every page that has the backdrop. It starts the drift and reveals the header's pause control; without it the contours stay still and the control stays hidden.
 - Let the header and footer sit on the frost. `cx-backdrop-page` removes their surfaces. Once the page scrolls, `dist/codex.js` makes the header sticky and fades its surface back in, so it never sits see-through on the text below; back at the top it returns to the frost (`site-header.md`). Without the script it scrolls away with the page.
+- Keep the layer's height at `size.backdrop.height`, the large viewport (`lvh`). On a phone the address bar slides away as you scroll; a layer pinned to the bottom of the screen, or sized in `dvh` or `svh`, resizes with it, re-fits the contours and makes them jump.
 - Tune the look through the backdrop tokens only.
 - Keep the opening statement inside the top fade, so it is the one piece of content that sits on the frost.
 

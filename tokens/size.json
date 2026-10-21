@@ -234,6 +234,17 @@
             "codex.tier": "primitive"
           }
         }
+      },
+      "viewport": {
+        "$type": "number",
+        "$description": "Viewport heights in the large-viewport unit (see codex.unit): the height with the browser's address bar retracted, which doesn't change as the bar slides in and out. Primitive.",
+        "1": {
+          "$value": 100,
+          "$extensions": {
+            "codex.tier": "primitive",
+            "codex.unit": "lvh"
+          }
+        }
       }
     }
   },
@@ -356,6 +367,11 @@
       "fade": {
         "$value": "{primitive.size.effect.2}",
         "$description": "Length of the fade at the top and bottom of a backdrop page, over which the page surface gives way to the frost. The header and the opening statement sit inside it; reading text below it is on the plain surface."
+      },
+      "height": {
+        "$type": "number",
+        "$value": "{primitive.size.viewport.1}",
+        "$description": "Height of the backdrop layer before its blur overhang: the large viewport, so the contours keep their size and position as a phone's address bar slides away. Never a dynamic or small viewport unit, which resize the layer as you scroll and make the contours jump."
       }
     }
   }

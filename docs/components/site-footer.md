@@ -79,6 +79,7 @@ The closing band of every page: a knitted ornament band, grouped links, a coloph
 
 ## Do
 
+- Let the groups wrap. Each is an equal-width column: a link list needs half of `size.column.sidebar`, a paragraph (the colophon) a whole one. On a phone the link lists sit side by side in two columns and the colophon takes the full row below; with room, all of them share one row.
 - Keep two to four columns; the grid wraps on its own.
 - Use the footer band as the page's single ornament when the page has no other.
 - On a backdrop page, let the footer sit on the frost: `cx-backdrop-page` removes its raised surface, and the bottom fade starts above it.

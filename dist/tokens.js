@@ -2065,6 +2065,13 @@ export const tokens = [
     "value": "30rem"
   },
   {
+    "name": "primitive.size.viewport.1",
+    "css": "--cx-primitive-size-viewport-1",
+    "tier": "primitive",
+    "type": "number",
+    "value": "100lvh"
+  },
+  {
     "name": "size.container.page",
     "css": "--cx-size-container-page",
     "tier": "semantic",
@@ -2252,6 +2259,15 @@ export const tokens = [
     "references": "primitive.size.effect.2",
     "value": "30rem",
     "description": "Length of the fade at the top and bottom of a backdrop page, over which the page surface gives way to the frost. The header and the opening statement sit inside it; reading text below it is on the plain surface."
+  },
+  {
+    "name": "size.backdrop.height",
+    "css": "--cx-size-backdrop-height",
+    "tier": "semantic",
+    "type": "number",
+    "references": "primitive.size.viewport.1",
+    "value": "100lvh",
+    "description": "Height of the backdrop layer before its blur overhang: the large viewport, so the contours keep their size and position as a phone's address bar slides away. Never a dynamic or small viewport unit, which resize the layer as you scroll and make the contours jump."
   },
   {
     "name": "primitive.space.0",

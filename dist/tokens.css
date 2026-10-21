@@ -273,6 +273,9 @@
   --cx-primitive-size-effect-1: 0.5rem;
   --cx-primitive-size-effect-2: 30rem;
 
+  /* primitive.size.viewport */
+  --cx-primitive-size-viewport-1: 100lvh;
+
   /* size.container */
   --cx-size-container-page: var(--cx-primitive-size-width-xl);
   --cx-size-container-breakout: var(--cx-primitive-size-width-lg);
@@ -311,6 +314,7 @@
   /* size.backdrop */
   --cx-size-backdrop-blur: var(--cx-primitive-size-effect-1);
   --cx-size-backdrop-fade: var(--cx-primitive-size-effect-2);
+  --cx-size-backdrop-height: var(--cx-primitive-size-viewport-1);
 
   /* primitive.space.0 */
   --cx-primitive-space-0: 0;
