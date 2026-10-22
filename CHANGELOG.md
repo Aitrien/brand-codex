@@ -2,6 +2,11 @@
 
 Every release of MotifSpec (named brand-codex until 1.10.0), newest first. Entries before 1.10.0 keep the names they were released under. Versions follow the rules in `CONVENTIONS.md`: renaming or removing a semantic token is major, adding tokens, components or icons is minor, and changing a value or fixing a description is a patch. `npm run build` fails if the version in `package.json` has no entry here.
 
+## [1.10.1] - 2026-10-22
+
+### Fixed
+- Contour drift no longer starts abruptly. The backdrop used to sit still for `motion.duration.plate` (the specimen plate's draw-in time, which the backdrop doesn't have) and then jump to full speed. It now starts as soon as `dist/plate.js` runs, and every start, on the backdrop and the plate, eases from rest to full speed over `motion.duration.plate`: on load, after the pause control is released, and when a hidden tab or an off-screen plate comes back. Pausing still stops the drift at once.
+
 ## [1.10.0] - 2026-10-21
 
 ### Changed
@@ -175,6 +180,7 @@ Every release of MotifSpec (named brand-codex until 1.10.0), newest first. Entri
 - Component docs, Chroma syntax mapping, README principles and the showcase page.
 - `npm run validate`, `build` and `audit`.
 
+[1.10.1]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#1101---2026-10-22
 [1.10.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#1100---2026-10-21
 [1.9.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#190---2026-10-20
 [1.8.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#180---2026-10-19

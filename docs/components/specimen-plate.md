@@ -74,7 +74,7 @@ The build writes the plate to `dist/plate.html` (the contours at time zero) and 
 ## Do
 
 - Keep the survey conventions: 14 contour levels, every fifth an index contour (`color.ornament.strong`, `border.width.emphasis`), the rest hairlines in `color.ornament.rest`, over a quarter grid in `color.ornament.muted`.
-- Let each contour draw in once on load (`motion.duration.plate`, `motion.easing.enter`, staggered from the lowest line), then let the script start the drift: the terrain moves one noise unit every `motion.duration.drift`, linearly, and the lines are recomputed on every second frame.
+- Let each contour draw in once on load (`motion.duration.plate`, `motion.easing.enter`, staggered from the lowest line), then let the script start the drift: it eases up from rest over `motion.duration.plate`, then the terrain moves one noise unit every `motion.duration.drift`, linearly, and the lines are recomputed on every second frame.
 - Change the terrain with `data-plate-seed` (and the matching `seed` option at build time), never by editing path data.
 - Keep the caption factual: what it is, the method and the contour count.
 
