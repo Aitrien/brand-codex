@@ -250,13 +250,20 @@
     }
     var drift = ms('--cx-plate-drift'), delay = ms('--cx-plate-draw');
     var s = survey({ seed: Number(root.getAttribute('data-plate-seed')) || DEFAULTS.seed });
-    var elapsed = 0, last = null, raf = 0, frames = 0, visible = true, ready = false;
+    var backdrop = root.classList.contains('cx-backdrop');
+    // The drift never starts at full speed: from rest its speed eases up over one draw duration, on load and again
+    // after a pause, a hidden tab or scrolling back into view. Pausing still stops it at once.
+    var elapsed = 0, last = null, raf = 0, frames = 0, visible = true, ready = false, warm = 0;
 
     function running() { return ready && visible && !doc.hidden && !reduce.matches && !(input && input.checked); }
     function tick(now) {
       raf = 0;
-      if (!running()) { last = null; return; }
-      if (last !== null) elapsed += Math.min(now - last, delay / 16); // a long gap (background tab) never jumps the terrain
+      if (!running()) { last = null; warm = 0; return; }
+      if (last !== null) {
+        var dt = Math.min(now - last, delay / 16); // a long gap (background tab) never jumps the terrain
+        warm = Math.min(1, warm + dt / delay);
+        elapsed += dt * warm * warm * (3 - 2 * warm); // speed follows a smoothstep from 0 to full
+      }
       last = now;
       // Redraw on every second frame: the terrain moves so little per frame that this looks the same at half the cost.
       if ((frames++ & 1) === 0) s.contours(elapsed / drift).forEach(function (c, i) { paths[i].setAttribute('d', c.d); });
@@ -270,7 +277,8 @@
     if (reduce.addEventListener) reduce.addEventListener('change', update);
     doc.addEventListener('visibilitychange', update);
     if ('IntersectionObserver' in win) new win.IntersectionObserver(function (e) { visible = e[0].isIntersecting; update(); }).observe(root);
-    win.setTimeout(function () { ready = true; update(); }, delay); // let the draw-in finish first
+    // A plate draws its lines in first; the backdrop has no draw-in, so it starts as soon as the script runs.
+    if (backdrop) ready = true; else win.setTimeout(function () { ready = true; update(); }, delay);
     update();
   }
 
