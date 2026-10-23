@@ -73,7 +73,7 @@ Import the module. Its own `hugo.toml` mounts `dist/` at `assets/motifspec` and 
   noClasses = false
 ```
 
-Pin a release with `hugo mod get github.com/aitrien/motifspec@v1.10.1`. Then, in `<head>`, apply any stored theme before first paint, load one stylesheet and the behaviour script:
+Pin a release with `hugo mod get github.com/aitrien/motifspec@v1.10.2`. Then, in `<head>`, apply any stored theme before first paint, load one stylesheet and the behaviour script:
 
 ```html
 {{ with resources.Get "motifspec/theme-init.js" }}<script>{{ .Content | safeJS }}</script>{{ end }}

@@ -2,6 +2,11 @@
 
 Every release of MotifSpec (named brand-codex until 1.10.0), newest first. Entries before 1.10.0 keep the names they were released under. Versions follow the rules in `CONVENTIONS.md`: renaming or removing a semantic token is major, adding tokens, components or icons is minor, and changing a value or fixing a description is a patch. `npm run build` fails if the version in `package.json` has no entry here.
 
+## [1.10.2] - 2026-10-23
+
+### Fixed
+- Site header on a phone: when the nav and controls wrap below the wordmark, the nav link text now lines up with the wordmark and the page text instead of starting about 17px further in. `dist/codex.js` marks the wrapped header with `data-wrapped`; the nav then starts at the left of its row and is offset by its pills' padding (a relative offset, so it can't change whether the header wraps), and the controls stay at the right. Without the script the row stays right-aligned as before.
+
 ## [1.10.1] - 2026-10-22
 
 ### Fixed
@@ -180,6 +185,7 @@ Every release of MotifSpec (named brand-codex until 1.10.0), newest first. Entri
 - Component docs, Chroma syntax mapping, README principles and the showcase page.
 - `npm run validate`, `build` and `audit`.
 
+[1.10.2]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#1102---2026-10-23
 [1.10.1]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#1101---2026-10-22
 [1.10.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#1100---2026-10-21
 [1.9.0]: https://github.com/Aitrien/motifspec/blob/main/CHANGELOG.md#190---2026-10-20

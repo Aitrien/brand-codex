@@ -79,6 +79,7 @@ p, li, dd, figcaption { text-wrap: pretty; }
   border-bottom: var(--cx-border-width-hairline) solid var(--cx-color-border-subtle);
   /* One hover for every header control: a wash of the text colour, which shows on the plain surface and on the frost. */
   --_wash: color-mix(in srgb, var(--cx-color-text-primary) var(--cx-color-wash-hover), transparent);
+  --_nav-pad: calc((var(--cx-space-inset-sm) + var(--cx-space-inset-md)) / 2);
 }
 .cx-header__inner { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 0 var(--cx-space-inline-lg); }
 .cx-wordmark {
@@ -94,12 +95,18 @@ p, li, dd, figcaption { text-wrap: pretty; }
 }
 .cx-header__end { flex: 1 1 auto; min-width: 0; display: flex; align-items: center; justify-content: flex-end; gap: var(--cx-space-inline-sm); }
 .cx-nav { min-width: 0; }
+/* Wrapped onto its own row (dist/codex.js sets data-wrapped), the nav starts at the left and is pulled out by its
+   pills' padding, so the link text lines up with the wordmark and the page text; the controls stay at the right. */
+.cx-header[data-wrapped] .cx-header__end { justify-content: space-between; }
+/* A relative offset, not a margin: it moves the links without changing the row's width, so it can't change whether
+   the header wraps. */
+.cx-header[data-wrapped] .cx-nav { position: relative; inset-inline-start: calc(var(--_nav-pad) * -1); }
 .cx-nav ul { display: flex; gap: 0 var(--cx-space-inline-xs); margin: 0; padding: 0; list-style: none; overflow-x: auto; scrollbar-width: thin; }
 .cx-nav li { flex: none; }
 .cx-nav a {
   /* Halfway between inset-sm and inset-md, so Work, Writing, About, the pause control and the toggle fit one row on a
      360px phone; narrower than that, the list scrolls inside its row. */
-  display: inline-flex; align-items: center; min-height: var(--cx-size-target-touch); padding-inline: calc((var(--cx-space-inset-sm) + var(--cx-space-inset-md)) / 2);
+  display: inline-flex; align-items: center; min-height: var(--cx-size-target-touch); padding-inline: var(--_nav-pad);
   border-radius: var(--cx-radius-pill); color: var(--cx-color-text-secondary); text-decoration: none; font-weight: var(--cx-font-weight-ui);
   transition: color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard), background-color var(--cx-motion-duration-fast) var(--cx-motion-easing-standard);
 }
