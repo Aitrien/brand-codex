@@ -61,7 +61,12 @@
     // The sticky header's height, for scroll-padding-top and the docked TOC: it wraps to two rows on narrow screens.
     var header = document.querySelector('.cx-header');
     if (header) {
-      var measure = function () { root.style.setProperty('--_header-height', header.offsetHeight + 'px'); };
+      var end = header.querySelector('.cx-header__end'), mark = header.querySelector('.cx-wordmark');
+      var measure = function () {
+        root.style.setProperty('--_header-height', header.offsetHeight + 'px');
+        // When the nav and controls wrap below the wordmark, mark the header so the nav aligns with the page text.
+        if (end && mark) header.toggleAttribute('data-wrapped', end.offsetTop > mark.offsetTop + mark.offsetHeight / 2);
+      };
       measure();
       if ('ResizeObserver' in window) new ResizeObserver(measure).observe(header); else window.addEventListener('resize', measure);
     }
